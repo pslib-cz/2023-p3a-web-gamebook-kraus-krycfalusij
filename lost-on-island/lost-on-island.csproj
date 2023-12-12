@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -6,5 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>lost_on_island</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\forest.png" />
+    <None Include="wwwroot\Images\shipwreck.png" />
+  </ItemGroup>
 
 </Project>

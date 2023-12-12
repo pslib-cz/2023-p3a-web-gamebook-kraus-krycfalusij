@@ -1,10 +1,12 @@
 ﻿@page
 @model IndexModel
+
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Lost on Island";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core Test</a>.</p>
+    <h1 class="display-4">Welcome to Lost on Island!</h1>
+
+    <a class="btn btn-primary btn-lg" asp-page="/Game/Location" asp-route-locationId="1" role="button">Start Game</a>
 </div>
