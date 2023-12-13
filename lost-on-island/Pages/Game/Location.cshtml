@@ -10,12 +10,13 @@
 
 <div class="card">
     <h3>KARTA</h3>
-    <p>@Model.Cards.CardPacks[0].Cards[0].Title</p>
-    <p>@Model.Cards.CardPacks[0].Cards[0].Description</p>
-    <p>+ @Model.Cards.CardPacks[0].Cards[0].ItemAdd dřeva </p>
-    <img src="@Model.Cards.CardPacks[0].Cards[0].Img" alt="Card Image" />
+    <p>@Model.CardId</p>
+    <p>@Model.CardTitle</p>
+    <p>@Model.CardDescription</p>
+    <p>Item type: @Model.CardItem</p>
+    <p>+ @Model.CardItemAdd dřeva </p>
+    <img src="@Model.CardIcon" alt="Card Image" />
 </div>
-
 
 
 
