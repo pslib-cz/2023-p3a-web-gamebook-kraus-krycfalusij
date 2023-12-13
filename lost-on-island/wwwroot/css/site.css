@@ -20,3 +20,16 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.card {
+    background-color: lightgray;
+    width: 200px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.card > img {
+    width: 150px
+}

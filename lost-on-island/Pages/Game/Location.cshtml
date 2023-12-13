@@ -8,6 +8,17 @@
 
 <p>@Model.CurrentLocation.Description</p>
 
+<div class="card">
+    <h3>KARTA</h3>
+    <p>@Model.Cards.CardPacks[0].Cards[0].Title</p>
+    <p>@Model.Cards.CardPacks[0].Cards[0].Description</p>
+    <p>+ @Model.Cards.CardPacks[0].Cards[0].ItemAdd dřeva </p>
+    <img src="@Model.Cards.CardPacks[0].Cards[0].Img" alt="Card Image" />
+</div>
+
+
+
+
 @foreach (var connection in Model.AvailableConnections)
 {
     <a asp-page="/Game/Location" asp-route-locationId="@connection.ToLocationId">@connection.Description</a>

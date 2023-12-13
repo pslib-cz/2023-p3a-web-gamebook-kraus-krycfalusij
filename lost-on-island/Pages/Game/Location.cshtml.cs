@@ -9,16 +9,18 @@ namespace lost_on_island.Pages.Game
     {
         private readonly ILocationProvider _locationProvider;
         private readonly ISessionStorage<GameState> _sessionStorage;
-
         public Location CurrentLocation { get; set; }
+        public Cards Cards { get; set; }
         public List<Connection> AvailableConnections { get; set; }
 
         public LocationModel(ILocationProvider locationProvider, ISessionStorage<GameState> sessionStorage)
         {
             _locationProvider = locationProvider;
             _sessionStorage = sessionStorage;
+
+            Cards = new Cards();
         }
-        
+
         public void OnGet(int locationId)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
