@@ -2,7 +2,7 @@
 {
     public class GameState
     {
-        public int CurrentLocationId { get; set; }
+        public int CurrentLocationId { get; set; } = 0;
 
     }
 

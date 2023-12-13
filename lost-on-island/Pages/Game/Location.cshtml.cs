@@ -2,6 +2,7 @@ using lost_on_island.Models;
 using lost_on_island.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Linq;
 
 namespace lost_on_island.Pages.Game
 {
@@ -31,14 +32,27 @@ namespace lost_on_island.Pages.Game
             Cards = new Cards();
         }
 
-        public void OnGet(int locationId)
+        public IActionResult OnGet(int locationId)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
+
+            if (gameState.CurrentLocationId == 0)
+            {
+                gameState.CurrentLocationId = 1; 
+                _sessionStorage.Save("GameState", gameState);
+            }
+
+            if (gameState.CurrentLocationId != locationId &&
+                !_locationProvider.GetConnectionsFromLocation(gameState.CurrentLocationId)
+                                 .Any(conn => conn.ToLocationId == locationId))
+            {
+                return RedirectToPage("/Game/Cheater");
+            }
 
             var location = _locationProvider.GetLocationById(locationId);
             if (location == null)
             {
-                return;
+                return RedirectToPage(new { locationId = gameState.CurrentLocationId });
             }
 
             gameState.CurrentLocationId = locationId;
@@ -53,8 +67,8 @@ namespace lost_on_island.Pages.Game
             CardDescription = Cards.CardPacks[cardIndex].Cards[cardIndex].Description;
             CardItem = Cards.CardPacks[cardIndex].Cards[cardIndex].Item;
             CardItemAdd = Cards.CardPacks[cardIndex].Cards[cardIndex].ItemAdd;
+
+            return Page();
         }
-
     }
-
 }
