@@ -18,8 +18,8 @@ namespace lost_on_island.Pages.Game
         public string CardTitle { get; set; }
         public string CardDescription { get; set; }
         public string CardIcon { get; set; }
-        public string CardItem {  get; set; }
-        public int CardItemAdd {  get; set; }
+        public string CardItem { get; set; }
+        public int CardItemAdd { get; set; }
 
         public int cardIndex = 0;
 
@@ -46,8 +46,6 @@ namespace lost_on_island.Pages.Game
 
             CurrentLocation = location;
             AvailableConnections = _locationProvider.GetConnectionsFromLocation(locationId).ToList();
-
-
 
             CardId = Cards.CardPacks[cardIndex].Cards[cardIndex].Id;
             CardTitle = Cards.CardPacks[cardIndex].Cards[cardIndex].Title;
