@@ -21,6 +21,13 @@ body {
   margin-bottom: 60px;
 }
 
+/* CUSTOM STYLES */
+
+.card-pack {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .card {
     background-color: lightgray;
     width: 200px;

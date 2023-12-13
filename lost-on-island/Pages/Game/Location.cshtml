@@ -8,15 +8,45 @@
 
 <p>@Model.CurrentLocation.Description</p>
 
-<div class="card">
-    <h3>KARTA</h3>
-    <p>@Model.CardId</p>
-    <p>@Model.CardTitle</p>
-    <p>@Model.CardDescription</p>
-    <p>Item type: @Model.CardItem</p>
-    <p>+ @Model.CardItemAdd dřeva </p>
-    <img src="@Model.CardIcon" alt="Card Image" />
+
+<div class="card-pack">
+    @foreach (var card in Model.LocationCards)
+    {
+        <div class="card">
+            <h3>@card.Title</h3>
+            <p>ID: @card.Id</p>
+            <p>Šance: @card.Probability%</p>
+            <p>@card.Description</p>
+            <p>Item type: @card.Item</p>
+            <p>+ @card.ItemAdd</p>
+            <img src="@card.Img" alt="Card Image" />
+            <button asp-page-handler="HandleCardClick">Click and try</button>
+        </div>
+    }
 </div>
+
+<script>
+    /*
+    function handleCardClick(cardId) {
+        // Use AJAX to send a POST request to the server
+        fetch(`/Game/Location?handler=HandleCardClick&cardId=${cardId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update the message on the page
+            document.getElementById('message').innerText = data.message;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
+    */
+</script>
+
 
 @foreach (var connection in Model.AvailableConnections)
 {
