@@ -7,6 +7,7 @@ namespace lost_on_island.Pages.Game
     {
         public void OnGet()
         {
+            
         }
     }
 }

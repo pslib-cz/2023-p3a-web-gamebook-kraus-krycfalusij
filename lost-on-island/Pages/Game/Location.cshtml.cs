@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;
+using static lost_on_island.Models.Cards;
 
 namespace lost_on_island.Pages.Game
 {
@@ -11,6 +12,7 @@ namespace lost_on_island.Pages.Game
     {
         private readonly ILocationProvider _locationProvider;
         private readonly ISessionStorage<GameState> _sessionStorage;
+        public GameState GameState => _sessionStorage.LoadOrCreate("GameState");
 
         public Location CurrentLocation { get; set; }
         public List<Connection> AvailableConnections { get; set; }
@@ -74,5 +76,60 @@ namespace lost_on_island.Pages.Game
             AvailableConnections = _locationProvider.GetConnectionsFromLocation(locationId).ToList();
             LocationCards = new Cards().CardPacks.FirstOrDefault(pack => pack.Id == locationId)?.CardsInPack;
         }
+
+
+
+        // KARTY
+        public IActionResult OnPostHandleCardClick(int cardId)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
+
+            // Naètení vybrané karty
+            var selectedCard = GetSelectedCard(cardId);
+
+            if (selectedCard != null)
+            {
+                ProcessCard(selectedCard, gameState);
+                _sessionStorage.Save("GameState", gameState);
+            }
+
+            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+        }
+
+        private Card GetSelectedCard(int cardId)
+        {
+            foreach (var pack in new Cards().CardPacks)
+            {
+                var foundCard = pack.CardsInPack.FirstOrDefault(c => c.Id == cardId);
+                if (foundCard != null)
+                {
+                    return foundCard;
+                }
+            }
+            return null;
+        }
+
+
+        private void ProcessCard(Card card, GameState gameState)
+        {
+            // Pøidání položek do inventáøe
+            gameState.AddToInventory(card.Item, card.ItemAdd);
+
+            // Aktualizace zdraví nebo energie
+            if (card.Item == "food")
+            {
+                gameState.UpdateHealthAndEnergy(5, 0); // Pøidá zdraví
+            }
+            else if (card.Item == "enemy")
+            {
+                gameState.UpdateHealthAndEnergy(-10, 0); // Odeète zdraví
+            }
+
+            // Kontrola postupu ve høe
+            gameState.CheckGameProgress();
+        }
+
+
+
     }
 }

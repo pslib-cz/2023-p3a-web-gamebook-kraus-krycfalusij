@@ -1,5 +1,9 @@
 ﻿@page
 @model lost_on_island.Pages.Game.LocationModel
+@{
+    var gameState = Model.GameState;
+}
+
 
 <h1>@Model.CurrentLocation.Title</h1>
 <img src="@Url.Content($"~/{Model.CurrentLocation.ImagePath}")" alt="Location image" />
@@ -16,6 +20,7 @@
             <p>Item type: @card.Item</p>
             <p>+ @card.ItemAdd</p>
             <img src="@Url.Content($"/{card.Img}")" alt="Card Image" />
+            
             <form method="post" asp-page-handler="HandleCardClick">
                 <input type="hidden" name="cardId" value="@card.Id" />
                 <button type="submit">Click and try</button>
@@ -23,6 +28,17 @@
         </div>
     }
 </div>
+
+
+<h3>Inventář</h3>
+@foreach (var item in gameState.Inventory)
+{
+    <p>@item.Key: @item.Value</p>
+}
+
+<h3>Energie: @gameState.Energy</h3>
+<h3>Zdraví: @gameState.Health</h3>
+
 
 @foreach (var connection in Model.AvailableConnections)
 {
