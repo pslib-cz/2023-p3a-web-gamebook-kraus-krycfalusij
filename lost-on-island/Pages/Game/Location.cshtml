@@ -1,13 +1,9 @@
 ﻿@page
 @model lost_on_island.Pages.Game.LocationModel
-@{
-}
 
 <h1>@Model.CurrentLocation.Title</h1>
-<img src="@Url.Content("~/" + Model.CurrentLocation.ImagePath)" alt="Location image" />
-
+<img src="@Url.Content($"~/{Model.CurrentLocation.ImagePath}")" alt="Location image" />
 <p>@Model.CurrentLocation.Description</p>
-
 
 <div class="card-pack">
     @foreach (var card in Model.LocationCards)
@@ -19,34 +15,14 @@
             <p>@card.Description</p>
             <p>Item type: @card.Item</p>
             <p>+ @card.ItemAdd</p>
-            <img src="@card.Img" alt="Card Image" />
-            <button asp-page-handler="HandleCardClick">Click and try</button>
+            <img src="@Url.Content($"/{card.Img}")" alt="Card Image" />
+            <form method="post" asp-page-handler="HandleCardClick">
+                <input type="hidden" name="cardId" value="@card.Id" />
+                <button type="submit">Click and try</button>
+            </form>
         </div>
     }
 </div>
-
-<script>
-    /*
-    function handleCardClick(cardId) {
-        // Use AJAX to send a POST request to the server
-        fetch(`/Game/Location?handler=HandleCardClick&cardId=${cardId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Update the message on the page
-            document.getElementById('message').innerText = data.message;
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-    */
-</script>
-
 
 @foreach (var connection in Model.AvailableConnections)
 {

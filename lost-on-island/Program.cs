@@ -9,7 +9,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // or whatever you want the timeout to be
+    options.IdleTimeout = TimeSpan.FromMinutes(30); 
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });

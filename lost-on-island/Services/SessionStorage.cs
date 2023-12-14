@@ -1,4 +1,7 @@
-﻿namespace lost_on_island.Services
+﻿using Microsoft.AspNetCore.Http;
+using System.Text.Json;
+
+namespace lost_on_island.Services
 {
     public class SessionStorage<T> : ISessionStorage<T> where T : new()
     {
@@ -16,21 +19,17 @@
 
             if (string.IsNullOrEmpty(value))
             {
-                var newState = new T();
-                Save(key, newState);
-                return newState;
+                return new T();
             }
 
-            return System.Text.Json.JsonSerializer.Deserialize<T>(value);
+            return JsonSerializer.Deserialize<T>(value);
         }
 
         public void Save(string key, T value)
         {
             var session = _httpContextAccessor.HttpContext.Session;
-            var serializedValue = System.Text.Json.JsonSerializer.Serialize(value);
+            var serializedValue = JsonSerializer.Serialize(value);
             session.SetString(key, serializedValue);
         }
     }
-
-
 }
