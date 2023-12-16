@@ -6,7 +6,8 @@
 
 
 <h1>@Model.CurrentLocation.Title</h1>
-<img src="@Url.Content($"~/{Model.CurrentLocation.ImagePath}")" alt="Location image" />
+
+<!-- <img src="@Url.Content($"~/{Model.CurrentLocation.ImagePath}")" alt="Location image" /> -->
 <p>@Model.CurrentLocation.Description</p>
 
 <div class="card-pack">
@@ -44,3 +45,11 @@
 {
     <a asp-page="/Game/Location" asp-route-locationId="@connection.ToLocationId">@connection.Description</a>
 }
+
+<div class="inventory">
+    <div class="inventory__content">
+        <p>test</p>
+        <p>test</p>
+        <p>test</p>
+    </div>
+</div>

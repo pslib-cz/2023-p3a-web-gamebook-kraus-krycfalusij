@@ -18,7 +18,14 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* odstranìní defaultních stylù na stránce */
+.container {
+    margin: 0;
+    padding: 0;
 }
 
 /* CUSTOM STYLES */
@@ -38,4 +45,69 @@ body {
 
 .card > img {
     width: 150px
+}
+
+/* INVENTORY */
+
+.inventory {
+    background-image: url(../Images/inventory.png);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    max-width: 360px;
+    transform: translateX(-50%);
+    left: 50%;
+    height: 180px;
+    object-fit: contain;
+    bottom: 50px;
+    box-sizing: border-box;
+}
+
+.inventory__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inventory__corner {
+    position: absolute;
+    width: 70px;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.inventory__corner--top {
+    top: -20px;
+}
+
+.inventory__corner--bottom {
+    bottom: -20px;
+}
+
+.inventory__corner--left {
+    left: -20px;
+}
+
+.inventory__corner--right {
+    right: -20px;
+}
+
+.inventory__moves {
+    position: absolute;
+    top: 0;
+    margin: 0;
+}
+
+.inventory__badges__container {
+    /*
+    border: 2px solid black;
+    border-radius: 5px;
+    */
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
+    margin: 20px;
+    box-sizing: border-box;
 }
