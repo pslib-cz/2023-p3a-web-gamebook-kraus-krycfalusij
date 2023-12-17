@@ -3,86 +3,63 @@
 @{
     var gameState = Model.GameState;
 }
+<div class="game-container" style="background-image: url('@Model.CurrentLocation.ImagePath')">
+    <div class="location__title__container">
+        <h1 class="location__title--font location__title--header">@Model.CurrentLocation.Title</h1>
+        <p class="location__title--font location__title--description">@Model.CurrentLocation.Description</p>
+    </div>
 
-
-<h1>@Model.CurrentLocation.Title</h1>
-
-<!-- <img src="@Url.Content($"~/{Model.CurrentLocation.ImagePath}")" alt="Location image" /> -->
-<p>@Model.CurrentLocation.Description</p>
-
-<!--
-<div class="card-pack">
-    @foreach (var card in Model.LocationCards)
-    {
-        <div class="card">
-            <h3>@card.Title</h3>
-            <p>ID: @card.Id</p>
-            <p>Šance: @card.Probability%</p>
-            <p>@card.Description</p>
-            <p>Item type: @card.Item</p>
-            <p>+ @card.ItemAdd</p>
-            <img src="@Url.Content($"/{card.Img}")" alt="Card Image" />
-            
-            <form method="post" asp-page-handler="HandleCardClick">
-                <input type="hidden" name="cardId" value="@card.Id" />
-                <button type="submit">Click and try</button>
-            </form>
-        </div>
-    }
-</div>
--->
-
-<div class="card-pack">
-    @foreach (var card in Model.LocationCards)
-    {
+    <div class="card-pack">
         <form method="post" asp-page-handler="HandleCardClick" class="card-form">
-            <input type="hidden" name="cardId" value="@card.Id" />
+            <input type="hidden" name="cardId" value="@Model.SingleLocationCard.Id" />
             <div class="card pack-of-cards"></div>
             <div class="card" onclick="handleCardAnimation(this)">
                 <div class="card--inner">
                     <div class="card--back">
                     </div>
                     <div class="card--front" onclick="handleCardClick(this)">
-                        <h3>@card.Title</h3>
-                        <p>ID: @card.Id</p>
-                        <p>Šance: @card.Probability%</p>
-                        <p>@card.Description</p>
-                        <p>Item type: @card.Item</p>
-                        <p>+ @card.ItemAdd</p>
-                        <img src="@card.Img" alt="Card Image" />
+                        <h3>@Model.SingleLocationCard.Title</h3>
+                        <!--
+                             <p>ID: @Model.SingleLocationCard.Id</p>
+                             <p>Item type: @Model.SingleLocationCard.Item</p>
+                        -->
+                        <p>Šance: @Model.SingleLocationCard.Probability%</p>
+                        <p>@Model.SingleLocationCard.Description</p>
+                        <p>+ @Model.SingleLocationCard.ItemAdd</p>
+                        <img src="@Model.SingleLocationCard.Img" alt="Card Image" />
                     </div>
                 </div>
             </div>
         </form>
+    </div>
+
+    <script>
+        function handleCardAnimation(card) {
+            card.classList.add("flipped");
+        }
+        function handleCardClick(card) {
+            card.closest("form").submit();
+        }
+    </script>
+
+
+    <h3>Inventář</h3>
+    @foreach (var item in gameState.Inventory)
+    {
+        <p>@item.Key: @item.Value</p>
     }
-</div>
 
-<script>
-    function handleCardAnimation(card) {
-        card.classList.add("flipped");
+    <h3>Energie: @gameState.Energy</h3>
+    <h3>Zdraví: @gameState.Health</h3>
+
+
+    @foreach (var connection in Model.AvailableConnections)
+    {
+        <a asp-page="/Game/Location" asp-route-locationId="@connection.ToLocationId">@connection.Description</a>
     }
-    function handleCardClick(card) {
-        card.closest("form").submit();
-    }
-</script>
 
-
-<h3>Inventář</h3>
-@foreach (var item in gameState.Inventory)
-{
-    <p>@item.Key: @item.Value</p>
-}
-
-<h3>Energie: @gameState.Energy</h3>
-<h3>Zdraví: @gameState.Health</h3>
-
-
-@foreach (var connection in Model.AvailableConnections)
-{
-    <a asp-page="/Game/Location" asp-route-locationId="@connection.ToLocationId">@connection.Description</a>
-}
-
-<div class="inventory">
-    <div class="inventory__content">
+    <div class="inventory__tools">
+        <div class="inventory__tools__content">
+        </div>
     </div>
 </div>

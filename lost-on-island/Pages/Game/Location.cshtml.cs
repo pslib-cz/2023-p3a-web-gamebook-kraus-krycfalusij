@@ -10,37 +10,24 @@ namespace lost_on_island.Pages.Game
 {
     public class LocationModel : PageModel
     {
+
+        private readonly ILogger<LocationModel> _logger;
+
+
         private readonly ILocationProvider _locationProvider;
         private readonly ISessionStorage<GameState> _sessionStorage;
         public GameState GameState => _sessionStorage.LoadOrCreate("GameState");
-
         public Location CurrentLocation { get; set; }
         public List<Connection> AvailableConnections { get; set; }
         public List<Cards.Card> LocationCards { get; set; }
+        public Card SingleLocationCard { get; set; }
+        Random rnd = new Random();
+        public int RandomCardIndex { get; set; }
 
         public LocationModel(ILocationProvider locationProvider, ISessionStorage<GameState> sessionStorage)
         {
             _locationProvider = locationProvider;
             _sessionStorage = sessionStorage;
-        }
-        
-        // Zpracovává GET požadavek na stránku Location
-        public IActionResult OnGet(int locationId)
-        {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-
-            Console.WriteLine(IsValidTransition(gameState, locationId).ToString());
-            // Ovìøení platnosti pøechodu a zpracování speciálních lokací
-            if (!IsValidTransition(gameState, locationId))
-            {
-                
-                return RedirectToPage("/Game/Cheater");
-            }
-
-            UpdateGameState(gameState, locationId);
-            LoadLocationData(locationId);
-
-            return Page();
         }
 
         // Zpracovává požadavek na stránku s prologem
@@ -75,9 +62,21 @@ namespace lost_on_island.Pages.Game
             CurrentLocation = _locationProvider.GetLocationById(locationId);
             AvailableConnections = _locationProvider.GetConnectionsFromLocation(locationId).ToList();
             LocationCards = new Cards().CardPacks.FirstOrDefault(pack => pack.Id == locationId)?.CardsInPack;
+
+            // Výbìr náhodné karty na bázi probility vlastnosti
+            int totalProbability = LocationCards.Sum(card => card.Probability);
+            int randomValue = rnd.Next(1, totalProbability + 1);
+            int cumulativeProbability = 0;
+            foreach (var card in LocationCards)
+            {
+                cumulativeProbability += card.Probability;
+                if (randomValue <= cumulativeProbability)
+                {
+                    SingleLocationCard = card;
+                    break;
+                }
+            }
         }
-
-
 
         // KARTY
         public IActionResult OnPostHandleCardClick(int cardId)
@@ -109,7 +108,6 @@ namespace lost_on_island.Pages.Game
             return null;
         }
 
-
         private void ProcessCard(Card card, GameState gameState)
         {
             // Pøidání položek do inventáøe
@@ -129,7 +127,22 @@ namespace lost_on_island.Pages.Game
             gameState.CheckGameProgress();
         }
 
+        // Zpracovává GET požadavek na stránku Location
+        public IActionResult OnGet(int locationId)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
 
+            Console.WriteLine(IsValidTransition(gameState, locationId).ToString());
+            // Ovìøení platnosti pøechodu a zpracování speciálních lokací
+            if (!IsValidTransition(gameState, locationId))
+            {
+                return RedirectToPage("/Game/Cheater");
+            }
 
+            UpdateGameState(gameState, locationId);
+            LoadLocationData(locationId);
+
+            return Page();
+        }
     }
 }

@@ -1,0 +1,101 @@
+﻿
+.card-pack {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card p {
+    margin: 0;
+}
+
+.card img {
+    width: 100px
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    perspective: 1000px;
+    width: 160px;
+    height: 240px;
+    transform-style: preserve-3d;
+    animation: none;
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+    top: 45%;
+    left: 50%;
+    border: none;
+    background: none;
+}
+
+.pack-of-cards {
+    background-image: url(../Images/card-safe-background.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.card.flipped {
+    animation: rotateXAnimation 1s forwards; /* dát zpět na 2.5s */
+}
+
+@keyframes rotateXAnimation {
+    0% {
+        transform: translateX(-50%) translateY(-50%) rotateX(0deg) scale(1);
+    }
+
+    30% {
+        transform: translateX(-50%) translateY(-10%) rotateX(0deg) scale(1.05);
+    }
+
+    70% {
+        transform: translateX(-50%) translateY(-10%) rotateX(180deg) scale(1.1);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(-45%) rotateX(180deg) rotateZ(-5deg) scale(1);
+    }
+}
+
+.card--inner {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.card--front,
+.card--back {
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.card--back {
+    background-image: url(../Images/card-safe-background.png);
+}
+
+.card--front {
+    background-image: url(../Images/card-safe-foreground.png);
+    transform: rotateX(180deg);
+}
+
+@media only screen and (min-width: 768px) {
+    .card {
+        width: 200px;
+        height: 300px;
+    }
+}

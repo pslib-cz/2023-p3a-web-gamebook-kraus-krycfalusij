@@ -23,7 +23,7 @@ namespace lost_on_island.Services
             // Přidání běžných lokací
             _locations.Add(new Location { Id = 2, Name = "beach", Title = "Pláž", ImagePath = "Images/beach.png", Description = "Pláž s výhledem na moře." });
             _locations.Add(new Location { Id = 3, Name = "field", Title = "Louka", ImagePath = "Images/field.png", Description = "Zelená louka s potulujícími se zvířátky." });
-            _locations.Add(new Location { Id = 4, Name = "forest", Title = "Les", ImagePath = "Images/forest.png", Description = "Lesík s prasátky." });
+            _locations.Add(new Location { Id = 4, Name = "forest", Title = "Les", ImagePath = "../Images/forest.png", Description = "Lesík s prasátky." });
             _locations.Add(new Location { Id = 5, Name = "cave", Title = "Jeskyně", ImagePath = "Images/cave.png", Description = "Černá díra vedoucí do pekel." });
             _locations.Add(new Location { Id = 6, Name = "deepForest", Title = "Hluboký les", ImagePath = "Images/deepForest.png", Description = "Hluboký les plný překvapení." });
 
