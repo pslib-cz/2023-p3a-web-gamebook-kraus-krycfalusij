@@ -1,6 +1,9 @@
 ﻿@page
 @model lost_on_island.Pages.Game.PrologModel
+@{
+    ViewData["Title"] = "Prolog";
+}
 
 <h1>Vítejte ve hře!</h1>
 <p>Úvodní příběh hry...</p>
-<a asp-page="/Game/Location" asp-route-locationId="1">Pokračovat na Loď</a>
+<a asp-page="/Game/Location" asp-route-locationId="2">Pokračovat na Loď</a>

@@ -1,6 +1,13 @@
 ﻿@page
 @model lost_on_island.Pages.Game.EndGameModel
 
+@{
+    if (Model.GameState.CurrentLocationId != 8 || Model.GameState.HasGameEnded == false)
+    {
+        Response.Redirect("/Game/Cheater");
+    }
+}
+
 <h1>Konec Hry</h1>
 <p>Gratulujeme! Dostali jste se z ostrova.</p>
-<a asp-page="/Game/Prolog">Začít znovu</a>
+<a asp-page="/Game/Prolog" asp-route-locationId="1">Začít znovu</a>

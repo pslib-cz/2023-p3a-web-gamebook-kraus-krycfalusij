@@ -8,7 +8,7 @@ namespace lost_on_island.Models
         {
             new CardPack
             {
-                Id = 1,
+                Id = 2,
                 Type = "ShipwreckPack",
                 CardsInPack = new List<Card>
                 {
@@ -17,7 +17,7 @@ namespace lost_on_island.Models
             },
             new CardPack
             {
-                Id = 2,
+                Id = 3,
                 Type = "BeachPack",
                 CardsInPack = new List<Card>
                 {
@@ -26,7 +26,7 @@ namespace lost_on_island.Models
             },
             new CardPack
             {
-                Id = 3,
+                Id = 4,
                 Type = "FieldPack",
                 CardsInPack = new List<Card>
                 {
@@ -39,7 +39,7 @@ namespace lost_on_island.Models
             },
             new CardPack
             {
-                Id = 4,
+                Id = 5,
                 Type = "ForestPack",
                 CardsInPack = new List<Card>
                 {
@@ -52,7 +52,7 @@ namespace lost_on_island.Models
             },
             new CardPack
             {
-                Id = 5,
+                Id = 6,
                 Type = "CavePack",
                 CardsInPack = new List<Card>
                 {
@@ -65,7 +65,7 @@ namespace lost_on_island.Models
             },
             new CardPack
             {
-                Id = 6,
+                Id = 7,
                 Type = "DeepForestPack",
                 CardsInPack = new List<Card>
                 {

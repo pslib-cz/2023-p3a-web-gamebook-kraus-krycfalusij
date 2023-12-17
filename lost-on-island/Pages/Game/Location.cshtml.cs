@@ -10,10 +10,7 @@ namespace lost_on_island.Pages.Game
 {
     public class LocationModel : PageModel
     {
-
         private readonly ILogger<LocationModel> _logger;
-
-
         private readonly ILocationProvider _locationProvider;
         private readonly ISessionStorage<GameState> _sessionStorage;
         public GameState GameState => _sessionStorage.LoadOrCreate("GameState");
@@ -30,40 +27,59 @@ namespace lost_on_island.Pages.Game
             _sessionStorage = sessionStorage;
         }
 
-        // Zpracovává požadavek na stránku s prologem
-        private IActionResult HandleProlog(GameState gameState)
+        private bool IsValidTransition(GameState gameState, int targetLocationId)
         {
-            if (gameState.CurrentLocationId == 0)
+
+            // Definice ID pro speciální lokace
+            const int prologId = 1;
+            const int shipwreckId = 2;
+            const int beachId = 3;
+            const int deathId = 8;
+            const int endgameId = 9;
+            const int indexId = 0;
+
+
+            switch (targetLocationId)
             {
-                UpdateGameState(gameState, 1);
-                return RedirectToPage("/Game/Prolog");
+                case deathId:
+                    // Smrt mùže nastat kdykoliv, ale pouze pokud je hráè mrtvý
+                    return gameState.IsPlayerDead;
+
+                case endgameId:
+                    // Na konec hry lze pøejít pouze pokud hra skonèila
+                    return gameState.HasGameEnded;
+
+                case prologId:
+                    // Na prolog lze pøejít pouze z indexu
+                    return gameState.CurrentLocationId == indexId;
+
+                case shipwreckId:
+                    // Na loï lze pøejít z prologu nebo opakovanì z pláže
+                    return gameState.CurrentLocationId == prologId || gameState.CurrentLocationId == beachId;
+
+                case indexId:
+                    // Na index lze pøejít pouze na zaèátku hry
+                    return gameState.CurrentLocationId == 0;
+
+                default:
+                    // Pro ostatní lokace platí standardní logika
+                    return _locationProvider.IsValidConnection(gameState.CurrentLocationId, targetLocationId);
             }
-
-            return RedirectToPage("/Game/Cheater");
         }
 
-        // Kontroluje pøechod na stejnou stránku nebo na jinou ale s platným pøechodem
-        private bool IsValidTransition(GameState gameState, int locationId)
-        {
-            return gameState.CurrentLocationId == locationId ||
-                   _locationProvider.IsValidConnection(gameState.CurrentLocationId, locationId);
-        }
 
-        // Aktualizuje stav hry
         private void UpdateGameState(GameState gameState, int locationId)
         {
             gameState.CurrentLocationId = locationId;
             _sessionStorage.Save("GameState", gameState);
         }
 
-        // Naète data o lokaci
         private void LoadLocationData(int locationId)
         {
             CurrentLocation = _locationProvider.GetLocationById(locationId);
             AvailableConnections = _locationProvider.GetConnectionsFromLocation(locationId).ToList();
             LocationCards = new Cards().CardPacks.FirstOrDefault(pack => pack.Id == locationId)?.CardsInPack;
 
-            // Výbìr náhodné karty na bázi probility vlastnosti
             int totalProbability = LocationCards.Sum(card => card.Probability);
             int randomValue = rnd.Next(1, totalProbability + 1);
             int cumulativeProbability = 0;
@@ -78,12 +94,9 @@ namespace lost_on_island.Pages.Game
             }
         }
 
-        // KARTY
         public IActionResult OnPostHandleCardClick(int cardId)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
-
-            // Naètení vybrané karty
             var selectedCard = GetSelectedCard(cardId);
 
             if (selectedCard != null)
@@ -110,38 +123,59 @@ namespace lost_on_island.Pages.Game
 
         private void ProcessCard(Card card, GameState gameState)
         {
-            // Pøidání položek do inventáøe
             gameState.AddToInventory(card.Item, card.ItemAdd);
 
-            // Aktualizace zdraví nebo energie
             if (card.Item == "food")
             {
-                gameState.UpdateHealthAndEnergy(5, 0); // Pøidá zdraví
+                gameState.UpdateHealthAndEnergy(5, 0);
             }
             else if (card.Item == "enemy")
             {
-                gameState.UpdateHealthAndEnergy(-10, 0); // Odeète zdraví
+                gameState.UpdateHealthAndEnergy(-10, 0);
             }
 
-            // Kontrola postupu ve høe
             gameState.CheckGameProgress();
         }
-
-        // Zpracovává GET požadavek na stránku Location
         public IActionResult OnGet(int locationId)
         {
+
             var gameState = _sessionStorage.LoadOrCreate("GameState");
 
-            // Ovìøení platnosti pøechodu a zpracování speciálních lokací
             if (!IsValidTransition(gameState, locationId))
             {
                 return RedirectToPage("/Game/Cheater");
             }
 
             UpdateGameState(gameState, locationId);
-            LoadLocationData(locationId);
 
+            if (_locationProvider.IsSpecialLocation(locationId))
+            {
+                return RedirectToSpecialPage(locationId, gameState);
+            }
+            
+            LoadLocationData(locationId);
             return Page();
         }
+
+        private IActionResult RedirectToSpecialPage(int locationId, GameState gameState)
+        {
+
+            switch (locationId)
+            {
+                
+                case 1:
+                    return RedirectToPage("/Game/Prolog");
+                case 2:
+                    return RedirectToPage("/Game/Shipwreck");
+                case 8: 
+                    return RedirectToPage("/Game/Death");
+                case 9: 
+                    return RedirectToPage("/Game/EndGame");
+
+                default:
+                    return RedirectToPage("/Game/Cheater");
+            }
+        }
+
     }
 }
