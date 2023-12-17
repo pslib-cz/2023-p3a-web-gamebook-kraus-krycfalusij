@@ -10,6 +10,7 @@
 <!-- <img src="@Url.Content($"~/{Model.CurrentLocation.ImagePath}")" alt="Location image" /> -->
 <p>@Model.CurrentLocation.Description</p>
 
+<!--
 <div class="card-pack">
     @foreach (var card in Model.LocationCards)
     {
@@ -29,6 +30,41 @@
         </div>
     }
 </div>
+-->
+
+<div class="card-pack">
+    @foreach (var card in Model.LocationCards)
+    {
+        <form method="post" asp-page-handler="HandleCardClick" class="card-form">
+            <input type="hidden" name="cardId" value="@card.Id" />
+            <div class="card pack-of-cards"></div>
+            <div class="card" onclick="handleCardAnimation(this)">
+                <div class="card--inner">
+                    <div class="card--back">
+                    </div>
+                    <div class="card--front" onclick="handleCardClick(this)">
+                        <h3>@card.Title</h3>
+                        <p>ID: @card.Id</p>
+                        <p>Šance: @card.Probability%</p>
+                        <p>@card.Description</p>
+                        <p>Item type: @card.Item</p>
+                        <p>+ @card.ItemAdd</p>
+                        <img src="@card.Img" alt="Card Image" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+</div>
+
+<script>
+    function handleCardAnimation(card) {
+        card.classList.add("flipped");
+    }
+    function handleCardClick(card) {
+        card.closest("form").submit();
+    }
+</script>
 
 
 <h3>Inventář</h3>
@@ -48,8 +84,5 @@
 
 <div class="inventory">
     <div class="inventory__content">
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
     </div>
 </div>

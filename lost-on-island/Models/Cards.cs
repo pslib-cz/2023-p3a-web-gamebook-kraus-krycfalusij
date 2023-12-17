@@ -33,6 +33,7 @@
                     new Card { Id = 3, Probability = 20, Title = "Ovce", Img = "/Images/Icons/sheep.png", Description = "Našel jsi ovci.", Item = "wool", ItemAdd = 2 },
                     new Card { Id = 4, Probability = 20, Title = "Ovce", Img = "/Images/Icons/sheep.png", Description = "Našel jsi ovci", Item = "wool", ItemAdd = 3 },
                     new Card { Id = 5, Probability = 20, Title = "Divoké prase", Img = "/Images/Icons/wild-pig.png", Description = "Zaútočilo na tebe divoké prase", Item = "enemy", ItemAdd = 0 },
+                    new Card { Id = 6, Probability = 20, Title = "Zajíc", Img = "/Images/Icons/hare.png", Description = "Ulovil jsi zajíce.", Item = "food", ItemAdd = 1 },
                 }
             },
             new CardPack
