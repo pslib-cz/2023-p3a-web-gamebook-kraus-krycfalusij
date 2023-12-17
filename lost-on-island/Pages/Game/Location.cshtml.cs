@@ -132,7 +132,6 @@ namespace lost_on_island.Pages.Game
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
 
-            Console.WriteLine(IsValidTransition(gameState, locationId).ToString());
             // Ovìøení platnosti pøechodu a zpracování speciálních lokací
             if (!IsValidTransition(gameState, locationId))
             {
