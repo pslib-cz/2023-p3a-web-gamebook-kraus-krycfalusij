@@ -35,10 +35,30 @@ namespace lost_on_island.Services
             // Přidání spojení mezi lokacemi
             _connections.Add(new Connection { FromLocationId = 3, ToLocationId = 4, Description = "Louka" });
             _connections.Add(new Connection { FromLocationId = 4, ToLocationId = 3, Description = "Pláž" });
-            
+
+            _connections.Add(new Connection { FromLocationId = 2, ToLocationId = 2, Description = "Loď" });
+            _connections.Add(new Connection { FromLocationId = 3, ToLocationId = 3, Description = "Pláž" });
+            _connections.Add(new Connection { FromLocationId = 4, ToLocationId = 4, Description = "Louka" });
+            _connections.Add(new Connection { FromLocationId = 5, ToLocationId = 5, Description = "Les" });
+            _connections.Add(new Connection { FromLocationId = 6, ToLocationId = 6, Description = "Jeskyně" });
+            _connections.Add(new Connection { FromLocationId = 7, ToLocationId = 7, Description = "Hluboký les" });
+
+
+
+            _connections.Add(new Connection { FromLocationId = 6, ToLocationId = 5, Description = "Les" });
+            _connections.Add(new Connection { FromLocationId = 5, ToLocationId = 6, Description = "Jeskyně" });
+
+
+            _connections.Add(new Connection { FromLocationId = 8,ToLocationId = 7, Description = "Hluboký les" });
+            _connections.Add(new Connection { FromLocationId = 7, ToLocationId = 7, Description = "Hluboký les" });
+
+
             _connections.Add(new Connection { FromLocationId = 4, ToLocationId = 5, Description = "Les" });
             _connections.Add(new Connection { FromLocationId = 5, ToLocationId = 4, Description = "Louka" });
-            
+
+
+
+
             _connections.Add(new Connection { FromLocationId = 4, ToLocationId = 6, Description = "Jeskyně" });
             _connections.Add(new Connection { FromLocationId = 6, ToLocationId = 4, Description = "Louka" });
             
