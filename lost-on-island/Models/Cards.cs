@@ -34,7 +34,7 @@ namespace lost_on_island.Models
                     new Card { Id = 2, Probability = 20, Title = "Srnka", Img = "/Images/Icons/doe.png", Description = "Ulovil jsi srnku.", Item = "food", ItemAdd = 3 },
                     new Card { Id = 3, Probability = 20, Title = "Ovce", Img = "/Images/Icons/sheep.png", Description = "Našel jsi ovci.", Item = "wool", ItemAdd = 2 },
                     new Card { Id = 4, Probability = 20, Title = "Ovce", Img = "/Images/Icons/sheep.png", Description = "Našel jsi ovci", Item = "wool", ItemAdd = 3 },
-                    new Card { Id = 5, Probability = 20, Title = "Divoké prase", Img = "/Images/Icons/wild-pig.png", Description = "Zaútočilo na tebe divoké prase", Item = "enemy", ItemAdd = 0 },
+                    new Card { Id = 5, Probability = 20, Title = "Divoké prase", Img = "/Images/Icons/wild-pig.png", Description = "Zaútočilo na tebe divoké prase", Item = "enemy", ItemAdd = 0, ItemType = "quiz" },
                 }
             },
             new CardPack
@@ -47,7 +47,7 @@ namespace lost_on_island.Models
                     new Card { Id = 2, Probability = 20, Title = "Dřevo", Img = "/Images/Icons/wood.png", Description = "Získal jsi dřevo.", Item = "wood", ItemAdd = 3 },
                     new Card { Id = 3, Probability = 20, Title = "Dřevo", Img = "/Images/Icons/wood.png", Description = "Získal jsi dřevo.", Item = "wood", ItemAdd = 4 },
                     new Card { Id = 4, Probability = 20, Title = "Bobule", Img = "/Images/Icons/berries.png", Description = "Našel jsi bobule.", Item = "food", ItemAdd = 1 },
-                    new Card { Id = 5, Probability = 20, Title = "Divoké prase", Img = "/Images/Icons/wild-pig.png", Description = "Zaútočilo na tebe divoké prase.", Item = "enemy", ItemAdd = 0 },
+                    new Card { Id = 5, Probability = 20, Title = "Divoké prase", Img = "/Images/Icons/wild-pig.png", Description = "Zaútočilo na tebe divoké prase", Item = "enemy", ItemAdd = 0, ItemType = "quiz" },
                 }
             },
             new CardPack
@@ -58,7 +58,7 @@ namespace lost_on_island.Models
                 {
                     new Card { Id = 1, Probability = 20, Title = "Kámen", Img = "/Images/Icons/stone.png", Description = "Získal jsi kámen.", Item = "stone", ItemAdd = 1 },
                     new Card { Id = 2, Probability = 20, Title = "Kámen", Img = "/Images/Icons/stone.png", Description = "Získal jsi kameny.", Item = "wood", ItemAdd = 2 },
-                    new Card { Id = 3, Probability = 20, Title = "Pavouk", Img = "/Images/Icons/spider.png", Description = "Kousl tě pavouk.", Item = "damage", ItemAdd = -3 },
+                    new Card { Id = 3, Probability = 20, Title = "Pavouk", Img = "/Images/Icons/spider.png", Description = "Kousl tě pavouk.", Item = "damage", ItemAdd = -3, ItemType = "damage" },
                     new Card { Id = 4, Probability = 20, Title = "Železo", Img = "/Images/Icons/iron.png", Description = "Našel jsi železo.", Item = "iron", ItemAdd = 2 },
                     new Card { Id = 5, Probability = 20, Title = "Železo", Img = "/Images/Icons/iron.png", Description = "Našel jsi železo.", Item = "iron", ItemAdd = 3 },
                 }
@@ -73,7 +73,9 @@ namespace lost_on_island.Models
                     new Card { Id = 2, Probability = 20, Title = "Dřevo", Img = "/Images/Icons/wood.png", Description = "Získal jsi dřevo.", Item = "wood", ItemAdd = 4 },
                     new Card { Id = 3, Probability = 20, Title = "Lano", Img = "/Images/Icons/rope.png", Description = "Získal jsi lano.", Item = "rope", ItemAdd = 1 },
                     new Card { Id = 4, Probability = 20, Title = "Lano", Img = "/Images/Icons/rope.png", Description = "Získal jsi lano.", Item = "rope", ItemAdd = 2 },
-                    new Card { Id = 5, Probability = 20, Title = "Divoké prase", Img = "/Images/Icons/wolf.png", Description = "Zaútočil na tebe vlk.", Item = "enemy", ItemAdd = 0 },
+                    new Card { Id = 5, Probability = 20, Title = "Divoké prase", Img = "/Images/Icons/wild-pig.png", Description = "Zaútočilo na tebe divoké prase", Item = "enemy", ItemAdd = 0, ItemType = "quiz" },
+                    new Card { Id = 5, Probability = 20, Title = "Vlk", Img = "/Images/Icons/wolf.png", Description = "Zaútočil na tebe vlk.", Item = "enemy", ItemAdd = 0, ItemType = "quiz" }
+
                 }
             },
         };
@@ -93,6 +95,8 @@ namespace lost_on_island.Models
             public string Description { get; set; }
             public string Item { get; set; }
             public int ItemAdd { get; set; }
+            public string ItemType { get; set; }  // druh enemies
         }
+
     }
 }

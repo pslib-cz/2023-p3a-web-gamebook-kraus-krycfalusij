@@ -101,12 +101,14 @@ namespace lost_on_island.Pages.Game
 
             if (selectedCard != null)
             {
-                ProcessCard(selectedCard, gameState);
+                var result = ProcessCard(selectedCard, gameState);
                 _sessionStorage.Save("GameState", gameState);
+                return result;
             }
 
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
+
 
         private Card GetSelectedCard(int cardId)
         {
@@ -121,7 +123,7 @@ namespace lost_on_island.Pages.Game
             return null;
         }
 
-        private void ProcessCard(Card card, GameState gameState)
+        private IActionResult ProcessCard(Card card, GameState gameState)
         {
             gameState.AddToInventory(card.Item, card.ItemAdd);
 
@@ -129,13 +131,22 @@ namespace lost_on_island.Pages.Game
             {
                 gameState.UpdateHealthAndEnergy(5, 0);
             }
+            else if (card.Item == "enemy" && card.ItemType == "quiz")
+            {
+                // Pokud je nep¯Ìtel typu "quiz", p¯esmÏrujte na str·nku Fight
+                return RedirectToPage("/Game/Fight", new { enemyId = card.Id });
+            }
             else if (card.Item == "enemy")
             {
-                gameState.UpdateHealthAndEnergy(-10, 0);
+                gameState.UpdateHealthAndEnergy(-10, 0); // P¯Ìklad poökozenÌ od nep¯Ìtele
             }
 
             gameState.CheckGameProgress();
+
+            // Vraùte se na aktu·lnÌ lokaci, pokud to nenÌ speci·lnÌ p¯Ìpad
+            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
+
         public IActionResult OnGet(int locationId)
         {
 

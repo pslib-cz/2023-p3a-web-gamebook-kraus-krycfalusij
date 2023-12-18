@@ -1,0 +1,11 @@
+﻿@page
+@model lost_on_island.Pages.Game.FightModel
+
+@{
+    var enemyTitle = Model.Enemy?.Title ?? "Neznámý nepřítel";
+    var enemyDescription = Model.Enemy?.Description ?? "Žádné informace.";
+}
+
+<h2>@enemyTitle</h2>
+<p>@enemyDescription</p>
+
