@@ -73,11 +73,15 @@ body {
 .location__title--header {
     margin-top: 10px;
     font-size: 2.5em;
+    line-height: 1;
 }
 
 .location__title--description {
     font-family: 'Jim Nightshade', cursive;
     font-size: 1.5em;
+    max-width: 80%;
+    line-height: 1;
+    text-align: center;
 }
 
 /* INVENTORY */
