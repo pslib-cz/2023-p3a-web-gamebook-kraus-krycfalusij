@@ -1,11 +1,14 @@
-﻿@page
+﻿@page "/Game/Fight/{enemyId:int}"
 @model lost_on_island.Pages.Game.FightModel
 
-@{
-    var enemyTitle = Model.Enemy?.Title ?? "Neznámý nepřítel";
-    var enemyDescription = Model.Enemy?.Description ?? "Žádné informace.";
+<h2>@Model.Enemy?.Title</h2>
+@if (Model.Enemy != null)
+{
+    <img src="@Model.Enemy.Img" alt="@Model.Enemy.Title" />
+    <p>@Model.Enemy.Description</p>
+
 }
-
-<h2>@enemyTitle</h2>
-<p>@enemyDescription</p>
-
+else
+{
+    <p>Informace o nepříteli nebyly nalezeny.</p>
+}

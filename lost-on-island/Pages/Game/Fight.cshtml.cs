@@ -1,29 +1,43 @@
 using lost_on_island.Models;
 using lost_on_island.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using static lost_on_island.Models.Cards;
 
-public class FightModel : PageModel
+namespace lost_on_island.Pages.Game
 {
-    private readonly ISessionStorage<GameState> _sessionStorage;
-
-    // Tøída Cards již není injektovaná jako služba
-    public Card Enemy { get; set; }
-
-    public FightModel(ISessionStorage<GameState> sessionStorage)
+    public class FightModel : PageModel
     {
-        _sessionStorage = sessionStorage;
-    }
+        private readonly ISessionStorage<GameState> _sessionStorage;
+        public Card Enemy { get; set; }
 
-    public void OnGet(int enemyId)
-    {
-        var gameState = _sessionStorage.LoadOrCreate("GameState");
-        var cards = new Cards();  // Vytvoøení instance pøímo zde
+        public FightModel(ISessionStorage<GameState> sessionStorage)
+        {
+            _sessionStorage = sessionStorage;
+        }
 
-        // Najít kartu nepøítele podle enemyId
-        Enemy = cards.CardPacks.SelectMany(pack => pack.CardsInPack)
-                               .FirstOrDefault(card => card.Id == enemyId && card.Item == "enemy");
+        public IActionResult OnGet(int enemyId)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
 
-        // Mùžete zde pøidat další logiku pro boj nebo kvíz
+            // Kontrola, zda je hráè oprávnìnì v boji
+            if (!gameState.InFight)
+            {
+                // Hráè není v boji, pøesmìrování na stránku Cheater
+                return RedirectToPage("/Game/Cheater");
+            }
+
+            var cards = new Cards();
+            Enemy = cards.CardPacks
+                .SelectMany(pack => pack.CardsInPack)
+                .FirstOrDefault(card => card.Id == enemyId);
+
+            // Resetujte stav boje na false po dokonèení boje
+            // Tuto logiku upravte podle potøeby vaší hry
+            //gameState.InFight = false;
+            //_sessionStorage.Save("GameState", gameState);
+
+            return Page();
+        }
     }
 }
