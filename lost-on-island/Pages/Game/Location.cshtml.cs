@@ -98,17 +98,17 @@ namespace lost_on_island.Pages.Game
         public IActionResult OnPostHandleCardClick(int cardId)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
-            var selectedCard = GetSelectedCard(cardId);
+            var selectedCard = GetSelectedCard(gameState.CurrentLocationId, cardId);
 
             if (selectedCard != null)
             {
                 gameState.AddToInventory(selectedCard.Item, selectedCard.ItemAdd);
-                
                 if (selectedCard != null && selectedCard.ItemType == "quiz")
                 {
                     gameState.InFight = true; // Hráè vstupuje do boje
                     _sessionStorage.Save("GameState", gameState);
-                    return RedirectToPage("/Game/Fight", new { cardPackId = 4, enemyId = selectedCard.Id});
+                    Console.WriteLine("location id" + gameState.CurrentLocationId);
+                    return RedirectToPage("/Game/Fight", new { cardPackId = (gameState.CurrentLocationId), enemyId = selectedCard.Id});
                 }
                 else if (selectedCard.Item == "enemy")
                 {
@@ -123,17 +123,10 @@ namespace lost_on_island.Pages.Game
 
 
 
-        private Card GetSelectedCard(int cardId)
+        private Card GetSelectedCard(int currentLocationId, int cardId)
         {
-            foreach (var pack in new Cards().CardPacks)
-            {
-                var foundCard = pack.CardsInPack.FirstOrDefault(c => c.Id == cardId);
-                if (foundCard != null)
-                {
-                    return foundCard;
-                }
-            }
-            return null;
+            var rightCardPack = GameState.CurrentLocationId;
+            return new Cards().CardPacks.Find(CardPack => CardPack.Id == currentLocationId).CardsInPack.FirstOrDefault(c => c.Id == cardId);
         }
 
         private IActionResult ProcessCard(Card card, GameState gameState)

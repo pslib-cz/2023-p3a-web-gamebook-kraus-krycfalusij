@@ -26,12 +26,12 @@ namespace lost_on_island.Pages.Game
                 // Hráè není v boji, pøesmìrování na stránku Cheater
                 return RedirectToPage("/Game/Cheater");
             }
-
+            Console.WriteLine("cardPackId" + cardPackId);
             var cards = new Cards();
             Enemy = cards.CardPacks
-                .FirstOrDefault(CardPack => CardPack.Id == cardPackId)
+                .Find(CardPack => CardPack.Id == cardPackId)
                 .CardsInPack
-                .FirstOrDefault(card => card.Id == enemyId);
+                .Find(card => card.Id == enemyId);
 
 
             // Resetujte stav boje na false po dokonèení boje
