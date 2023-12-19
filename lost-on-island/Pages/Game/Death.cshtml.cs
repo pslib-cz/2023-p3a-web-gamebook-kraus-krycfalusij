@@ -1,6 +1,7 @@
 using lost_on_island.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Reflection;
 
 namespace lost_on_island.Pages.Game
 {
@@ -13,14 +14,14 @@ namespace lost_on_island.Pages.Game
         {
             _sessionStorage = sessionStorage;
         }
-
+        
         public IActionResult OnGet()
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
 
-            if (GameState.IsPlayerDead == false)
+            if (GameState.CurrentLocationId != 9 && GameState.IsPlayerDead == false)
             {
-                return RedirectToPage("/Game/Cheater");
+                Response.Redirect("/Game/Cheater");
             }
 
             GameState.CurrentLocationId = 9;

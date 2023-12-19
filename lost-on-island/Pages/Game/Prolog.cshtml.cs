@@ -21,7 +21,7 @@ namespace lost_on_island.Pages.Game
             GameState = _sessionStorage.LoadOrCreate("GameState");
 
             // Ovìøení, zda je uživatel na správném locationId
-            if (GameState.CurrentLocationId != 0 && GameState.CurrentLocationId != 1)
+            if (GameState.CurrentLocationId != 0 && GameState.CurrentLocationId != 1 && GameState.CurrentLocationId != 8 && GameState.CurrentLocationId != 9)
             {
                 return RedirectToPage("/Game/Cheater");
             }

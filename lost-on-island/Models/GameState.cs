@@ -7,6 +7,9 @@
     public int Energy { get; set; } = 20;
     public int Health { get; set; } = 20;
     public int Turns { get; set; } = 0;
+    public bool InFight { get; set; } = false;
+
+
 
     // Metoda pro aktualizaci zdraví a energie
     public void UpdateHealthAndEnergy(int healthChange, int energyChange)

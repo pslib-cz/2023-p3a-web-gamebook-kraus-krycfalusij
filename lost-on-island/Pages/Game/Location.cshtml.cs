@@ -101,13 +101,14 @@ namespace lost_on_island.Pages.Game
 
             if (selectedCard != null)
             {
-
                 ProcessCard(selectedCard, gameState);
                 _sessionStorage.Save("GameState", gameState);
             }
 
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
+
+
 
         private Card GetSelectedCard(int cardId)
         {
@@ -122,7 +123,7 @@ namespace lost_on_island.Pages.Game
             return null;
         }
 
-        private void ProcessCard(Card card, GameState gameState)
+        private IActionResult ProcessCard(Card card, GameState gameState)
         {
             gameState.AddToInventory(card.Item, card.ItemAdd);
 
@@ -132,17 +133,24 @@ namespace lost_on_island.Pages.Game
             }
             else if (card.Item == "enemy")
             {
-                gameState.UpdateHealthAndEnergy(-10, 0);
+                gameState.UpdateHealthAndEnergy(-10, 0); // Poškození hráèe
             }
 
             gameState.CheckGameProgress();
+            return null; // Žádné automatické pøesmìrování
         }
+
+
         public IActionResult OnGet(int locationId)
         {
 
             var gameState = _sessionStorage.LoadOrCreate("GameState");
 
             if (!IsValidTransition(gameState, locationId))
+            {
+                return RedirectToPage("/Game/Cheater");
+            }
+            if (gameState.InFight)
             {
                 return RedirectToPage("/Game/Cheater");
             }
