@@ -101,6 +101,7 @@ namespace lost_on_island.Pages.Game
 
             if (selectedCard != null)
             {
+
                 ProcessCard(selectedCard, gameState);
                 _sessionStorage.Save("GameState", gameState);
             }
