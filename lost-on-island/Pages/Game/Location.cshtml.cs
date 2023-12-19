@@ -83,6 +83,7 @@ namespace lost_on_island.Pages.Game
             int totalProbability = LocationCards.Sum(card => card.Probability);
             int randomValue = rnd.Next(1, totalProbability + 1);
             int cumulativeProbability = 0;
+            
             foreach (var card in LocationCards)
             {
                 cumulativeProbability += card.Probability;
@@ -101,7 +102,19 @@ namespace lost_on_island.Pages.Game
 
             if (selectedCard != null)
             {
-                ProcessCard(selectedCard, gameState);
+                gameState.AddToInventory(selectedCard.Item, selectedCard.ItemAdd);
+                
+                if (selectedCard != null && selectedCard.ItemType == "quiz")
+                {
+                    gameState.InFight = true; // Hr·Ë vstupuje do boje
+                    _sessionStorage.Save("GameState", gameState);
+                    return RedirectToPage("/Game/Fight", new { cardPackId = 4, enemyId = selectedCard.Id});
+                }
+                else if (selectedCard.Item == "enemy")
+                {
+                    gameState.UpdateHealthAndEnergy(-10, 0);
+                }
+
                 _sessionStorage.Save("GameState", gameState);
             }
 
@@ -161,7 +174,6 @@ namespace lost_on_island.Pages.Game
             {
                 return RedirectToSpecialPage(locationId, gameState);
             }
-            
             LoadLocationData(locationId);
             return Page();
         }

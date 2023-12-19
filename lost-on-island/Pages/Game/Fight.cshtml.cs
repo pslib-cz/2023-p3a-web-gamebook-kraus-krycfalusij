@@ -16,7 +16,7 @@ namespace lost_on_island.Pages.Game
             _sessionStorage = sessionStorage;
         }
 
-        public IActionResult OnGet(int enemyId)
+        public IActionResult OnGet(int cardPackId, int enemyId)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
 
@@ -29,8 +29,10 @@ namespace lost_on_island.Pages.Game
 
             var cards = new Cards();
             Enemy = cards.CardPacks
-                .SelectMany(pack => pack.CardsInPack)
+                .FirstOrDefault(CardPack => CardPack.Id == cardPackId)
+                .CardsInPack
                 .FirstOrDefault(card => card.Id == enemyId);
+
 
             // Resetujte stav boje na false po dokonèení boje
             // Tuto logiku upravte podle potøeby vaší hry

@@ -58,9 +58,9 @@ namespace lost_on_island.Models
                 {
                     new Card { Id = 1, Probability = 20, Title = "Kámen", Img = "/Images/Icons/stone.png", Description = "Získal jsi kámen.", Item = "stone", ItemAdd = 1 },
                     new Card { Id = 2, Probability = 20, Title = "Kámen", Img = "/Images/Icons/stone.png", Description = "Získal jsi kameny.", Item = "wood", ItemAdd = 2 },
-                    new Card { Id = 3, Probability = 50, Title = "Pavouk", Img = "/Images/Icons/spider.png", Description = "Kousl tě pavouk.", Item = "damage", ItemAdd = 0, ItemType = "quiz" },
+                    new Card { Id = 3, Probability = 50, Title = "Pavouk", Img = "/Images/Icons/spider.png", Description = "Kousl tě pavouk.", Item = "enemy", ItemAdd = 0, ItemType = "quiz" },
                     new Card { Id = 4, Probability = 20, Title = "Železo", Img = "/Images/Icons/iron.png", Description = "Našel jsi železo.", Item = "iron", ItemAdd = 2 },
-                    new Card { Id = 5, Probability = 20, Title = "Železo", Img = "/Images/Icons/iron.png", Description = "Našel jsi železo.", Item = "iron", ItemAdd = 3 },
+                    new Card { Id = 5, Probability = 20, Title = "Železo", Img = "/Images/Icons/iron.png", Description = "Našel jsi železo.", Item = "iron", ItemAdd = 3 }
                 }
             },
             new CardPack
@@ -74,7 +74,7 @@ namespace lost_on_island.Models
                     new Card { Id = 3, Probability = 20, Title = "Lano", Img = "/Images/Icons/rope.png", Description = "Získal jsi lano.", Item = "rope", ItemAdd = 1 },
                     new Card { Id = 4, Probability = 20, Title = "Lano", Img = "/Images/Icons/rope.png", Description = "Získal jsi lano.", Item = "rope", ItemAdd = 2 },
                     new Card { Id = 5, Probability = 50, Title = "Divoké prase", Img = "/Images/Icons/wild-pig.png", Description = "Zaútočilo na tebe divoké prase", Item = "enemy", ItemAdd = 0, ItemType = "quiz" },
-                    new Card { Id = 5, Probability = 50, Title = "Vlk", Img = "/Images/Icons/wolf.png", Description = "Zaútočil na tebe vlk.", Item = "enemy", ItemAdd = 0, ItemType = "quiz" }
+                    new Card { Id = 6, Probability = 50, Title = "Vlk", Img = "/Images/Icons/wolf.png", Description = "Zaútočil na tebe vlk.", Item = "enemy", ItemAdd = 0, ItemType = "quiz" }
 
                 }
             },
