@@ -163,11 +163,13 @@ namespace lost_on_island.Pages.Game
 
             UpdateGameState(gameState, locationId);
 
+
             if (_locationProvider.IsSpecialLocation(locationId))
             {
                 return RedirectToSpecialPage(locationId, gameState);
             }
             LoadLocationData(locationId);
+
             return Page();
         }
 

@@ -10,8 +10,6 @@
     public bool InFight { get; set; } = false;
 
 
-
-    // Metoda pro aktualizaci zdraví a energie
     public void UpdateHealthAndEnergy(int healthChange, int energyChange)
     {
         Health += healthChange;
@@ -19,7 +17,6 @@
         if (Health <= 0 || Energy <= 0) IsPlayerDead = true;
     }
 
-    // Metoda pro přidání položek do inventáře
     public void AddToInventory(string item, int amount)
     {
         if (Inventory.ContainsKey(item))

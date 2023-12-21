@@ -5,7 +5,9 @@
 }
 
 
-<div class="game-container" style="background-image: url('@Model.CurrentLocation.ImagePath')">
+<div class="game-container">
+    <div style="background-image: url('@Url.Content($"~/../{Model.CurrentLocation.ImagePath}")')" class="background-overlay"></div>
+
     <div class="location__title__container">
         <h1 class="location__title--font location__title--header">@Model.CurrentLocation.Title</h1>
         <p class="location__title--font location__title--description">@Model.CurrentLocation.Description</p>
@@ -21,10 +23,52 @@
                     </div>
                     <div class="card--front" onclick="handleCardClick(this)">
                         <h3>@Model.SingleLocationCard.Title</h3>
-                        
+                        <!--
                              <p>ID: @Model.SingleLocationCard.Id</p>
                              <p>Item type: @Model.SingleLocationCard.Item</p>
                        
+                        <p>Šance: @Model.SingleLocationCard.Probability%</p>
+                        -->
+                        <p>@Model.SingleLocationCard.Description</p>
+                        <p>+ @Model.SingleLocationCard.ItemAdd</p>
+                        <img src="@Model.SingleLocationCard.Img" alt="Card Image" />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form method="post" asp-page-handler="HandleCardClick" class="card-form">
+            <input type="hidden" name="cardId" value="@Model.SingleLocationCard.Id" />
+            <div class="card pack-of-cards"></div>
+            <div class="card" onclick="handleCardAnimation(this)">
+                <div class="card--inner">
+                    <div class="card--back">
+                    </div>
+                    <div class="card--front" onclick="handleCardClick(this)">
+                        <h3>@Model.SingleLocationCard.Title</h3>
+
+                        <p>ID: @Model.SingleLocationCard.Id</p>
+                        <p>Item type: @Model.SingleLocationCard.Item</p>
+
+                        <p>Šance: @Model.SingleLocationCard.Probability%</p>
+                        <p>@Model.SingleLocationCard.Description</p>
+                        <p>+ @Model.SingleLocationCard.ItemAdd</p>
+                        <img src="@Model.SingleLocationCard.Img" alt="Card Image" />
+                    </div>
+                </div>
+            </div>
+        </form>        <form method="post" asp-page-handler="HandleCardClick" class="card-form">
+            <input type="hidden" name="cardId" value="@Model.SingleLocationCard.Id" />
+            <div class="card pack-of-cards"></div>
+            <div class="card" onclick="handleCardAnimation(this)">
+                <div class="card--inner">
+                    <div class="card--back">
+                    </div>
+                    <div class="card--front" onclick="handleCardClick(this)">
+                        <h3>@Model.SingleLocationCard.Title</h3>
+
+                        <p>ID: @Model.SingleLocationCard.Id</p>
+                        <p>Item type: @Model.SingleLocationCard.Item</p>
+
                         <p>Šance: @Model.SingleLocationCard.Probability%</p>
                         <p>@Model.SingleLocationCard.Description</p>
                         <p>+ @Model.SingleLocationCard.ItemAdd</p>
@@ -44,24 +88,23 @@
         }
     </script>
 
-    <h3>Inventář</h3>
-    @foreach (var item in gameState.Inventory)
-    {
-        <p>@item.Key: @item.Value</p>
-    }
-
-    <h3>Energie: @gameState.Energy</h3>
-    <h3>Zdraví: @gameState.Health</h3>
 
 
-    @foreach (var connection in Model.AvailableConnections)
-    {
-        <a asp-page="/Game/Location" asp-route-locationId="@connection.ToLocationId">@connection.Description</a>
-    }
-
-    <div class="inventory__tools">
-        <div class="inventory__tools__content">
+    <div class="game-stats">
+        <div class="game-stats__energy">
+            <span class="icon--energy"></span>
+            Energie: @gameState.Energy/20
+        </div>
+        <div class="game-stats__health">
+            <span class="icon--health"></span>
+            Zdraví: @gameState.Health/20
+        </div>
+        <div class="game-stats__turns">
+            Počet tahů: @gameState.Turns
         </div>
     </div>
+
+
+    
 </div>
 

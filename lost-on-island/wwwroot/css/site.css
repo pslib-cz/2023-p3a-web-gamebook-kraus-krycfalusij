@@ -1,11 +1,14 @@
 html {
-    font-size: 14px;
+    font-size: 0.875em;
     font-family: 'Source Serif 4', serif;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Jim+Nightshade&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
+    html {
+    font-size: 1em;
   }
 }
 
@@ -13,10 +16,6 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
 
 body {
     width: 100vw;
@@ -25,8 +24,178 @@ body {
     margin: 0;
 }
 
-/* LAYOUT STYLY */
+.game-container {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
 
+.location__title__container {
+    margin-top: 1em;
+    width: 16em;
+    height: 7em;
+    background-image: url(../Images/paper-title-background.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    font-family: 'Jim Nightshade';
+}
+
+.location__title__container h1 {
+    font-size: 3em;
+    font-weight: 500;
+    margin: 0;
+    margin-top: 0.25em;
+}
+.location__title__container p {
+        font-weight: 500;
+        margin: 0;
+        margin-top: -0.35em;
+        font-size: 1.25em;
+        max-width: 175px;
+        text-align: center;
+        line-height: 1em;
+}
+
+
+.game-container {
+    position: relative;
+    overflow: hidden;
+
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-position: left center;
+    filter: blur(1px);
+    z-index: 1;
+}
+
+.game-container > *:not(.background-overlay) {
+    position: relative;
+    z-index: 2;
+}
+
+/*
+.game-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0); 
+    z-index: 1; 
+}
+*/
+
+.card-pack {
+    display: flex;
+    width: 65vw;
+    margin-top: -10vh;
+}
+
+
+
+a {
+    color: red;
+}
+
+.game-stats {
+    width: 100vw;
+    height: 190px;
+    background-image: url(../Images/gamestats.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    position: relative;
+    font-weight: 600;
+    max-width: 500px;
+}
+
+.game-stats__turns {
+    position: absolute;
+    top: 12%;
+    left: 38%;
+}
+
+.game-stats__health {
+    position: absolute;
+    top: 24%;
+    right: 13%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 0.25em;
+}
+
+.icon--energy {
+    width: 1em;
+    background-image: url(../Images/icons/energy.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon--health {
+    width: 1em;
+    background-image: url(../Images/icons/heart.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+.game-stats__energy {
+    position: absolute;
+    top: 24%;
+    left: 13%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 0.25em;
+}
+
+@media only screen and (max-width: 390px) {
+    .game-stats {
+        font-size: 0.9em;
+    }
+    .game-stats__turns {
+        bottom: 37%;
+    }
+    .game-stats__energy {
+        bottom: 30%;
+
+    }
+    .game-stats__health {
+        bottom: 30%;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .game-stats {
+        height: 250px;
+
+    }
+}
+
+
+
+/* LAYOUT STYLY */
+/*
 .game-container {
     width: 100vw;
     height: 100vh;
@@ -47,7 +216,7 @@ body {
     z-index: -1;
 }
 */
-
+/*
 .location__title__container {
     position: absolute;
     top: 20px;
@@ -85,7 +254,7 @@ body {
 }
 
 /* INVENTORY */
-
+/*
 .inventory__tools {
     background-image: url(../Images/inventory.png);
     background-position: center;
@@ -119,3 +288,7 @@ body {
         height: 120px;
     }
 }
+*/
+
+
+

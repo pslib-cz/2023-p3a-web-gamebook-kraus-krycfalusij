@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Images\forest.png" />
-    <None Include="wwwroot\Images\shipwreck.png" />
+    <None Include="wwwroot\Images\location-forest.png" />
+    <None Include="wwwroot\Images\location-shipwreck.png" />
   </ItemGroup>
 
 </Project>

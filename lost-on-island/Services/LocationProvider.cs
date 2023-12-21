@@ -19,14 +19,14 @@ namespace lost_on_island.Services
 
             // Přidání speciálních lokací
             _locations.Add(new Location { Id = 1, Name = "prolog", Title = "Prolog", ImagePath = "Images/prolog.png", Description = "Začátek dobrodružství.", IsSpecial = true });
-            _locations.Add(new Location { Id = 2, Name = "shipwreck", Title = "Loď", ImagePath = "Images/shipwreck.png", Description = "Ztroskotaná loď.", IsSpecial = true });
+            _locations.Add(new Location { Id = 2, Name = "shipwreck", Title = "Loď", ImagePath = "Images/location-shipwreck.png", Description = "Ztroskotaná loď.", IsSpecial = true });
 
             // Přidání běžných lokací
-            _locations.Add(new Location { Id = 3, Name = "beach", Title = "Pláž", ImagePath = "Images/beach.png", Description = "Pláž s výhledem na moře." });
-            _locations.Add(new Location { Id = 4, Name = "field", Title = "Louka", ImagePath = "Images/field.png", Description = "Zelená louka s potulujícími se zvířátky." });
-            _locations.Add(new Location { Id = 5, Name = "forest", Title = "Les", ImagePath = "Images/forest.png", Description = "Lesík s prasátky." });
-            _locations.Add(new Location { Id = 6, Name = "cave", Title = "Jeskyně", ImagePath = "Images/cave.png", Description = "Černá díra vedoucí do pekel." });
-            _locations.Add(new Location { Id = 7, Name = "deepForest", Title = "Hluboký les", ImagePath = "Images/deepForest.png", Description = "Hluboký les plný překvapení." });
+            _locations.Add(new Location { Id = 3, Name = "beach", Title = "Pláž", ImagePath = "Images/location-beach.png", Description = "Pláž s výhledem na moře." });
+            _locations.Add(new Location { Id = 4, Name = "field", Title = "Louka", ImagePath = "Images/location-field.png", Description = "Zelená louka s potulujícími se zvířátky." });
+            _locations.Add(new Location { Id = 5, Name = "forest", Title = "Les", ImagePath = "Images/location-forest.png", Description = "Lesík s prasátky." });
+            _locations.Add(new Location { Id = 6, Name = "cave", Title = "Jeskyně", ImagePath = "Images/location-cave.png", Description = "Černá díra vedoucí do pekel." });
+            _locations.Add(new Location { Id = 7, Name = "deepForest", Title = "Hluboký les", ImagePath = "Images/location-deep-forest.png", Description = "Hluboký les plný překvapení." });
 
             // Přidání speciálních lokací pro smrt a konec hry
             _locations.Add(new Location { Id = 8, Name = "death", Title = "Smrt", ImagePath = "Images/death.png", Description = "Konec vašeho dobrodružství.", IsSpecial = true });

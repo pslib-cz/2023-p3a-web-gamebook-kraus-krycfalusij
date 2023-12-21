@@ -1,6 +1,8 @@
 ﻿@page
 @model lost_on_island.Pages.Game.ShipwreckModel
 
-<h1>Loď</h1>
-<p>Zde můžeš opravovat svojí loď</p>
-<a asp-page="/Game/Location" asp-route-locationId="3">Pláž</a>
+<div class="game-container" style="background-image: url('@Url.Content("~/Images/location-shipwreck.png")')">
+    <h1>Loď</h1>
+    <p>Zde můžeš opravovat svojí loď</p>
+    <a asp-page="/Game/Location" asp-route-locationId="3">Pláž</a>
+</div>
