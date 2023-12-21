@@ -23,6 +23,7 @@
     transform: translateX(-50%) translateY(-50%);
     border: none;
     background: none;
+    cursor: pointer;
 }
 
 .pack-of-cards {
@@ -103,3 +104,7 @@
     }
 }
 
+.card.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}

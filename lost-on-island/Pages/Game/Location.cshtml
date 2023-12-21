@@ -46,10 +46,12 @@
                     <div class="card--front" onclick="handleCardClick(this)">
                         <h3>@Model.SingleLocationCard.Title</h3>
 
-                        <p>ID: @Model.SingleLocationCard.Id</p>
-                        <p>Item type: @Model.SingleLocationCard.Item</p>
+                        <!--
+                             <p>ID: @Model.SingleLocationCard.Id</p>
+                             <p>Item type: @Model.SingleLocationCard.Item</p>
 
                         <p>Šance: @Model.SingleLocationCard.Probability%</p>
+                        -->
                         <p>@Model.SingleLocationCard.Description</p>
                         <p>+ @Model.SingleLocationCard.ItemAdd</p>
                         <img src="@Model.SingleLocationCard.Img" alt="Card Image" />
@@ -82,6 +84,12 @@
     <script>
         function handleCardAnimation(card) {
             card.classList.add("flipped");
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(function (cardElement) {
+                if (cardElement !== card) {
+                    cardElement.style.pointerEvents = 'none'; // Zabrání kliknutí na kartu
+                }
+            });
         }
         function handleCardClick(card) {
             card.closest("form").submit();
@@ -102,7 +110,20 @@
         <div class="game-stats__turns">
             Počet tahů: @gameState.Turns
         </div>
+
+        <div class="navigation-buttons">
+            @foreach (var connection in Model.AvailableConnections)
+            {
+                if (connection.ToLocationId != Model.CurrentLocation.Id)
+                {
+                    <button type="button" class="nav-button" onclick="location.href='@Url.Page("/Game/Location", new { locationId = connection.ToLocationId })'">
+                        @connection.Description
+                    </button>
+                }
+            }
+        </div>
     </div>
+
 
 
     

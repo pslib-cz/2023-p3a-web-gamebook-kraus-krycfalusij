@@ -169,7 +169,6 @@ namespace lost_on_island.Pages.Game
                 return RedirectToSpecialPage(locationId, gameState);
             }
             LoadLocationData(locationId);
-
             return Page();
         }
 
