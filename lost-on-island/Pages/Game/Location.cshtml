@@ -15,7 +15,7 @@
 
     <div class="card-pack">
         <form method="post" asp-page-handler="HandleCardClick" class="card-form">
-            <input type="hidden" name="cardId" value="@Model.SingleLocationCard.Id" />
+
             <div class="card pack-of-cards"></div>
             <div class="card" onclick="handleCardAnimation(this)">
                 <div class="card--inner">
@@ -23,12 +23,7 @@
                     </div>
                     <div class="card--front" onclick="handleCardClick(this)">
                         <h3>@Model.SingleLocationCard.Title</h3>
-                        <!--
-                             <p>ID: @Model.SingleLocationCard.Id</p>
-                             <p>Item type: @Model.SingleLocationCard.Item</p>
-                       
                         <p>Šance: @Model.SingleLocationCard.Probability%</p>
-                        -->
                         <p>@Model.SingleLocationCard.Description</p>
                         <p>+ @Model.SingleLocationCard.ItemAdd</p>
                         <img src="@Model.SingleLocationCard.Img" alt="Card Image" />
@@ -37,7 +32,7 @@
             </div>
         </form>
         <form method="post" asp-page-handler="HandleCardClick" class="card-form">
-            <input type="hidden" name="cardId" value="@Model.SingleLocationCard.Id" />
+
             <div class="card pack-of-cards"></div>
             <div class="card" onclick="handleCardAnimation(this)">
                 <div class="card--inner">
@@ -45,21 +40,15 @@
                     </div>
                     <div class="card--front" onclick="handleCardClick(this)">
                         <h3>@Model.SingleLocationCard.Title</h3>
-
-                        <!--
-                             <p>ID: @Model.SingleLocationCard.Id</p>
-                             <p>Item type: @Model.SingleLocationCard.Item</p>
-
                         <p>Šance: @Model.SingleLocationCard.Probability%</p>
-                        -->
                         <p>@Model.SingleLocationCard.Description</p>
                         <p>+ @Model.SingleLocationCard.ItemAdd</p>
-                        <img src="@Model.SingleLocationCard.Img" alt="Card Image" />
                     </div>
                 </div>
             </div>
-        </form>        <form method="post" asp-page-handler="HandleCardClick" class="card-form">
-            <input type="hidden" name="cardId" value="@Model.SingleLocationCard.Id" />
+        </form>
+        <form method="post" asp-page-handler="HandleCardClick" class="card-form">
+
             <div class="card pack-of-cards"></div>
             <div class="card" onclick="handleCardAnimation(this)">
                 <div class="card--inner">
@@ -67,36 +56,26 @@
                     </div>
                     <div class="card--front" onclick="handleCardClick(this)">
                         <h3>@Model.SingleLocationCard.Title</h3>
-
-                        <p>ID: @Model.SingleLocationCard.Id</p>
-                        <p>Item type: @Model.SingleLocationCard.Item</p>
-
                         <p>Šance: @Model.SingleLocationCard.Probability%</p>
                         <p>@Model.SingleLocationCard.Description</p>
                         <p>+ @Model.SingleLocationCard.ItemAdd</p>
-                        <img src="@Model.SingleLocationCard.Img" alt="Card Image" />
                     </div>
                 </div>
             </div>
         </form>
     </div>
 
-    <script>
-        function handleCardAnimation(card) {
-            card.classList.add("flipped");
-            var cards = document.querySelectorAll('.card');
-            cards.forEach(function (cardElement) {
-                if (cardElement !== card) {
-                    cardElement.style.pointerEvents = 'none'; // Zabrání kliknutí na kartu
+    <div class="navigation-buttons">
+            @foreach (var connection in Model.AvailableConnections)
+            {
+                if (connection.ToLocationId != Model.CurrentLocation.Id)
+                {
+                    <button type="button" class="nav-button" onclick="location.href='@Url.Page("/Game/Location", new { locationId = connection.ToLocationId })'">
+                        @connection.Description
+                    </button>
                 }
-            });
-        }
-        function handleCardClick(card) {
-            card.closest("form").submit();
-        }
-    </script>
-
-
+            }
+     </div>
 
     <div class="game-stats">
         <div class="game-stats__energy">
@@ -110,22 +89,34 @@
         <div class="game-stats__turns">
             Počet tahů: @gameState.Turns
         </div>
-
-        <div class="navigation-buttons">
-            @foreach (var connection in Model.AvailableConnections)
-            {
-                if (connection.ToLocationId != Model.CurrentLocation.Id)
-                {
-                    <button type="button" class="nav-button" onclick="location.href='@Url.Page("/Game/Location", new { locationId = connection.ToLocationId })'">
-                        @connection.Description
-                    </button>
-                }
-            }
-        </div>
+        <form method="post" asp-page-handler="HandleBadgeClick" class="badges-list">
+            <div onclick="handleBadgeClick(this, 'Sword')" class="single-tool__badge" style="background-image: url('@(gameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
+            <div onclick="handleBadgeClick(this, 'Axe')" class="single-tool__badge" style="background-image: url('@(gameState.Axe ? "/Images/Icons/axe-badge.png" : "/Images/Icons/axe-badge-disabled.png")')"></div>
+            <div onclick="handleBadgeClick(this, 'Pickaxe')" class="single-tool__badge" style="background-image: url('@(gameState.Pickaxe ? "/Images/Icons/pickaxe-badge.png" : "/Images/Icons/pickaxe-badge-disabled.png")')"></div>
+            <div onclick="handleBadgeClick(this, 'Shears')" class="single-tool__badge" style="background-image: url('@(gameState.Shears ? "/Images/Icons/shears-badge.png" : "/Images/Icons/shears-badge-disabled.png")')"></div>
+            <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(gameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png")')"></div>
+            <input type="hidden" name="badgeType" />
+        </form>
     </div>
-
-
-
-    
 </div>
+
+<script>
+    function handleCardAnimation(card) {
+        card.classList.add("flipped");
+        var cards = document.querySelectorAll('.card');
+        cards.forEach(function (cardElement) {
+            if (cardElement !== card) {
+                cardElement.style.pointerEvents = 'none'; // Zabrání kliknutí na kartu
+            }
+        });
+    }
+    function handleCardClick(card) {
+        card.closest("form").submit();
+    }
+    function handleBadgeClick(div, badgeType) {
+        var form = div.closest("form");
+        form.querySelector("[name='badgeType']").value = badgeType;
+        form.submit();
+    }
+</script>
 

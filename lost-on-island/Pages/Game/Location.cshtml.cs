@@ -121,7 +121,13 @@ namespace lost_on_island.Pages.Game
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
 
-
+        public IActionResult OnPostHandleBadgeClick(string badgeType)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState.AddTool(badgeType);
+            _sessionStorage.Save("GameState", gameState);
+            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+        }
 
         private Card GetSelectedCard(int currentLocationId, int cardId)
         {

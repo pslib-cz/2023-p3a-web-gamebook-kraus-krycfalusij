@@ -1,6 +1,7 @@
 ﻿.card-pack {
+    margin-top: 100px;
     justify-content: unset;
-    gap: 9.5em;
+    gap: 8em;
     justify-content: center;
 }
 .card p {
@@ -15,8 +16,8 @@
     display: flex;
     flex-direction: column;
     perspective: 1000px;
-    width: 9em;
-    height: 14em;
+    width: 7.5em;
+    height: 11.5em;
     transform-style: preserve-3d;
     animation: none;
     position: absolute;
@@ -33,7 +34,7 @@
 }
 
 .card.flipped {
-    animation: rotateXAnimation 1s forwards; /* dát zpět na 2.5s */
+    animation: rotateXAnimation 1.5s forwards;
 }
 
 @keyframes rotateXAnimation {
