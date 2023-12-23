@@ -13,57 +13,38 @@
         <p class="location__title--font location__title--description">@Model.CurrentLocation.Description</p>
     </div>
 
+
+    <form method="post" asp-page-handler="ToggleRiskyMode" onsubmit="return refreshPage();">
+        <button type="submit" class="button-toggle @(Model.GameState.IsRiskyMode ? "risky" : "safe")" style="background-image: url('@Url.Content("~/Images/icons/riskysafebutton.png")');">
+        </button>
+    </form>
+
+
     <div class="card-pack">
-        <form method="post" asp-page-handler="HandleCardClick" class="card-form">
+        @for (int i = 0; i < 3; i++)
+        {
+            <form method="post" asp-page-handler="HandleCardClick" class="card-form">
+                <div class="card pack-of-cards" style="background-image: url('@(Model.GameState.IsRiskyMode ? "/Images/card-risk-background.png" : "/Images/card-safe-background.png")');">
+                </div>
+                <div class="card" onclick="handleCardAnimation(this)">
+                    <div class="card--inner">
+                        <div style="background-image: url('@(Model.GameState.IsRiskyMode ? "/Images/card-risk-background.png" : "/Images/card-safe-background.png")');" class="card--back">
+                        </div>
+                        <input type="hidden" name="cardId" value="@Model.SingleLocationCard.Id" />
 
-            <div class="card pack-of-cards"></div>
-            <div class="card" onclick="handleCardAnimation(this)">
-                <div class="card--inner">
-                    <div class="card--back">
-                    </div>
-                    <div class="card--front" onclick="handleCardClick(this)">
-                        <h3>@Model.SingleLocationCard.Title</h3>
-                        <p>Šance: @Model.SingleLocationCard.Probability%</p>
-                        <p>@Model.SingleLocationCard.Description</p>
-                        <p>+ @Model.SingleLocationCard.ItemAdd</p>
-                        <img src="@Model.SingleLocationCard.Img" alt="Card Image" />
+                        <div class="card--front" onclick="handleCardClick(this)" style="background-image: url('@(Model.GameState.IsRiskyMode ? "/Images/card-risk-foreground.png" : "/Images/card-safe-foreground.png")');">
+                            <h3>@Model.SingleLocationCard.Title</h3>
+                            <p>Šance: @Model.SingleLocationCard.Probability%</p>
+                            <p>@Model.SingleLocationCard.Description</p>
+                            <p>+ @Model.SingleLocationCard.ItemAdd</p>
+                            <img src="@Model.SingleLocationCard.Img" alt="Card Image" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-        <form method="post" asp-page-handler="HandleCardClick" class="card-form">
-
-            <div class="card pack-of-cards"></div>
-            <div class="card" onclick="handleCardAnimation(this)">
-                <div class="card--inner">
-                    <div class="card--back">
-                    </div>
-                    <div class="card--front" onclick="handleCardClick(this)">
-                        <h3>@Model.SingleLocationCard.Title</h3>
-                        <p>Šance: @Model.SingleLocationCard.Probability%</p>
-                        <p>@Model.SingleLocationCard.Description</p>
-                        <p>+ @Model.SingleLocationCard.ItemAdd</p>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <form method="post" asp-page-handler="HandleCardClick" class="card-form">
-
-            <div class="card pack-of-cards"></div>
-            <div class="card" onclick="handleCardAnimation(this)">
-                <div class="card--inner">
-                    <div class="card--back">
-                    </div>
-                    <div class="card--front" onclick="handleCardClick(this)">
-                        <h3>@Model.SingleLocationCard.Title</h3>
-                        <p>Šance: @Model.SingleLocationCard.Probability%</p>
-                        <p>@Model.SingleLocationCard.Description</p>
-                        <p>+ @Model.SingleLocationCard.ItemAdd</p>
-                    </div>
-                </div>
-            </div>
-        </form>
+            </form>
+        }
     </div>
+
 
     <div class="navigation-buttons">
             @foreach (var connection in Model.AvailableConnections)

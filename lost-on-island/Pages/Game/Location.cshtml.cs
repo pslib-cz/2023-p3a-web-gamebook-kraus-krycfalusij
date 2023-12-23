@@ -74,7 +74,7 @@ namespace lost_on_island.Pages.Game
             _sessionStorage.Save("GameState", gameState);
         }
 
-        private void LoadLocationData(int locationId)
+        private void LoadLocationData(int locationId, bool isRiskyMode)
         {
             CurrentLocation = _locationProvider.GetLocationById(locationId);
             AvailableConnections = _locationProvider.GetConnectionsFromLocation(locationId).ToList();
@@ -93,11 +93,28 @@ namespace lost_on_island.Pages.Game
                     break;
                 }
             }
+
+            if (isRiskyMode)
+            {
+                foreach (var card in LocationCards)
+                {
+                    if (card.Item == "enemy")
+                    {
+                        card.Probability *= 2;
+                    }
+                    else
+                    {
+                        card.ItemAdd *= 2;
+                    }
+                }
+            }
+
         }
 
         public IActionResult OnPostHandleCardClick(int cardId)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
+
             var selectedCard = GetSelectedCard(gameState.CurrentLocationId, cardId);
 
             if (selectedCard != null)
@@ -108,7 +125,7 @@ namespace lost_on_island.Pages.Game
                     gameState.InFight = true; // Hr·Ë vstupuje do boje
                     _sessionStorage.Save("GameState", gameState);
                     Console.WriteLine("location id" + gameState.CurrentLocationId);
-                    return RedirectToPage("/Game/Fight", new { cardPackId = (gameState.CurrentLocationId), enemyId = selectedCard.Id});
+                    return RedirectToPage("/Game/Fight", new { cardPackId = (gameState.CurrentLocationId), enemyId = selectedCard.Id });
                 }
                 else if (selectedCard.Item == "enemy")
                 {
@@ -121,10 +138,11 @@ namespace lost_on_island.Pages.Game
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
 
+
         public IActionResult OnPostHandleBadgeClick(string badgeType)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
-            gameState.AddTool(badgeType);
+            //gameState.AddTool(badgeType);
             _sessionStorage.Save("GameState", gameState);
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
@@ -174,7 +192,7 @@ namespace lost_on_island.Pages.Game
             {
                 return RedirectToSpecialPage(locationId, gameState);
             }
-            LoadLocationData(locationId);
+            LoadLocationData(locationId, GameState.IsRiskyMode);
             return Page();
         }
 
@@ -197,6 +215,18 @@ namespace lost_on_island.Pages.Game
                     return RedirectToPage("/Game/Cheater");
             }
         }
+
+        public IActionResult OnPostToggleRiskyMode()
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState.IsRiskyMode = !gameState.IsRiskyMode;
+            _sessionStorage.Save("GameState", gameState);
+
+            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+        }
+
+
+
 
     }
 }

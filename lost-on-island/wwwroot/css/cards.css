@@ -1,5 +1,5 @@
 ﻿.card-pack {
-    margin-top: 100px;
+
     justify-content: unset;
     gap: 8em;
     justify-content: center;
@@ -28,7 +28,6 @@
 }
 
 .pack-of-cards {
-    background-image: url(../Images/card-safe-background.png);
     background-size: cover;
     background-position: center;
 }
