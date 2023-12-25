@@ -14,11 +14,10 @@
     </div>
 
 
-    <form method="post" asp-page-handler="ToggleRiskyMode" onsubmit="return refreshPage();">
-        <button type="submit" class="button-toggle @(Model.GameState.IsRiskyMode ? "risky" : "safe")" style="background-image: url('@Url.Content("~/Images/icons/riskysafebutton.png")');">
+    <form method="post" asp-page-handler="ToggleRiskyMode">
+        <button type="button" onClick="handleRiskToggler(this)" class="button-toggle @(Model.GameState.IsRiskyMode ? "risky" : "safe")" style="background-image: url('@Url.Content("~/Images/icons/riskysafebutton.png")');">
         </button>
     </form>
-
 
     <div class="card-pack">
         @for (int i = 0; i < 3; i++)
@@ -45,18 +44,18 @@
         }
     </div>
 
-
     <div class="navigation-buttons">
-            @foreach (var connection in Model.AvailableConnections)
+        @foreach (var connection in Model.AvailableConnections)
+        {
+            if (connection.ToLocationId != Model.CurrentLocation.Id)
             {
-                if (connection.ToLocationId != Model.CurrentLocation.Id)
-                {
-                    <button type="button" class="nav-button" onclick="location.href='@Url.Page("/Game/Location", new { locationId = connection.ToLocationId })'">
-                        @connection.Description
-                    </button>
-                }
+                <form method="post" asp-page-handler="HandleChangeLocation">
+                    <button type="button" onclick="changeLocation(this, @connection.ToLocationId)" class="nav-button">@connection.Description</button>
+                    <input type="hidden" name="locationIdInputValue" />
+                </form>
             }
-     </div>
+        }
+    </div>
 
     <div class="game-stats">
         <div class="game-stats__energy">
@@ -82,7 +81,10 @@
 </div>
 
 <script>
-    function handleCardAnimation(card) {
+    var cardFlipped = false;
+
+    const handleCardAnimation = (card) => {
+        cardFlipped = true;
         card.classList.add("flipped");
         var cards = document.querySelectorAll('.card');
         cards.forEach(function (cardElement) {
@@ -91,13 +93,26 @@
             }
         });
     }
-    function handleCardClick(card) {
+    const handleCardClick = (card) => {
         card.closest("form").submit();
     }
-    function handleBadgeClick(div, badgeType) {
-        var form = div.closest("form");
-        form.querySelector("[name='badgeType']").value = badgeType;
-        form.submit();
+    const handleRiskToggler = (toggler) => {
+        if (cardFlipped == false) {
+            toggler.closest("form").submit();
+        }
+    }
+
+    const handleBadgeClick = (div, badgeType) => {
+        var formBadge = div.closest("form");
+        formBadge.querySelector("[name='badgeType']").value = badgeType;
+        formBadge.submit();
+    }
+    const changeLocation = (div, locationId) => {
+        if (!cardFlipped) {
+            var formLocation = div.closest("form");
+            formLocation.querySelector("[name='locationIdInputValue']").value = locationId;
+            formLocation.submit();
+        }
     }
 </script>
 

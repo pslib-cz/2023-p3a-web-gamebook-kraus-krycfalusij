@@ -83,16 +83,6 @@ namespace lost_on_island.Pages.Game
             int totalProbability = LocationCards.Sum(card => card.Probability);
             int randomValue = rnd.Next(1, totalProbability + 1);
             int cumulativeProbability = 0;
-            
-            foreach (var card in LocationCards)
-            {
-                cumulativeProbability += card.Probability;
-                if (randomValue <= cumulativeProbability)
-                {
-                    SingleLocationCard = card;
-                    break;
-                }
-            }
 
             if (isRiskyMode)
             {
@@ -109,6 +99,15 @@ namespace lost_on_island.Pages.Game
                 }
             }
 
+            foreach (var card in LocationCards)
+            {
+                cumulativeProbability += card.Probability;
+                if (randomValue <= cumulativeProbability)
+                {
+                    SingleLocationCard = card;
+                    break;
+                }
+            }
         }
 
         public IActionResult OnPostHandleCardClick(int cardId)
@@ -119,38 +118,27 @@ namespace lost_on_island.Pages.Game
 
             if (selectedCard != null)
             {
-                gameState.AddToInventory(selectedCard.Item, selectedCard.ItemAdd);
-                if (selectedCard != null && selectedCard.ItemType == "quiz")
+                gameState.Turns += 1;
+                if (selectedCard != null && selectedCard.Item == "enemy" && selectedCard.ItemType == "quiz") // enemy co tì hodí do kvízu
                 {
                     gameState.InFight = true; // Hráè vstupuje do boje
                     _sessionStorage.Save("GameState", gameState);
                     Console.WriteLine("location id" + gameState.CurrentLocationId);
                     return RedirectToPage("/Game/Fight", new { cardPackId = (gameState.CurrentLocationId), enemyId = selectedCard.Id });
                 }
-                else if (selectedCard.Item == "enemy")
+                else if (selectedCard.Item == "enemy") // nešastné náhody co berou životy
                 {
                     gameState.UpdateHealthAndEnergy(-10, 0);
+                }
+                else
+                {
+                    ProcessCard(selectedCard, gameState);
                 }
 
                 _sessionStorage.Save("GameState", gameState);
             }
 
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
-        }
-
-
-        public IActionResult OnPostHandleBadgeClick(string badgeType)
-        {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-            //gameState.AddTool(badgeType);
-            _sessionStorage.Save("GameState", gameState);
-            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
-        }
-
-        private Card GetSelectedCard(int currentLocationId, int cardId)
-        {
-            var rightCardPack = GameState.CurrentLocationId;
-            return new Cards().CardPacks.Find(CardPack => CardPack.Id == currentLocationId).CardsInPack.FirstOrDefault(c => c.Id == cardId);
         }
 
         private IActionResult ProcessCard(Card card, GameState gameState)
@@ -170,6 +158,11 @@ namespace lost_on_island.Pages.Game
             return null; // Žádné automatické pøesmìrování
         }
 
+        private Card GetSelectedCard(int currentLocationId, int cardId)
+        {
+            var rightCardPack = GameState.CurrentLocationId;
+            return new Cards().CardPacks.Find(CardPack => CardPack.Id == currentLocationId).CardsInPack.FirstOrDefault(c => c.Id == cardId);
+        }
 
         public IActionResult OnGet(int locationId)
         {
@@ -225,8 +218,25 @@ namespace lost_on_island.Pages.Game
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
 
+        public IActionResult OnPostHandleBadgeClick(string badgeType)
+        {
+            Console.WriteLine(badgeType);
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState.AddTool(badgeType);
+            _sessionStorage.Save("GameState", gameState);
+            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+        }
 
+        public IActionResult OnPostHandleChangeLocation(string locationIdInputValue)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
 
+            gameState.Turns += 1;
+
+            _sessionStorage.Save("GameState", gameState);
+
+            return RedirectToPage(new { locationId = locationIdInputValue });
+        }
 
     }
 }
