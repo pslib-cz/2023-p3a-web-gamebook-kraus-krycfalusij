@@ -119,7 +119,7 @@ namespace lost_on_island.Pages.Game
             if (selectedCard != null)
             {
                 gameState.Turns += 1;
-                if (selectedCard != null && selectedCard.Item == "enemy" && selectedCard.ItemType == "quiz") // enemy co tì hodí do kvízu
+                if (selectedCard != null && selectedCard.Item == "enemy")
                 {
                     gameState.InFight = true; // Hráè vstupuje do boje
                     _sessionStorage.Save("GameState", gameState);
