@@ -219,7 +219,7 @@ a {
         bottom: 30%;
     }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1600px) {
     .game-stats {
         height: 250px;
         width: 500px;
@@ -255,14 +255,20 @@ form:has(.button-toggle) {
 }
 
 form:has(.button-toggle) {
-    right: -12em;
-    top: 24em;
+    right: -40vw;
+    top: 25vh;
 }
 
 .button-toggle.risky {
     background-color: var(--red)
 }
 
+@media only screen and (min-width: 1300px) {
+    form:has(.button-toggle) {
+        right: -20vw;
+        top: 25vh;
+    }
+}
 
 
 /* LAYOUT STYLY */

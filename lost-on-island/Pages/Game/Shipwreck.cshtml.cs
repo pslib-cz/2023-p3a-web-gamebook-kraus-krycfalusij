@@ -7,7 +7,7 @@ namespace lost_on_island.Pages.Game
 {
     public class ShipwreckModel : PageModel
     {
-        public GameState GameState { get; set; }
+        public GameState gameState { get; set; }
         private readonly ISessionStorage<GameState> _sessionStorage;
         
         public ShipwreckModel(ISessionStorage<GameState> sessionStorage)
@@ -17,20 +17,32 @@ namespace lost_on_island.Pages.Game
 
         public IActionResult OnGet()
         {
-            GameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState = _sessionStorage.LoadOrCreate("GameState");
 
             // Ovìøení, zda je uživatel na správném locationId
-            if (GameState.CurrentLocationId != 2 && GameState.CurrentLocationId != 3)
+            if (gameState.CurrentLocationId != 2 && gameState.CurrentLocationId != 3)
             {
                 return RedirectToPage("/Game/Cheater");
             }
 
             // Aktualizace CurrentLocationId na 2
-            GameState.CurrentLocationId = 2;
-            _sessionStorage.Save("GameState", GameState);
+            gameState.CurrentLocationId = 2;
+            gameState.Turns += 1;
+
+            _sessionStorage.Save("GameState", gameState);
 
 
             return Page();
+        }
+        public IActionResult OnPostHandleChangeLocation(string locationIdInputValue)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
+
+            gameState.Turns += 1;
+
+            _sessionStorage.Save("GameState", gameState);
+
+            return RedirectToPage(new { locationId = locationIdInputValue });
         }
     }
 }

@@ -91,7 +91,7 @@
     transform: rotateX(180deg);
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1600px) {
     .card {
         width: 12.5em;
         height: 18.75em;

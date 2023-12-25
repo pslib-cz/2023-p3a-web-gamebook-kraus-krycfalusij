@@ -33,7 +33,9 @@ namespace lost_on_island.Pages.Game
                 .CardsInPack
                 .Find(card => card.Id == enemyId);
 
+            gameState.Turns += 1;
 
+            _sessionStorage.Save("GameState", gameState);
             // Resetujte stav boje na false po dokonèení boje
             // Tuto logiku upravte podle potøeby vaší hry
             //gameState.InFight = false;

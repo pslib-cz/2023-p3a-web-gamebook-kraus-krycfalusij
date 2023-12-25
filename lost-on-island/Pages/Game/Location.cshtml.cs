@@ -185,6 +185,10 @@ namespace lost_on_island.Pages.Game
             {
                 return RedirectToSpecialPage(locationId, gameState);
             }
+
+            gameState.Turns += 1;
+
+            _sessionStorage.Save("GameState", gameState);
             LoadLocationData(locationId, GameState.IsRiskyMode);
             return Page();
         }
@@ -229,11 +233,6 @@ namespace lost_on_island.Pages.Game
 
         public IActionResult OnPostHandleChangeLocation(string locationIdInputValue)
         {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-
-            gameState.Turns += 1;
-
-            _sessionStorage.Save("GameState", gameState);
 
             return RedirectToPage(new { locationId = locationIdInputValue });
         }

@@ -25,6 +25,8 @@ namespace lost_on_island.Pages.Game
             }
 
             GameState.CurrentLocationId = 9;
+            GameState.Turns += 1;
+
             _sessionStorage.Save("GameState", GameState);
 
 

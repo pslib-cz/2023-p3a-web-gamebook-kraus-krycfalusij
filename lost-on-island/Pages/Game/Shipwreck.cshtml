@@ -1,8 +1,42 @@
 ﻿@page
 @model lost_on_island.Pages.Game.ShipwreckModel
 
+
 <div class="game-container" style="background-image: url('@Url.Content("~/Images/location-shipwreck.png")')">
-    <h1>Loď</h1>
-    <p>Zde můžeš opravovat svojí loď</p>
-    <a asp-page="/Game/Location" asp-route-locationId="3">Pláž</a>
+    <div style="background-image: url('@Url.Content("~/Images/location-shipwreck.png")')" class="background-overlay"></div>
+
+    <div class="location__title__container">
+        <h1 class="location__title--font location__title--header">Loď</h1>
+        <p class="location__title--font location__title--description">Zde můžeš opravovat svou loď</p>
+    </div>
+
+
+    <form method="post" asp-page-handler="HandleChangeLocation">
+        <a asp-page="/Game/Location" asp-page-handler="HandleChangeLocation" asp-route-locationId="3">Pláž</a>
+        <input type="hidden" name="locationIdInputValue" />
+    </form>
+
+
+    <div class="game-stats">
+        <div class="game-stats__energy">
+            <span class="icon--energy"></span>
+            Energie: @Model.gameState.Energy/20
+        </div>
+        <div class="game-stats__health">
+            <span class="icon--health"></span>
+            Zdraví: @Model.gameState.Health/20
+        </div>
+        <div class="game-stats__turns">
+            Počet tahů: @Model.gameState.Turns
+        </div>
+        
+        <div class="badges-list">
+            <div class="single-tool__badge" style="background-image: url('@(Model.gameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
+            <div class="single-tool__badge" style="background-image: url('@(Model.gameState.Axe ? "/Images/Icons/axe-badge.png" : "/Images/Icons/axe-badge-disabled.png")')"></div>
+            <div class="single-tool__badge" style="background-image: url('@(Model.gameState.Pickaxe ? "/Images/Icons/pickaxe-badge.png" : "/Images/Icons/pickaxe-badge-disabled.png")')"></div>
+            <div class="single-tool__badge" style="background-image: url('@(Model.gameState.Shears ? "/Images/Icons/shears-badge.png" : "/Images/Icons/shears-badge-disabled.png")')"></div>
+            <div class="single-tool__badge" style="background-image: url('@(Model.gameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png")')"></div>
+        </div>
+           
+    </div>
 </div>
