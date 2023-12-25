@@ -1,0 +1,5 @@
+﻿- Kvízy
+
+IMPORTANT
+- Při přepínání na speciální lokace přidávat tahy
+- Když jdeme index -> prolog -> šipka zpět -> prolog = cheate chyba? - pak už hráč nic nemůže dělat

@@ -6,7 +6,9 @@
 }
 
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Lost on Island!</h1>
-    <a asp-page="/Game/Location" asp-route-locationId="1">Start game</a>
+<div class="game-container index-page">
+    <div class="index__header__container">
+        <h1 class="display-4 index__header">Lost on Island!</h1>
+    </div>
+    <a class="index__start-button" asp-page="/Game/Location" asp-route-locationId="1">Začít</a>
 </div>

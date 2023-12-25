@@ -4,6 +4,31 @@
     ViewData["Title"] = "Prolog";
 }
 
-<h1>Vítejte ve hře!</h1>
-<p>Úvodní příběh hry...</p>
-<a asp-page="/Game/Location" asp-route-locationId="2">Pokračovat na Loď</a>
+<div class="game-container prolog-page">
+    <div class="location__title__container">
+        <h1 class="location__title--font location__title--header">Prolog</h1>
+        <p class="location__title--font location__title--description">Úvod do hry</p>
+    </div>
+    <a class="index__start-button" asp-page="/Game/Location" asp-route-locationId="2">Pokračovat na Loď</a>
+    <div class="game-stats">
+        <div class="game-stats__energy">
+            <span class="icon--energy"></span>
+            Energie: @Model.GameState.Energy/20
+        </div>
+        <div class="game-stats__health">
+            <span class="icon--health"></span>
+            Zdraví: @Model.GameState.Health/20
+        </div>
+        <div class="game-stats__turns">
+            Počet tahů: @Model.GameState.Turns
+        </div>
+        <!-- fake badges (nic nedělají) -->
+        <div class="badges-list">
+            <div class="single-tool__badge" style="background-image: url('@(Model.GameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
+            <div class="single-tool__badge" style="background-image: url('@(Model.GameState.Axe ? "/Images/Icons/axe-badge.png" : "/Images/Icons/axe-badge-disabled.png")')"></div>
+            <div class="single-tool__badge" style="background-image: url('@(Model.GameState.Pickaxe ? "/Images/Icons/pickaxe-badge.png" : "/Images/Icons/pickaxe-badge-disabled.png")')"></div>
+            <div class="single-tool__badge" style="background-image: url('@(Model.GameState.Shears ? "/Images/Icons/shears-badge.png" : "/Images/Icons/shears-badge-disabled.png")')"></div>
+            <div class="single-tool__badge" style="background-image: url('@(Model.GameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png")')"></div>
+        </div>
+    </div>
+</div>

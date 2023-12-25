@@ -3,32 +3,36 @@ using lost_on_island.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Reflection;
+using static lost_on_island.Models.Cards;
 
 namespace lost_on_island.Pages.Game
 {
     public class PrologModel : PageModel
     {
-        public GameState GameState { get; set; }
+        private readonly ILocationProvider _locationProvider;
         private readonly ISessionStorage<GameState> _sessionStorage;
+        public GameState GameState => _sessionStorage.LoadOrCreate("GameState");
+        public Location CurrentLocation { get; set; }
 
-        public PrologModel(ISessionStorage<GameState> sessionStorage)
+
+        public PrologModel(ILocationProvider locationProvider, ISessionStorage<GameState> sessionStorage)
         {
             _sessionStorage = sessionStorage;
+            _locationProvider = locationProvider;
         }
 
         public IActionResult OnGet()
         {
-            GameState = _sessionStorage.LoadOrCreate("GameState");
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
 
             // Ovìøení, zda je uživatel na správném locationId
-            if (GameState.CurrentLocationId != 0 && GameState.CurrentLocationId != 1 && GameState.CurrentLocationId != 8 && GameState.CurrentLocationId != 9)
+            if (gameState.CurrentLocationId != 0 && gameState.CurrentLocationId != 1 && gameState.CurrentLocationId != 8 && gameState.CurrentLocationId != 9)
             {
                 return RedirectToPage("/Game/Cheater");
             }
 
-            GameState.CurrentLocationId = 1;
-            _sessionStorage.Save("GameState", GameState);
-
+            gameState.CurrentLocationId = 1;
+            _sessionStorage.Save("GameState", gameState);
 
             return Page();
         }

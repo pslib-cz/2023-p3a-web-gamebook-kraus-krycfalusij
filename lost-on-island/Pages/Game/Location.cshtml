@@ -60,14 +60,14 @@
     <div class="game-stats">
         <div class="game-stats__energy">
             <span class="icon--energy"></span>
-            Energie: @gameState.Energy/20
+            Energie: @Model.GameState.Energy/20
         </div>
         <div class="game-stats__health">
             <span class="icon--health"></span>
-            Zdraví: @gameState.Health/20
+            Zdraví: @Model.GameState.Health/20
         </div>
         <div class="game-stats__turns">
-            Počet tahů: @gameState.Turns
+            Počet tahů: @Model.GameState.Turns
         </div>
         <form method="post" asp-page-handler="HandleBadgeClick" class="badges-list">
             <div onclick="handleBadgeClick(this, 'Sword')" class="single-tool__badge" style="background-image: url('@(gameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
