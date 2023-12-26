@@ -252,18 +252,15 @@ a {
     background-repeat: no-repeat;
 }
 
-form:has(.button-toggle) {
-    position: absolute;
-    right: 2em;
-}
-
 .button-toggle.safe {
     background-color: var(--brown-dark)
 }
 
 form:has(.button-toggle) {
-    right: -35vw;
-    top: 25vh;
+    position: fixed;
+    right: 10vw;
+    bottom: 30%;
+    z-index: 5;
 }
 
 .button-toggle.risky {
@@ -272,107 +269,6 @@ form:has(.button-toggle) {
 
 @media only screen and (min-width: 1300px) {
     form:has(.button-toggle) {
-        right: -20vw;
-        top: 25vh;
+        right: 25vw;
     }
 }
-
-
-/* LAYOUT STYLY */
-/*
-.game-container {
-    width: 100vw;
-    height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* z-index: -1; */
-}
-/*
-.game-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1;
-}
-*/
-/*
-.location__title__container {
-    position: absolute;
-    top: 20px;
-    transform: translateX(-50%);
-    left: 50%;
-    width: 250px;
-    height: 100px;
-    background-image: url(../Images/paper-title-background.png);
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    box-sizing: border-box;
-}
-
-.location__title--font {
-    font-family: 'Jim Nightshade', cursive;
-    margin: 0;
-}
-
-.location__title--header {
-    margin-top: 10px;
-    font-size: 2.5em;
-    line-height: 1;
-}
-
-.location__title--description {
-    font-family: 'Jim Nightshade', cursive;
-    font-size: 1.5em;
-    max-width: 80%;
-    line-height: 1;
-    text-align: center;
-}
-
-/* INVENTORY */
-/*
-.inventory__tools {
-    background-image: url(../Images/inventory.png);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: absolute;
-    width: 100%;
-    max-width: 360px;
-    height: 180px;
-    transform: translateX(-50%);
-    left: 50%;
-    object-fit: contain;
-    bottom: 0;
-    box-sizing: border-box;
-}
-
-.inventory__tools__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-@media only screen and (min-width: 768px) {
-    .inventory__tools {
-        max-width: 400px;
-        height: 200px;
-    }
-    .location__title__container {
-        width: 300px;
-        height: 120px;
-    }
-}
-*/
-
-
-

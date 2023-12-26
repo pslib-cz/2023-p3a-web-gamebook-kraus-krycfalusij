@@ -23,7 +23,7 @@
         @for (int i = 0; i < 3; i++)
         {
             <form method="post" asp-page-handler="HandleCardClick" class="card-form">
-                <div class="card pack-of-cards" style="background-image: url('@(Model.GameState.IsRiskyMode ? "/Images/card-risk-background.png" : "/Images/card-safe-background.png")');">
+                <div class="card card-pack__background" style="background-image: url('@(Model.GameState.IsRiskyMode ? "/Images/card-risk-background.png" : "/Images/card-safe-background.png")');">
                 </div>
                 <div class="card" onclick="handleCardAnimation(this)">
                     <div class="card--inner">
@@ -62,7 +62,6 @@
             }
         }
     </div>
-
 
     <div class="game-stats">
         <div class="game-stats__energy">
