@@ -30,12 +30,6 @@
     border-width: 3px 3px 3px 0px;
 }
 
-@media only screen and (min-width: 1600px) {
-    .toggler {
-        display: none;
-    }
-}
-
 .map__container {
     border-radius: 20px 0 0 20px;
     display: grid;
@@ -51,7 +45,7 @@
     border: solid var(--black);
     border-width: 3px 0 3px 3px;
     transition-duration: 0.5s;
-    z-index: 5 !important; /* kvůli přepsání z-index 2 */
+    z-index: 3 !important; /* kvůli přepsání z-index 2 */
     overflow: hidden;
 }
 
@@ -74,7 +68,6 @@
 }
 
 .map__header {
-
     font-size: 2em;
     margin: 0;
     font-weight: 600;
@@ -169,4 +162,24 @@
     font-family: 'Jim Nightshade';
     font-size: 1.25em;
     margin: 0;
+}
+
+@media only screen and (min-width: 1600px) {
+    .toggler {
+        display: none;
+    }
+    .map__container {
+        width: 400px;
+        top: 20%;
+        right: 0;
+    }
+    .map__header__close-button {
+        opacity: 0;
+    }
+}
+
+@media only screen and (min-width: 1700px) {
+    .map__container {
+        width: 450px;
+    }
 }
