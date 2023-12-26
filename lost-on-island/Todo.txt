@@ -1,5 +1,4 @@
 ﻿- Kvízy
+- 2× větší risk na enemy neznamená 2× větší risk celkově (když z 10 uděláme šanci 20 a celek je 110, 20 / 110 není 20%;)
 
 IMPORTANT
-- Při přepínání na speciální lokace přidávat tahy
-- Když jdeme index -> prolog -> šipka zpět -> prolog = cheate chyba? - pak už hráč nic nemůže dělat

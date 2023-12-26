@@ -1,23 +1,24 @@
 ﻿.card-pack {
 
     justify-content: unset;
-    gap: 8em;
+    gap: 9em;
     justify-content: center;
 }
-.card p {
-    margin: 0;
-}
 
-.card img {
-    width: 100px
+.card__icon {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+    font-size: 1em;
+    color: var(--brown-extra-dark);
 }
 
 .card {
     display: flex;
     flex-direction: column;
     perspective: 1000px;
-    width: 7.5em;
-    height: 11.5em;
+    width: 8em;
+    height: 12.25em;
     transform-style: preserve-3d;
     animation: none;
     position: absolute;
@@ -25,11 +26,66 @@
     border: none;
     background: none;
     cursor: pointer;
+    overflow: hidden;
+}
+
+.card__title {
+    font-size: 1em;
+    margin: 0;
+    color: var(--brown-extra-dark);
+}
+
+.card__description {
+    font-size: 0.75em;
+    margin: 0;
+    color: var(--brown-extra-dark);
 }
 
 .pack-of-cards {
     background-size: cover;
     background-position: center;
+}
+
+@media only screen and (min-width: 768px) {
+    .card {
+        width: 10.5em;
+        height: 16em;
+    }
+    .card-pack {
+        gap: 12em;
+    }
+    .card__icon {
+        height: 70px;
+        width: 70px;
+    }
+    .card__title {
+        font-size: 1.2em;
+        margin: 0;
+    }
+    .card__description {
+        font-size: 0.8em;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .card {
+        width: 12em;
+        height: 18.25em;
+    }
+    .card-pack {
+        gap: 15em;
+    }
+    .card__icon {
+        height: 100px;
+        width: 100px;
+    }
+    .card__title {
+        font-size: 1.4em;
+        margin: 0;
+    }
+    .card__description {
+        font-size: 1em;
+    }
 }
 
 .card.flipped {
@@ -89,19 +145,6 @@
 .card--front {
     background-image: url(../Images/card-safe-foreground.png);
     transform: rotateX(180deg);
-}
-
-@media only screen and (min-width: 1600px) {
-    .card {
-        width: 12.5em;
-        height: 18.75em;
-    }
-
-    .card-pack {
-        justify-content: unset;
-        gap: 15em;
-        justify-content: center;
-    }
 }
 
 .card.disabled {

@@ -94,7 +94,7 @@ namespace lost_on_island.Pages.Game
                     }
                     else
                     {
-                        card.ItemAdd *= 2;
+                        card.ItemCount *= 2;
                     }
                 }
             }
@@ -118,17 +118,16 @@ namespace lost_on_island.Pages.Game
 
             if (selectedCard != null)
             {
-                gameState.Turns += 1;
-                if (selectedCard != null && selectedCard.Item == "enemy")
+                if (selectedCard.Item == "enemy")
                 {
                     gameState.InFight = true; // Hr·Ë vstupuje do boje
                     _sessionStorage.Save("GameState", gameState);
                     Console.WriteLine("location id" + gameState.CurrentLocationId);
                     return RedirectToPage("/Game/Fight", new { cardPackId = (gameState.CurrentLocationId), enemyId = selectedCard.Id });
                 }
-                else if (selectedCard.Item == "enemy") // neöùastnÈ n·hody co berou ûivoty
+                else if (selectedCard.Item == "accident") // neöùastnÈ n·hody co berou ûivoty
                 {
-                    gameState.UpdateHealthAndEnergy(-10, 0);
+                    gameState.UpdateHealthAndEnergy(selectedCard.ItemCount, 0);
                 }
                 else
                 {
@@ -143,7 +142,7 @@ namespace lost_on_island.Pages.Game
 
         private IActionResult ProcessCard(Card card, GameState gameState)
         {
-            gameState.AddToInventory(card.Item, card.ItemAdd);
+            gameState.AddToInventory(card.Item, card.ItemCount);
 
             if (card.Item == "food")
             {

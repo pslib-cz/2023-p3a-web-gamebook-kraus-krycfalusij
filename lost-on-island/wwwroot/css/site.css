@@ -123,7 +123,6 @@ body {
     z-index: 2;
 }
 
-
 .card-pack {
     display: flex;
     width: 65vw;
@@ -151,13 +150,12 @@ a {
     transform: translateX(-50%) translateY(-50%);
     top: 52%;
     left: 50%;
-    gap: 20px;
+    gap: 15px;
 }
 
-.badges-list > div {
-    width: 50px;
-    height: 50px;
-    /* background-image: url(../Images/Icons/pickaxe-badge-disabled.png); */
+.single-tool__badge {
+    width: 45px;
+    height: 45px;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -167,6 +165,20 @@ a {
     position: absolute;
     top: 10%;
     left: 50%;
+}
+
+@media only screen and (min-width: 390px) {
+    .badges-list {
+        gap: 20px;
+    }
+    .single-tool__badge {
+        width: 50px;
+        height: 50px;
+    }
+    .game-stats {
+        height: 220px;
+        width: 450px;
+    }
 }
 
 .game-stats__health {
@@ -255,7 +267,7 @@ form:has(.button-toggle) {
 }
 
 form:has(.button-toggle) {
-    right: -40vw;
+    right: -35vw;
     top: 25vh;
 }
 
