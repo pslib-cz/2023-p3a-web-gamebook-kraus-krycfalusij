@@ -155,13 +155,12 @@ namespace lost_on_island.Pages.Game
 
         private IActionResult ProcessCard(Card card, GameState gameState)
         {
-            gameState.Inventory.AddItem(card.Item, card.ItemCount);
+            gameState.AddItem(card.Item, card.ItemCount);
 
             gameState.CheckGameProgress();
 
             _sessionStorage.Save("GameState", gameState);
-            Console.Write("Processcard:");
-            Console.WriteLine(gameState.Inventory.Items["food"]);
+
             return Page();
         }
 
@@ -176,11 +175,11 @@ namespace lost_on_island.Pages.Game
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
             GameState = gameState;
-            Console.Write("Onget:");
-            Console.WriteLine(gameState.Inventory.Items["food"]);
+
 
             if (!IsValidTransition(gameState, locationId))
             {
+                Console.WriteLine("teï");
                 return RedirectToPage("/Game/Cheater");
             }
             if (gameState.InFight)
@@ -246,27 +245,16 @@ namespace lost_on_island.Pages.Game
             return RedirectToPage(new { locationId = locationIdInputValue });
         }
 
-        /*
-        public void OnPostModifyItem(string itemName, string operation)
+        public IActionResult OnPostRemoveItem(string itemName, int itemCount)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
-
-            switch (operation)
+            if (gameState.RemoveItem(itemName, itemCount))
             {
-                case "remove":
-                    gameState.Inventory.RemoveItem(itemName, 1);
-                    break;
-                case "consume":
-                    if (itemName == "food")
-                    {
-                        gameState.Inventory.RemoveItem(itemName, 1);
-                        gameState.UpdateHealthAndEnergy(1, 0); 
-                    }
-                    break;
+                _sessionStorage.Save("GameState", gameState); 
             }
 
-            _sessionStorage.Save("GameState", gameState);
+            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
-        */
+
     }
 }

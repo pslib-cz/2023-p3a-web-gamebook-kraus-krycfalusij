@@ -17,10 +17,10 @@ public class GameState
     public bool Pickaxe { get; set; } = false;
     public bool Shears { get; set; } = false;
     public bool Backpack { get; set; } = false;
-
+    
+    public int InventoryCapacity { get; set; } = 20;
     public Inventory Inventory { get; set; } = new Inventory();
 
-    
 
     public void AddTool(string badgeType)
     {
@@ -44,6 +44,36 @@ public class GameState
             default:
                 break;
         }
+    }
+
+    public bool AddItem(string name, int count)
+    {
+        int currentTotalCount = Inventory.Items.Values.Sum();
+        if (currentTotalCount + count > InventoryCapacity)
+        {
+            return false;
+        }
+
+        if (Inventory.Items.ContainsKey(name))
+        {
+            Inventory.Items[name] += count;
+        }
+        else
+        {
+            Inventory.Items.Add(name, count);
+        }
+        return true;
+    }
+
+
+    public bool RemoveItem(string name, int count)
+    {
+        if (Inventory.Items.ContainsKey(name) && Inventory.Items[name] >= count)
+        {
+            Inventory.Items[name] -= count;
+            return true;
+        }
+        return false;
     }
 
     public void UpdateHealthAndEnergy(int healthChange, int energyChange)
