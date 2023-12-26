@@ -3,3 +3,11 @@
 
 IMPORTANT
 - jídlo přidává životy místo jídla
+
+Co nám zbývá?:
+1) fight system
+2) Loď
+3) inventář
+4) Badges
+5) UX (text, vyskakovací okna...)
+6) Final stránka, Prolog, Cheater stránka
