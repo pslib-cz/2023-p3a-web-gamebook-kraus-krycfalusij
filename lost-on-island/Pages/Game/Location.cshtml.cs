@@ -13,7 +13,7 @@ namespace lost_on_island.Pages.Game
         private readonly ILogger<LocationModel> _logger;
         private readonly ILocationProvider _locationProvider;
         private readonly ISessionStorage<GameState> _sessionStorage;
-        public GameState GameState => _sessionStorage.LoadOrCreate("GameState");
+        public GameState GameState { get; set; }
         public Location CurrentLocation { get; set; }
         public List<Connection> AvailableConnections { get; set; }
         public List<Cards.Card> LocationCards { get; set; }
@@ -136,7 +136,6 @@ namespace lost_on_island.Pages.Game
                 {
                     gameState.InFight = true; // Hráè vstupuje do boje
                     _sessionStorage.Save("GameState", gameState);
-                    Console.WriteLine("location id" + gameState.CurrentLocationId);
                     return RedirectToPage("/Game/Fight", new { cardPackId = (gameState.CurrentLocationId), enemyId = selectedCard.Id });
                 }
                 else if (selectedCard.Item == "accident") // nešastné náhody co berou životy
@@ -161,20 +160,24 @@ namespace lost_on_island.Pages.Game
             gameState.CheckGameProgress();
 
             _sessionStorage.Save("GameState", gameState);
-            
+            Console.Write("Processcard:");
+            Console.WriteLine(gameState.Inventory.Items["food"]);
             return Page();
         }
 
         private Card GetSelectedCard(int currentLocationId, int cardId)
         {
+            GameState = _sessionStorage.LoadOrCreate("GameState");
             var rightCardPack = GameState.CurrentLocationId;
             return new Cards().CardPacks.Find(CardPack => CardPack.Id == currentLocationId).CardsInPack.FirstOrDefault(c => c.Id == cardId);
         }
 
         public IActionResult OnGet(int locationId)
         {
-
             var gameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState = gameState;
+            Console.Write("Onget:");
+            Console.WriteLine(gameState.Inventory.Items["food"]);
 
             if (!IsValidTransition(gameState, locationId))
             {
@@ -232,7 +235,6 @@ namespace lost_on_island.Pages.Game
 
         public IActionResult OnPostHandleBadgeClick(string badgeType)
         {
-            Console.WriteLine(badgeType);
             var gameState = _sessionStorage.LoadOrCreate("GameState");
             gameState.AddTool(badgeType);
             _sessionStorage.Save("GameState", gameState);
@@ -244,6 +246,7 @@ namespace lost_on_island.Pages.Game
             return RedirectToPage(new { locationId = locationIdInputValue });
         }
 
+        /*
         public void OnPostModifyItem(string itemName, string operation)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
@@ -264,5 +267,6 @@ namespace lost_on_island.Pages.Game
 
             _sessionStorage.Save("GameState", gameState);
         }
+        */
     }
 }

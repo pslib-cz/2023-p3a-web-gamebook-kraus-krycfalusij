@@ -18,8 +18,9 @@ public class GameState
     public bool Shears { get; set; } = false;
     public bool Backpack { get; set; } = false;
 
-    public Inventory Inventory { get;  set; } = new Inventory();
+    public Inventory Inventory { get; set; } = new Inventory();
 
+    
 
     public void AddTool(string badgeType)
     {

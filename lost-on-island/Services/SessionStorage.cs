@@ -21,7 +21,7 @@ namespace lost_on_island.Services
             {
                 return new T();
             }
-
+            Console.WriteLine(value);
             return JsonSerializer.Deserialize<T>(value);
         }
 
@@ -31,5 +31,7 @@ namespace lost_on_island.Services
             var serializedValue = JsonSerializer.Serialize(value);
             session.SetString(key, serializedValue);
         }
+
+       
     }
 }
