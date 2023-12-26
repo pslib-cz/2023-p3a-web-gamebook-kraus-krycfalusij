@@ -101,11 +101,6 @@ body {
     line-height: 1em;
 }
 
-.game-container {
-    position: relative;
-    overflow: hidden;
-}
-
 .background-overlay {
     position: absolute;
     top: 0;
@@ -119,7 +114,7 @@ body {
 }
 
 .game-container > *:not(.background-overlay) {
-    position: relative;
+    /* position: relative; wtf */
     z-index: 2;
 }
 

@@ -1,8 +1,7 @@
 ﻿.card-pack {
-
-    justify-content: unset;
     gap: 9em;
     justify-content: center;
+    margin-top: 1em;
 }
 
 .card__icon {
