@@ -268,3 +268,124 @@ form:has(.button-toggle) {
 .button-toggle.risky {
     background-color: var(--red)
 }
+
+
+
+.shipbuilding {
+    padding: 1em;
+    border-radius: 8px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    position: absolute;
+    top: 20%;
+    max-width: 75vw;
+}
+
+.shipbuilding__phase {
+    background: var(--white);
+    border-radius: 1.5em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.shipbuilding__phase__name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--brown);
+    border-radius: 1em 1em 0em 0em;
+    padding: 0.5em;
+}
+.shipbuilding__phase__info {
+    background-color: var(--white);
+    display: flex;
+
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+    padding: 0.5em;
+    border-radius: 0em 0em 1em 1em
+}
+
+.shipbuilding__phase h2 {
+    color: white;
+    font-size: 1em;
+    padding: 0.25em;
+    margin: 0;
+}
+
+.shipbuilding__phase p {
+    font-size: 0.9em;
+    color: white;
+    margin: 5px 0;
+    color: var(--brown);
+}
+
+.shipbuilding__phase button {
+    background-color: var(--beige-dark); 
+    color: white; 
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.shipbuilding__phase button:hover {
+    background-color: var(--brown-dark);
+}
+
+
+.shipbuilding__phase.deactive {
+    opacity: 0.75; 
+}
+
+.materials-list {
+    list-style: none;
+    padding: 0.15em;
+    display: flex;
+    margin: 0;
+    gap: 8px
+}
+
+.materials-list li {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.material-amount {
+    position: absolute;
+    bottom: 8px;
+    left: 5px;
+}
+
+.material-icon {
+    height: 2em;
+    width: 2em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 2em;
+}
+
+    .material-icon.wood {
+        background-image: url(/Images/Icons/wood.png);
+    }
+
+    .material-icon.stone {
+        background-image: url(/Images/Icons/stone.png);
+    }
+    .material-icon.rope {
+        background-image: url(/Images/Icons/rope.png);
+    }
+    .material-icon.wool {
+        background-image: url(/Images/Icons/wool.png);
+    }
+    .material-icon.iron {
+        background-image: url(/Images/Icons/iron.png);
+    }
+    .material-icon.bamboo {
+        background-image: url(/Images/Icons/bamboo.png);
+    }

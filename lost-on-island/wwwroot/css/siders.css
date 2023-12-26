@@ -344,7 +344,7 @@
 .inventory__item {
     display: flex;
     align-items: center;
-    padding-left: 2em;
+    padding-left: 2.5em;
     padding-right: 1em;
     position: relative;
     gap: 0.5em;
@@ -353,12 +353,12 @@
 .inventory__item__count {
     font-size: 1.5em;
     position: absolute;
-    left: 12px;
-    bottom: 12px;
+    left: 10px;
+    bottom: 15px;
 }
 
 .inventory__item__icon {
-    height: 2.5em; 
+    height: 2em; 
 }
 
 .inventory__item__name {
@@ -371,12 +371,14 @@
 }
 
 .inventory__item__info__description {
-    font-size: 0.75em;
+    font-size: 0.7em;
 }
-
+.inventory__item__info__name {
+ font-weight: bold;
+}
 .inventory__item__remove-button {
     padding: 5px 10px;
-    background-color: #d9534f;
+    background-color: var(--brown);
     color: white;
     border: none;
     border-radius: 5px;
@@ -386,3 +388,17 @@
 .inventory__item__remove-button:hover {
     background-color: #c9302c;
 }
+
+.inventory__capacity{
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    font-weight: bold;
+    margin-left: 1em
+}
+.inventory__capacity img{
+    height: 1.5em
+}
+    .inventory__capacity p {
+        margin: 0;
+    }

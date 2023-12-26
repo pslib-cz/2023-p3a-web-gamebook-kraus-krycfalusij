@@ -19,7 +19,10 @@ public class GameState
     public bool Backpack { get; set; } = false;
     
     public int InventoryCapacity { get; set; } = 20;
+    
     public Inventory Inventory { get; set; } = new Inventory();
+    public int CurrentShipBuildingPhaseIndex { get; set; } = 0;
+
 
 
     public void AddTool(string badgeType)

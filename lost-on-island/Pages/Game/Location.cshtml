@@ -222,7 +222,10 @@
 
         </div>
         <div class="inventory__capacity">
-            <p>Kapacita: /@Model.GameState.InventoryCapacity</p>
+            <img class="inventory__item__icon" src="/Images/icons/inventory.png" />
+            <p>
+                Kapacita: @Model.GameState.Inventory.Items.Values.Sum() / @Model.GameState.InventoryCapacity
+            </p>
         </div>
     </div>
 
