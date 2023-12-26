@@ -2,13 +2,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 5em;
-    height: 7em;
+    width: 4.5em;
+    height: 5.5em;
     position: absolute;
     top: 15%;
     padding: 0.4em;
     box-sizing: border-box;
     border: solid var(--black);
+    top: 9em;
+}
+
+.toggler:hover {
+    cursor: pointer;
 }
 
 .toggler__icon {
@@ -34,12 +39,12 @@
     border-radius: 20px 0 0 20px;
     display: grid;
     right: -100%;
-    top: 100px;
+    top: 9em;
     grid-template-columns: 1fr;
-    grid-auto-rows: 50px 420px auto;
+    grid-auto-rows: 65px 420px auto;
     position: absolute;
     height: 550px;
-    width: 85%;
+    width: 90%;
     max-width: 500px;
     background: white;
     border: solid var(--black);
@@ -51,23 +56,34 @@
 
 .map__container__enabled {
     right: 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); 
 }
 
 .map__header__section {
-    padding: 0.5em;
+    padding: 1em;
     background-color: var(--brown-extra-light);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 3px solid black;
 }
 
-.map__header__close-button {
+.inventory__header__section {
+    padding: 1em;
+    background-color: var(--brown-extra-light);
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid black;
+    
+}
+
+.map__header__close-button, .inventory__header__close-button {
     object-fit: contain;
     height: 30px;
     width: 30px;
 }
 
-.map__header {
+.map__header, .inventory__header {
     font-size: 2em;
     margin: 0;
     font-weight: 600;
@@ -113,6 +129,7 @@
 
 .tag--green {
     background-color: var(--green);
+
 }
 
 .tag--yellow {
@@ -160,7 +177,7 @@
 
 .map__description {
     font-family: 'Jim Nightshade';
-    font-size: 1.25em;
+    font-size: 1.15em;
     margin: 0;
 }
 
@@ -176,6 +193,7 @@
     .map__header__close-button {
         opacity: 0;
     }
+
 }
 
 @media only screen and (min-width: 1700px) {
@@ -183,3 +201,136 @@
         width: 450px;
     }
 }
+
+@media only screen and (max-width: 400px) {
+    .toggler {
+        top: 8em;
+    }
+
+    .map__container {
+        top: 8em;
+    }
+
+}
+
+.map_overlay, .inventory_overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100vw;
+    height: 100vh;
+    z-index: 3 !important;
+}
+
+
+.map_overlay--active, .inventory_overlay--active {
+    display: block;
+}
+
+.map__header__close-button, .inventory__header__close-button {
+    width: 30px; 
+    height: 30px; 
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+    .map__header__close-button::before,
+    .map__header__close-button::after, .inventory__header__close-button::before, .inventory__header__close-button::after{
+        content: '';
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        top: 50%;
+        left: 0;
+        background-color: black;
+    }
+
+    .map__header__close-button::before, .inventory__header__close-button::before {
+        transform: rotate(45deg);
+    }
+
+    .map__header__close-button::after, .inventory__header__close-button::after {
+        transform: rotate(-45deg);
+    }
+
+
+
+
+.inventory__container {
+    border-radius: 0 20px 20px 0;
+    display: grid;
+    left: -100%;
+    top: 9em;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 65px auto;
+    position: absolute;
+    height: 550px;
+    width: 90%;
+    max-width: 500px;
+    background-color: var(--beige);
+    border: solid var(--black);
+    border-width: 3px 3px 3px 0;
+    transition-duration: 0.5s;
+    z-index: 3 !important;
+    overflow: hidden;
+}
+
+.inventory__container__enabled {
+    left: 0;
+    box-shadow: -4px 0px 8px rgba(0, 0, 0, 0.5);
+}
+
+.inventory__header {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inventory__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    /* další styly podle vašich potřeb */
+}
+
+.inventory__item__count {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.inventory__item__name {
+    text-transform: capitalize;
+}
+
+
+@media only screen and (min-width: 1700px) {
+
+    .inventory__container {
+        width: 450px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+
+    .inventory__container {
+        top: 8em;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+
+    .inventory__container {
+        width: 400px;
+        top: 20%;
+        left: 0;
+    }
+
+    .inventory__header__close-button {
+        opacity: 0;
+    }
+}
+

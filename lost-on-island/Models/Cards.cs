@@ -26,8 +26,8 @@ namespace lost_on_island.Models
                     new Card { Id = 3, Probability = 15, Title = "Úpal", Img = "/Images/Icons/sun.png", Description = "Dostal jsi úpal!", ItemDescription = "životy", Item = "accident", ItemCount = -3 },
                     new Card { Id = 4, Probability = 10, Title = "Had", Img = "/Images/Icons/snake.png", Description = "Zaútočil na tebe had!", ItemDescription = "život", Item = "enemy", ItemCount = 0},
                     new Card { Id = 5, Probability = 15, Title = "Pouštní brouk", Img = "/Images/Icons/beatle.png", Description = "Kousl tě divný pouštní brouk", ItemDescription = "životy", Item = "accident", ItemCount = -2 },
-                    new Card { Id = 6, Probability = 15, Title = "Bambus", Img = "/Images/Icons/bamboo.png", Description = "Získal jsi bambus.", ItemDescription = "jídla", Item = "bamboo", ItemCount = 1 },
-                    new Card { Id = 7, Probability = 15, Title = "Bambus", Img = "/Images/Icons/bamboo.png", Description = "Získal jsi dva bambusy.", ItemDescription = "jídla", Item = "bamboo", ItemCount = 2 }
+                    new Card { Id = 6, Probability = 15, Title = "Bambus", Img = "/Images/Icons/bamboo.png", Description = "Získal jsi bambus.", ItemDescription = "bambus", Item = "bamboo", ItemCount = 1 },
+                    new Card { Id = 7, Probability = 15, Title = "Bambus", Img = "/Images/Icons/bamboo.png", Description = "Získal jsi dva bambusy.", ItemDescription = "bambus", Item = "bamboo", ItemCount = 2 }
 
                 }
             },
@@ -110,7 +110,7 @@ namespace lost_on_island.Models
             public string Description { get; set; }
             public string ItemDescription { get; set; }
             public string Item { get; set; }
-            public int ItemCount { get; set; }
+            public int ItemCount { get; set; } 
             public string ItemType { get; set; }  // druh enemies
         }
 

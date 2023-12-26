@@ -156,19 +156,13 @@ namespace lost_on_island.Pages.Game
 
         private IActionResult ProcessCard(Card card, GameState gameState)
         {
-            gameState.AddToInventory(card.Item, card.ItemCount);
-
-            if (card.Item == "food")
-            {
-                gameState.UpdateHealthAndEnergy(5, 0);
-            }
-            else if (card.Item == "enemy")
-            {
-                gameState.UpdateHealthAndEnergy(-10, 0); // Poškození hráèe
-            }
+            gameState.Inventory.AddItem(card.Item, card.ItemCount);
 
             gameState.CheckGameProgress();
-            return null; // Žádné automatické pøesmìrování
+
+            _sessionStorage.Save("GameState", gameState);
+            
+            return Page();
         }
 
         private Card GetSelectedCard(int currentLocationId, int cardId)
@@ -203,6 +197,7 @@ namespace lost_on_island.Pages.Game
 
             _sessionStorage.Save("GameState", gameState);
             LoadLocationData(locationId, GameState.IsRiskyMode);
+
             return Page();
         }
 
@@ -246,9 +241,28 @@ namespace lost_on_island.Pages.Game
 
         public IActionResult OnPostHandleChangeLocation(string locationIdInputValue)
         {
-
             return RedirectToPage(new { locationId = locationIdInputValue });
         }
 
+        public void OnPostModifyItem(string itemName, string operation)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
+
+            switch (operation)
+            {
+                case "remove":
+                    gameState.Inventory.RemoveItem(itemName, 1);
+                    break;
+                case "consume":
+                    if (itemName == "food")
+                    {
+                        gameState.Inventory.RemoveItem(itemName, 1);
+                        gameState.UpdateHealthAndEnergy(1, 0); 
+                    }
+                    break;
+            }
+
+            _sessionStorage.Save("GameState", gameState);
+        }
     }
 }
