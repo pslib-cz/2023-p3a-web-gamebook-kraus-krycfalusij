@@ -2,6 +2,7 @@
 @model lost_on_island.Pages.Game.LocationModel
 @{
     var gameState = Model.GameState;
+    var jsAvailableConnectionsIds = Json.Serialize(Model.AvailableConnectionsIds);
 }
 
 
@@ -43,24 +44,45 @@
         }
     </div>
 
-    <div class="toggler map__toggler">
+    <div class="toggler map__toggler" onclick="enableMap()">
         <img class="toggler__icon" src="/Images/Icons/map.png"/>
     </div>
-    <div class="toggler inventory__toggler">
-        <img class="toggler__icon" src="/Images/Icons/inventory.png" />
+    <div class="map__container"> 
+        <div class="map__header__section">
+            <img class="map__header__close-button" src="/Images/Icons/x.png" onclick="disableMap()" />
+            <p class="map__header">Mapa</p>
+            <div></div>
+        </div>
+        <div class="map__image__section">
+            <form method="post" asp-page-handler="HandleChangeLocation">
+                <p onclick="changeLocation(this, 2)" class="location__tag tag--shipwreck @(Model.AvailableConnectionsIds.Contains(2) ? "tag--green" : Model.CurrentLocation.Id == 2 ? "tag--yellow" : "tag--red")">
+                    Loď
+                </p>
+                <p onclick="changeLocation(this, 3)" class="location__tag tag--beach @(Model.AvailableConnectionsIds.Contains(3) ? "tag--green" : Model.CurrentLocation.Id == 3 ? "tag--yellow" : "tag--red")">
+                    Pláž
+                </p>
+                <p onclick="changeLocation(this, 4)" class="location__tag tag--field @(Model.AvailableConnectionsIds.Contains(4) ? "tag--green" : Model.CurrentLocation.Id == 4 ? "tag--yellow" : "tag--red")">
+                    Louka
+                </p>
+                <p onclick="changeLocation(this, 5)" class="location__tag tag--forest @(Model.AvailableConnectionsIds.Contains(5) ? "tag--green" : Model.CurrentLocation.Id == 5 ? "tag--yellow" : "tag--red")">
+                    Les
+                </p>
+                <p onclick="changeLocation(this, 6)" class="location__tag tag--cave @(Model.AvailableConnectionsIds.Contains(6) ? "tag--green" : Model.CurrentLocation.Id == 6 ? "tag--yellow" : "tag--red")">
+                    Jeskyně
+                </p>
+                <p onclick="changeLocation(this, 7)" class="location__tag tag--deep-forest @(Model.AvailableConnectionsIds.Contains(7) ? "tag--green" : Model.CurrentLocation.Id == 7 ? "tag--yellow" : "tag--red")">
+                    Hluboký les
+                </p>
+                <input type="hidden" name="locationIdInputValue" />
+            </form>
+        </div>
+        <div class="map__description__section">
+            <p class="map__description">(? kliknutím na místo se přesměrujete na danou lokaci, pokud je dostupná)</p>
+        </div>
     </div>
 
-    <div class="navigation-buttons">
-        @foreach (var connection in Model.AvailableConnections)
-        {
-            if (connection.ToLocationId != Model.CurrentLocation.Id)
-            {
-                <form method="post" asp-page-handler="HandleChangeLocation">
-                    <button type="button" onclick="changeLocation(this, @connection.ToLocationId)" class="nav-button">@connection.Description</button>
-                    <input type="hidden" name="locationIdInputValue" />
-                </form>
-            }
-        }
+    <div class="toggler inventory__toggler">
+        <img class="toggler__icon" src="/Images/Icons/inventory.png" />
     </div>
 
     <div class="game-stats">
@@ -88,6 +110,7 @@
 
 <script>
     var cardFlipped = false;
+    const availableConnectionsIds = @Html.Raw(jsAvailableConnectionsIds);
 
     const handleCardAnimation = (card) => {
         cardFlipped = true;
@@ -107,18 +130,25 @@
             toggler.closest("form").submit();
         }
     }
-
     const handleBadgeClick = (div, badgeType) => {
         var formBadge = div.closest("form");
         formBadge.querySelector("[name='badgeType']").value = badgeType;
         formBadge.submit();
     }
     const changeLocation = (div, locationId) => {
-        if (!cardFlipped) {
+        if (!cardFlipped && availableConnectionsIds.includes(locationId)) {
             var formLocation = div.closest("form");
             formLocation.querySelector("[name='locationIdInputValue']").value = locationId;
             formLocation.submit();
         }
+    }
+    const enableMap = () => {
+        var map = document.querySelector(".map__container");
+        map.classList.add("map__container__enabled");
+    }
+    const disableMap = () => {
+        var map = document.querySelector(".map__container");
+        map.classList.remove("map__container__enabled");
     }
 </script>
 

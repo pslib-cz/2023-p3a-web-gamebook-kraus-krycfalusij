@@ -20,6 +20,7 @@ namespace lost_on_island.Pages.Game
         public Card SingleLocationCard { get; set; }
         Random rnd = new Random();
         public int RandomCardIndex { get; set; }
+        public List<int> AvailableConnectionsIds { get; set; }
 
         public LocationModel(ILocationProvider locationProvider, ISessionStorage<GameState> sessionStorage)
         {
@@ -78,6 +79,19 @@ namespace lost_on_island.Pages.Game
         {
             CurrentLocation = _locationProvider.GetLocationById(locationId);
             AvailableConnections = _locationProvider.GetConnectionsFromLocation(locationId).ToList();
+            AvailableConnectionsIds = new List<int>();
+
+            if (AvailableConnections != null && CurrentLocation != null)
+            {
+                AvailableConnections.ForEach(singleLocation => {
+                    if (CurrentLocation.Id != singleLocation.ToLocationId)
+                    {
+                        AvailableConnectionsIds.Add(singleLocation.ToLocationId);
+                    }
+                });
+            }
+
+
             LocationCards = new Cards().CardPacks.FirstOrDefault(pack => pack.Id == locationId)?.CardsInPack;
 
             int totalProbability = LocationCards.Sum(card => card.Probability);

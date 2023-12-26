@@ -1,0 +1,172 @@
+﻿.toggler {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5em;
+    height: 7em;
+    position: absolute;
+    top: 15%;
+    padding: 0.4em;
+    box-sizing: border-box;
+    border: solid var(--black);
+}
+
+.toggler__icon {
+    width: 100%;
+    object-fit: contain;
+}
+
+.map__toggler {
+    right: 0;
+    background: linear-gradient(to bottom right, var(--brown-extra-light), var(--beige-dark, #E6D5CE));
+    border-radius: 30px 0 0 30px;
+    border-width: 3px 0px 3px 3px;
+}
+
+.inventory__toggler {
+    left: 0;
+    background: linear-gradient(to bottom left, var(--brown-extra-light), var(--beige-dark, #E6D5CE));
+    border-radius: 0 30px 30px 0;
+    border-width: 3px 3px 3px 0px;
+}
+
+@media only screen and (min-width: 1600px) {
+    .toggler {
+        display: none;
+    }
+}
+
+.map__container {
+    border-radius: 20px 0 0 20px;
+    display: grid;
+    right: -100%;
+    top: 100px;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 50px 420px auto;
+    position: absolute;
+    height: 550px;
+    width: 85%;
+    max-width: 500px;
+    background: white;
+    border: solid var(--black);
+    border-width: 3px 0 3px 3px;
+    transition-duration: 0.5s;
+    z-index: 5 !important; /* kvůli přepsání z-index 2 */
+    overflow: hidden;
+}
+
+.map__container__enabled {
+    right: 0;
+}
+
+.map__header__section {
+    padding: 0.5em;
+    background-color: var(--brown-extra-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.map__header__close-button {
+    object-fit: contain;
+    height: 30px;
+    width: 30px;
+}
+
+.map__header {
+
+    font-size: 2em;
+    margin: 0;
+    font-weight: 600;
+}
+
+.map__image__section {
+    background-image: url(/Images/Icons/game-map.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.map__image {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.location__tag {
+    margin: 0;
+    position: absolute;
+    padding: 0.25em 1em;
+    border-radius: 3px;
+}
+
+.location__tag::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.3s ease;
+    pointer-events: none;
+    border-radius: 3px;
+}
+
+.location__tag:hover::before {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.tag--green {
+    background-color: var(--green);
+}
+
+.tag--yellow {
+    background-color: var(--yellow);
+}
+
+.tag--red {
+    background-color: var(--red);
+}
+
+.tag--shipwreck {
+    top: 38%;
+    left: 10%
+}
+
+.tag--beach {
+    bottom: 20%;
+    left: 25%
+}
+
+.tag--field {
+    bottom: 28%;
+    right: 25%
+}
+
+.tag--forest {
+    top: 33%;
+    left: 38%
+}
+
+.tag--cave {
+    top: 35%;
+    right: 12%
+}
+
+.tag--deep-forest {
+    top: 12%;
+    right: 25%
+}
+
+.map__description__section {
+    background-color: var(--beige);
+    padding: 1em;
+}
+
+.map__description {
+    font-family: 'Jim Nightshade';
+    font-size: 1.25em;
+    margin: 0;
+}
