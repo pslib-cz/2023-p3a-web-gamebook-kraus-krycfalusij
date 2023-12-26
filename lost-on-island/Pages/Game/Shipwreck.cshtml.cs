@@ -29,15 +29,6 @@ namespace lost_on_island.Pages.Game
             _logger = logger;
         }
 
-        public List<ShipBuildingPhase> shipBuildingPhases = new List<ShipBuildingPhase>
-{
-        new ShipBuildingPhase("Opìrná struktura 1", new Dictionary<string, int>{{"wood", 15}, {"rope", 5}}),
-        new ShipBuildingPhase("Opìrná struktura 2", new Dictionary<string, int>{{"wood", 20}, {"rope", 10}, {"bamboo", 10}}),
-        new ShipBuildingPhase("Kabina", new Dictionary<string, int>{{"stone", 20}, {"rope", 5}}),
-        new ShipBuildingPhase("Plachta", new Dictionary<string, int>{{"wood", 10}, {"rope", 15}, {"wool", 10}, {"bamboo", 10}}),
-        new ShipBuildingPhase("Kormidlo", new Dictionary<string, int>{{"wood", 15}, {"iron", 15}, {"stone", 10}})
-};
-
 
         public IActionResult OnGet()
         {
@@ -84,14 +75,22 @@ namespace lost_on_island.Pages.Game
             }
             return RedirectToPage("/Game/Shipwreck");
         }
+                public IActionResult OnPostRemoveItem(string itemName, int itemCount)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
+            if (gameState.RemoveItem(itemName, itemCount))
+            {
+                _sessionStorage.Save("GameState", gameState); 
+            }
 
+            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+        }
 
         public IActionResult OnPostBuildShipPhase(string phaseName)
         {
             gameState = _sessionStorage.LoadOrCreate("GameState");
             var phaseIndex = gameState.CurrentShipBuildingPhaseIndex;
-            var phases = shipBuildingPhases;
-            var currentPhase = phases.ElementAtOrDefault(phaseIndex);
+            var currentPhase = gameState.shipBuildingPhases.ElementAtOrDefault(phaseIndex);
 
             if (currentPhase != null && currentPhase.Name == phaseName)
             {
@@ -114,25 +113,17 @@ namespace lost_on_island.Pages.Game
                 if (canBuild)
                 {
                     gameState.CurrentShipBuildingPhaseIndex++; // Pøesuneme se na další fázi
+                    _sessionStorage.Save("GameState", gameState);
                 }
 
-                _sessionStorage.Save("GameState", gameState);
-                if (canBuild)
-                {
-                    // Redirect to confirmation page or refresh with success message
-                    return RedirectToPage("/Game/ShipBuiltConfirmation", new { phaseName = phaseName });
-                }
-                else
-                {
-                    // Redirect back with error message
-                    // (Pro reálnou aplikaci byste mìli pøidat nìjakou formu uživatelského feedbacku)
-                    return RedirectToPage("/Game/Shipwreck");
-                }
+                // Zde se vrátíme na stránku Shipwreck bez potvrzovací stránky
+                return RedirectToPage("/Game/Shipwreck");
             }
 
             // Fáze neodpovídá aktuálnímu indexu nebo neexistuje
             return RedirectToPage("/Game/Shipwreck");
         }
+
 
     }
 }

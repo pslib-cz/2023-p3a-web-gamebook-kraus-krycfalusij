@@ -256,5 +256,22 @@ namespace lost_on_island.Pages.Game
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
 
+        public IActionResult OnPostEatItem(string itemName, int itemCount)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
+
+            if (itemName == "food" && gameState.Inventory.Items[itemName] >= itemCount)
+            {
+                gameState.UpdateHealthAndEnergy(1, 0); 
+
+                gameState.RemoveItem(itemName, itemCount);
+
+                _sessionStorage.Save("GameState", gameState);
+            }
+
+            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+        }
+
+
     }
 }

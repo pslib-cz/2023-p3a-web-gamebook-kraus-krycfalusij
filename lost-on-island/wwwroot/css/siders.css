@@ -394,11 +394,99 @@
     flex-direction: row;
     gap: 4px;
     font-weight: bold;
-    margin-left: 1em
+    margin-left: 1em;
+    font-size: 0.9em;
+    height: min-content;
 }
 .inventory__capacity img{
     height: 1.5em
 }
     .inventory__capacity p {
         margin: 0;
+    }
+
+
+.materials-list {
+    list-style: none;
+    padding: 0.15em;
+    display: flex;
+    margin: 0;
+    gap: 8px
+}
+
+.materials-list li {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.material-amount {
+    position: absolute;
+    bottom: 8px;
+    left: 5px;
+}
+
+.material-icon {
+    height: 2em;
+    width: 2em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 2em;
+}
+
+
+    .material-icon.wood {
+        background-image: url('/Images/icons/wood.png');
+    }
+
+    .material-icon.stone {
+        background-image: url('/Images/icons/stone.png');
+    }
+
+    .material-icon.iron {
+        background-image: url('/Images/icons/iron.png');
+    }
+
+    .material-icon.rope {
+        background-image: url('/Images/icons/rope.png');
+    }
+
+    .material-icon.food {
+        background-image: url('/Images/icons/food.png');
+    }
+
+    .material-icon.wool {
+        background-image: url('/Images/icons/wool.png');
+    }
+
+    .material-icon.bamboo {
+        background-image: url('/Images/icons/bamboo.png');
+    }
+
+.inventory__shipbuild {
+    margin: 0;
+    height: min-content;
+    margin-top: -3em;
+    margin-left: 1em;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    font-size: 0.9em;
+}
+.inventory__shipbuild p {
+    margin: 0;
+}
+
+.inventory__item__eat-button {
+    padding: 5px 10px;
+    background-color: var(--green); /* Choose a color that signifies health or energy */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px; /* To separate it from the remove button */
+}
+
+    .inventory__item__eat-button:hover {
+        background-color: #28a745; /* Darker shade of green for hover state */
     }

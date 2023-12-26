@@ -92,6 +92,22 @@
             <span class="inventory__header__close-button" onclick="disableInventory()"></span>
         </div>
         <div class="inventory__items__section">
+            <div class="inventory__item">
+                <span class="inventory__item__count">@Model.GameState.Inventory.Items["food"]×</span>
+                <img class="inventory__item__icon" src="/Images/icons/food.png" />
+                <div class="inventory__item__info">
+                    <span class="inventory__item__info__name">Jídlo</span>
+                    <span class="inventory__item__info__description">
+                        Nutné k doplnění energie.
+                        Najdeš ho všude, nejvíce na louce.
+                    </span>
+                </div>
+                <form method="post" asp-page-handler="EatItem">
+                    <input type="hidden" name="itemName" value="food" />
+                    <input type="hidden" name="itemCount" value="1" />
+                    <button type="submit" class="inventory__item__eat-button">Sníst</button>
+                </form>
+            </div>
             
             <div class="inventory__item">
                 <span class="inventory__item__count">@Model.GameState.Inventory.Items["wood"]×</span>
@@ -167,24 +183,6 @@
             </div>
 
             <div class="inventory__item">
-                <span class="inventory__item__count">@Model.GameState.Inventory.Items["food"]×</span>
-                <img class="inventory__item__icon" src="/Images/icons/food.png" />
-                <div class="inventory__item__info">
-                    <span class="inventory__item__info__name">Jídlo</span>
-                    <span class="inventory__item__info__description">
-                        Nutné k doplnění energie.
-                        Najdeš ho všude, nejvíce na louce.
-                    </span>
-                </div>
-                <form method="post" asp-page-handler="RemoveItem">
-                    <input type="hidden" name="itemName" value="food" />
-                    <input type="hidden" name="itemCount" value="1" />
-
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
-                </form>
-            </div>
-
-            <div class="inventory__item">
                 <span class="inventory__item__count">@Model.GameState.Inventory.Items["wool"]×</span>
                 <img class="inventory__item__icon" src="/Images/icons/wool.png" />
                 <div class="inventory__item__info">
@@ -227,6 +225,22 @@
                 Kapacita: @Model.GameState.Inventory.Items.Values.Sum() / @Model.GameState.InventoryCapacity
             </p>
         </div>
+            @if (Model.GameState.CurrentShipBuildingPhaseIndex < Model.GameState.shipBuildingPhases.Count)
+            {
+                var currentPhase = Model.GameState.shipBuildingPhases[Model.GameState.CurrentShipBuildingPhaseIndex];
+                <div class="inventory__shipbuild">
+                    <p>Aktuálně potřeba:</p>
+                    <ul class="materials-list">
+                        @foreach (var material in currentPhase.RequiredMaterials)
+                        {
+                            <li>
+                                <span class="material-amount">@material.Value×</span>
+                                <span class="material-icon @material.Key"></span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
     </div>
 
 

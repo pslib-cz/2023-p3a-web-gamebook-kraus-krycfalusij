@@ -2,7 +2,7 @@
 @model lost_on_island.Pages.Game.ShipwreckModel
 @{
     var jsAvailableConnectionsIds = Json.Serialize(Model.AvailableConnectionsIds);
-    var currentPhase = Model.shipBuildingPhases.ElementAtOrDefault(Model.gameState.CurrentShipBuildingPhaseIndex);
+    var currentPhase = Model.gameState.shipBuildingPhases.ElementAtOrDefault(Model.gameState.CurrentShipBuildingPhaseIndex);
 
 }
 
@@ -198,38 +198,55 @@
                 Kapacita: @Model.gameState.Inventory.Items.Values.Sum() / @Model.gameState.InventoryCapacity
             </p>
         </div>
-    </div>
-
-    <div class="shipbuilding">
-        @foreach (var phase in Model.shipBuildingPhases)
+        @if (@Model.gameState.CurrentShipBuildingPhaseIndex < Model.gameState.shipBuildingPhases.Count)
         {
-            var isCurrentPhase = Model.shipBuildingPhases.IndexOf(phase) == Model.gameState.CurrentShipBuildingPhaseIndex;
-            <div class="shipbuilding__phase @(isCurrentPhase ? "" : "deactive")">
-                <div class="shipbuilding__phase__name">
-                    <h2>@phase.Name</h2>
-                    @if (isCurrentPhase)
+            var gameState = Model.gameState.shipBuildingPhases[Model.gameState.CurrentShipBuildingPhaseIndex];
+            <div class="inventory__shipbuild">
+                <p>Aktuálně potřeba:</p>
+                <ul class="materials-list">
+                    @foreach (var material in currentPhase.RequiredMaterials)
                     {
-                        <button type="submit" asp-page-handler="BuildShipPhase" asp-route-phaseName="@phase.Name">
-                            Postavit
-                        </button>
+                        <li>
+                            <span class="material-amount">@material.Value×</span>
+                            <span class="material-icon @material.Key"></span>
+                        </li>
                     }
-                </div>
-                <div class="shipbuilding__phase__info">
-                    <p>Potřeba:</p>
-                    <ul class="materials-list">
-                        @foreach (var material in phase.RequiredMaterials)
-                        {
-                            <li>
-                                <span class="material-amount">@material.Value×</span>
-                                <span class="material-icon @material.Key"></span>
-
-                            </li>
-                        }
-                    </ul>
-                </div>
+                </ul>
             </div>
         }
     </div>
+    
+    <div class="shipbuilding">
+        @foreach (var phase in Model.gameState.shipBuildingPhases)
+        {
+            var isCurrentPhase = Model.gameState.shipBuildingPhases.IndexOf(phase) == Model.gameState.CurrentShipBuildingPhaseIndex;
+            <form method="post" asp-page-handler="BuildShipPhase">
+                <div class="shipbuilding__phase @(isCurrentPhase ? "" : "deactive")">
+                    <input type="hidden" name="phaseName" value="@phase.Name" />
+                    <div class="shipbuilding__phase__name">
+                        <h2>@phase.Name</h2>
+                        @if (isCurrentPhase)
+                        {
+                            <button type="submit">Postavit</button>
+                        }
+                    </div>
+                    <div class="shipbuilding__phase__info">
+                        <p>Potřeba:</p>
+                        <ul class="materials-list">
+                            @foreach (var material in phase.RequiredMaterials)
+                            {
+                                <li>
+                                    <span class="material-amount">@material.Value×</span>
+                                    <span class="material-icon @material.Key"></span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+
 
 
 

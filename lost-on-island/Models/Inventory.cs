@@ -10,7 +10,7 @@ public class Inventory
     {
         Items = new Dictionary<string, int>
         {
-            ["wood"] = 0,
+            ["wood"] = 1,
             ["stone"] = 0,
             ["iron"] = 0,
             ["rope"] = 0,
