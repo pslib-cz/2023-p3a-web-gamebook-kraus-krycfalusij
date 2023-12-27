@@ -258,23 +258,23 @@
         </div>
         <form method="post" asp-page-handler="HandleBadgeClick" class="badges-list">
             <div class="single-tool__badge__wrapper">
-                <div class="single-tool__badge__infobox" id="infoSword">Info</div>
+                <div class="single-tool__badge__infobox" id="infoSword">Info1</div>
                 <div onclick="handleBadgeClick(this, 'Sword')" class="single-tool__badge" style="background-image: url('@(gameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
-                <div class="single-tool__badge__infobox" id="infoAxe">Info</div>
+                <div class="single-tool__badge__infobox" id="infoAxe">Info2</div>
                 <div onclick="handleBadgeClick(this, 'Axe')" class="single-tool__badge" style="background-image: url('@(gameState.Axe ? "/Images/Icons/axe-badge.png" : "/Images/Icons/axe-badge-disabled.png")')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
-                <div class="single-tool__badge__infobox" id="infoPickaxe">Info</div>
+                <div class="single-tool__badge__infobox" id="infoPickaxe">Info3</div>
                 <div onclick="handleBadgeClick(this, 'Pickaxe')" class="single-tool__badge" style="background-image: url('@(gameState.Pickaxe ? "/Images/Icons/pickaxe-badge.png" : "/Images/Icons/pickaxe-badge-disabled.png")')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
-                <div class="single-tool__badge__infobox" id="infoShears">Info</div>
+                <div class="single-tool__badge__infobox" id="infoShears">Info4</div>
                 <div onclick="handleBadgeClick(this, 'Shears')" class="single-tool__badge" style="background-image: url('@(gameState.Shears ? "/Images/Icons/shears-badge.png" : "/Images/Icons/shears-badge-disabled.png")')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
-                <div class="single-tool__badge__infobox" id="infoBackpack">Info</div>
+                <div class="single-tool__badge__infobox" id="infoBackpack">Info5</div>
                 <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(gameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png")')"></div>
             </div>
             <input type="hidden" name="badgeType" />
