@@ -116,7 +116,6 @@ body {
 }
 
 .game-container > *:not(.background-overlay) {
-    /* position: relative; wtf */
     z-index: 2;
 }
 
