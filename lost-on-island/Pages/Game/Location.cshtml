@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <div class="inventory_overlay @(Model.GameState.IsInventoryOpen? "inventory_overlay--active" : "" )"></div>
+    <div id="inventoryOverlay" class="inventory_overlay @(Model.GameState.IsInventoryOpen? "inventory_overlay--active" : "" )"></div>
     <div class="toggler inventory__toggler" onclick="enableInventory()">
         <img class="toggler__icon" src="/Images/Icons/inventory.png" />
     </div>
@@ -365,6 +365,7 @@
         var overlay = document.querySelector(".inventory_overlay");
         overlay.classList.remove("inventory_overlay--active");
     }
+    
 
 </script>
 

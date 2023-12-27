@@ -16,7 +16,10 @@ shipwreck:
  - stavba i s malo mnozstvi materialu
  
  spánek/energie?
+
+ risky karty neubírají 2* životů
  
 UX (text, vyskakovací okna..., cursor pointer)
 
 Final stránka, Prolog, Cheater stránka
+

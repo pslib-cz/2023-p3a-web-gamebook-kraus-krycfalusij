@@ -228,10 +228,13 @@
     transition-duration: 0.5s;
 }
 
-.map_overlay--active, .inventory_overlay--active {
-    visibility: visible;
-    opacity: 1;
+@media only screen and (max-width: 1600px) {
+    .map_overlay--active, .inventory_overlay--active {
+        visibility: visible;
+        opacity: 1;
+    }
 }
+
 
 .map__header__close-button, .inventory__header__close-button {
     width: 30px; 
