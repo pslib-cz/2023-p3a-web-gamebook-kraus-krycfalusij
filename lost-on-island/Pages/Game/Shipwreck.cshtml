@@ -53,6 +53,7 @@
         </div>
     </div>
 
+
     <div class="inventory_overlay"></div>
     <div class="toggler inventory__toggler" onclick="enableInventory()">
         <img class="toggler__icon" src="/Images/Icons/inventory.png" />
@@ -63,6 +64,22 @@
             <span class="inventory__header__close-button" onclick="disableInventory()"></span>
         </div>
         <div class="inventory__items__section">
+            <div class="inventory__item">
+                <span class="inventory__item__count">@Model.gameState.Inventory.Items["food"]×</span>
+                <img class="inventory__item__icon" src="/Images/icons/food.png" />
+                <div class="inventory__item__info">
+                    <span class="inventory__item__info__name">Jídlo</span>
+                    <span class="inventory__item__info__description">
+                        Nutné k doplnění energie.
+                        Najdeš ho všude, nejvíce na louce.
+                    </span>
+                </div>
+                <form method="post" asp-page-handler="EatItem">
+                    <input type="hidden" name="itemName" value="food" />
+                    <input type="hidden" name="itemCount" value="1" />
+                    <button type="submit" class="inventory__item__eat-button">Sníst</button>
+                </form>
+            </div>
 
             <div class="inventory__item">
                 <span class="inventory__item__count">@Model.gameState.Inventory.Items["wood"]×</span>
@@ -78,7 +95,7 @@
                     <input type="hidden" name="itemName" value="wood" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
 
@@ -96,7 +113,7 @@
                     <input type="hidden" name="itemName" value="stone" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
 
@@ -114,7 +131,7 @@
                     <input type="hidden" name="itemName" value="iron" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
 
@@ -133,25 +150,7 @@
                     <input type="hidden" name="itemName" value="rope" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
-                </form>
-            </div>
-
-            <div class="inventory__item">
-                <span class="inventory__item__count">@Model.gameState.Inventory.Items["food"]×</span>
-                <img class="inventory__item__icon" src="/Images/icons/food.png" />
-                <div class="inventory__item__info">
-                    <span class="inventory__item__info__name">Jídlo</span>
-                    <span class="inventory__item__info__description">
-                        Nutné k doplnění energie.
-                        Najdeš ho všude, nejvíce na louce.
-                    </span>
-                </div>
-                <form method="post" asp-page-handler="RemoveItem">
-                    <input type="hidden" name="itemName" value="food" />
-                    <input type="hidden" name="itemCount" value="1" />
-
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
 
@@ -169,7 +168,7 @@
                     <input type="hidden" name="itemName" value="wool" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
 
@@ -187,7 +186,7 @@
                     <input type="hidden" name="itemName" value="bamboo" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
 
@@ -246,8 +245,6 @@
             </form>
         }
     </div>
-
-
 
 
 

@@ -176,7 +176,6 @@ namespace lost_on_island.Pages.Game
             var gameState = _sessionStorage.LoadOrCreate("GameState");
             GameState = gameState;
 
-
             if (!IsValidTransition(gameState, locationId))
             {
                 Console.WriteLine("teï");
@@ -202,6 +201,7 @@ namespace lost_on_island.Pages.Game
 
             return Page();
         }
+
 
         private IActionResult RedirectToSpecialPage(int locationId, GameState gameState)
         {
@@ -244,7 +244,7 @@ namespace lost_on_island.Pages.Game
         {
             return RedirectToPage(new { locationId = locationIdInputValue });
         }
-
+        
         public IActionResult OnPostRemoveItem(string itemName, int itemCount)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
@@ -271,7 +271,7 @@ namespace lost_on_island.Pages.Game
 
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
-
+  
 
     }
 }

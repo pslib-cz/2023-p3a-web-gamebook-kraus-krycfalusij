@@ -19,14 +19,16 @@ public class GameState
     public bool Backpack { get; set; } = false;
     
     public int InventoryCapacity { get; set; } = 20;
-    
+
+    public bool IsInventoryOpen { get; set; } = false;
+
     public Inventory Inventory { get; set; } = new Inventory();
     public int CurrentShipBuildingPhaseIndex { get; set; } = 0;
 
     public List<ShipBuildingPhase> shipBuildingPhases = new List<ShipBuildingPhase>
 {
-        new ShipBuildingPhase("Opěrná struktura 1", new Dictionary<string, int>{{"wood", 3}}),
-        new ShipBuildingPhase("Opěrná struktura 2", new Dictionary<string, int>{{"wood", 20}, {"rope", 10}, {"bamboo", 10}}),
+        new ShipBuildingPhase("Skelet lodi", new Dictionary<string, int>{{"wood", 3}}),
+        new ShipBuildingPhase("Pokročilý skelet lodi", new Dictionary<string, int>{{"wood", 20}, {"rope", 10}, {"bamboo", 10}}),
         new ShipBuildingPhase("Kabina", new Dictionary<string, int>{{"stone", 20}, {"rope", 5}}),
         new ShipBuildingPhase("Plachta", new Dictionary<string, int>{{"wood", 10}, {"rope", 15}, {"wool", 10}, {"bamboo", 10}}),
         new ShipBuildingPhase("Kormidlo", new Dictionary<string, int>{{"wood", 15}, {"iron", 15}, {"stone", 10}})

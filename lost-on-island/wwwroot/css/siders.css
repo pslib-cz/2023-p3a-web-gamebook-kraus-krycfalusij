@@ -340,18 +340,18 @@
     flex-direction: column;
 }
 .inventory__item {
-    display: flex;
-    align-items: center;
-    padding-left: 2.5em;
-    padding-right: 1em;
     position: relative;
+    display: grid;
+    grid-template-columns: 3em 15em 4em; 
+    margin-left: 2em;
+    grid-auto-rows: auto;
     gap: 0.5em;
 }
 
 .inventory__item__count {
     font-size: 1.5em;
     position: absolute;
-    left: 10px;
+    left: -1.2em;
     bottom: 15px;
 }
 

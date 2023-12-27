@@ -86,7 +86,7 @@
     <div class="toggler inventory__toggler" onclick="enableInventory()">
         <img class="toggler__icon" src="/Images/Icons/inventory.png" />
     </div>
-    <div class="inventory__container">
+    <div class="inventory__container @(Model.GameState.IsInventoryOpen ? "inventory__container__enabled" : "")">
         <div class="inventory__header__section">
             <p class="inventory__header">Inventář</p>
             <span class="inventory__header__close-button" onclick="disableInventory()"></span>
@@ -123,7 +123,7 @@
                     <input type="hidden" name="itemName" value="wood" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
 
@@ -141,7 +141,7 @@
                     <input type="hidden" name="itemName" value="stone" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
             
@@ -159,7 +159,7 @@
                     <input type="hidden" name="itemName" value="iron" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
             
@@ -178,7 +178,7 @@
                     <input type="hidden" name="itemName" value="rope" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
 
@@ -196,7 +196,7 @@
                     <input type="hidden" name="itemName" value="wool" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
 
@@ -214,7 +214,7 @@
                     <input type="hidden" name="itemName" value="bamboo" />
                     <input type="hidden" name="itemCount" value="1" />
 
-                    <button type="submit" class="inventory__item__remove-button">Zahodit kus</button>
+                    <button type="submit" class="inventory__item__remove-button">Odebrat</button>
                 </form>
             </div>
 
@@ -315,14 +315,20 @@
         overlay.classList.remove("map_overlay--active");
     }
 
-    const enableInventory = () => {
+    document.addEventListener("DOMContentLoaded", function () {
+        if (@Model.GameState.IsInventoryOpen) {
+            enableInventory();
+        }
+    });
+
+    function enableInventory() {
         var inventory = document.querySelector(".inventory__container");
         inventory.classList.add("inventory__container__enabled");
         var overlay = document.querySelector(".inventory_overlay");
         overlay.classList.add("inventory_overlay--active");
     }
 
-    const disableInventory = () => {
+    function disableInventory() {
         var inventory = document.querySelector(".inventory__container");
         inventory.classList.remove("inventory__container__enabled");
         var overlay = document.querySelector(".inventory_overlay");

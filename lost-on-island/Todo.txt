@@ -7,10 +7,11 @@ IMPORTANT
 Co nám zbývá?:
 1) fight system
 2) Badges
-3) shipwreck:
+3) spravit vytékající obsah (mapa atd) - overflowhidden nepomáhá? 
+4) shipwreck:
  - aktualizace inventáře s rozbalenim
  - eating / removing items
  - stavba i s malo mnozstvi materialu
-3) spánek/energie?
-4) UX (text, vyskakovací okna...)
-5) Final stránka, Prolog, Cheater stránka
+5) spánek/energie?poš
+6) UX (text, vyskakovací okna...)
+7) Final stránka, Prolog, Cheater stránka
