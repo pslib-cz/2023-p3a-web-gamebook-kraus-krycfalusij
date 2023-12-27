@@ -149,11 +149,34 @@ a {
     gap: 15px;
 }
 
+.single-tool__badge__wrapper {
+    position: relative;
+}
+
 .single-tool__badge {
     width: 45px;
     height: 45px;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.single-tool__badge__infobox {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 60px;
+    left: -50px;
+    height: 100px;
+    width: 150px;
+    background-color: red;
+    z-index: 10;
+    transition-duration: 1.5s;
+}
+
+.single-tool__badge__infobox__enabled {
+    visibility: visible;
+    opacity: 1;
+    transition-duration: 0.3s;
 }
 
 .game-stats__turns {

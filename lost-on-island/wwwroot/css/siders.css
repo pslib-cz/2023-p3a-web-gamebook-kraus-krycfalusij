@@ -241,26 +241,24 @@
     display: inline-block;
 }
 
-    .map__header__close-button::before,
-    .map__header__close-button::after, .inventory__header__close-button::before, .inventory__header__close-button::after{
-        content: '';
-        position: absolute;
-        height: 3px;
-        width: 100%;
-        top: 50%;
-        left: 0;
-        background-color: black;
-    }
+.map__header__close-button::before,
+.map__header__close-button::after, .inventory__header__close-button::before, .inventory__header__close-button::after{
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    background-color: black;
+}
 
-    .map__header__close-button::before, .inventory__header__close-button::before {
-        transform: rotate(45deg);
-    }
+.map__header__close-button::before, .inventory__header__close-button::before {
+    transform: rotate(45deg);
+}
 
-    .map__header__close-button::after, .inventory__header__close-button::after {
-        transform: rotate(-45deg);
-    }
-
-
+.map__header__close-button::after, .inventory__header__close-button::after {
+    transform: rotate(-45deg);
+}
 
 
 .inventory__container {

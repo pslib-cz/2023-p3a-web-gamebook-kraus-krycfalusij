@@ -257,11 +257,26 @@
             Počet tahů: @Model.GameState.Turns
         </div>
         <form method="post" asp-page-handler="HandleBadgeClick" class="badges-list">
-            <div onclick="handleBadgeClick(this, 'Sword')" class="single-tool__badge" style="background-image: url('@(gameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
-            <div onclick="handleBadgeClick(this, 'Axe')" class="single-tool__badge" style="background-image: url('@(gameState.Axe ? "/Images/Icons/axe-badge.png" : "/Images/Icons/axe-badge-disabled.png")')"></div>
-            <div onclick="handleBadgeClick(this, 'Pickaxe')" class="single-tool__badge" style="background-image: url('@(gameState.Pickaxe ? "/Images/Icons/pickaxe-badge.png" : "/Images/Icons/pickaxe-badge-disabled.png")')"></div>
-            <div onclick="handleBadgeClick(this, 'Shears')" class="single-tool__badge" style="background-image: url('@(gameState.Shears ? "/Images/Icons/shears-badge.png" : "/Images/Icons/shears-badge-disabled.png")')"></div>
-            <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(gameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png")')"></div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoSword">Info</div>
+                <div onclick="handleBadgeClick(this, 'Sword')" class="single-tool__badge" style="background-image: url('@(gameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoAxe">Info</div>
+                <div onclick="handleBadgeClick(this, 'Axe')" class="single-tool__badge" style="background-image: url('@(gameState.Axe ? "/Images/Icons/axe-badge.png" : "/Images/Icons/axe-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoPickaxe">Info</div>
+                <div onclick="handleBadgeClick(this, 'Pickaxe')" class="single-tool__badge" style="background-image: url('@(gameState.Pickaxe ? "/Images/Icons/pickaxe-badge.png" : "/Images/Icons/pickaxe-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoShears">Info</div>
+                <div onclick="handleBadgeClick(this, 'Shears')" class="single-tool__badge" style="background-image: url('@(gameState.Shears ? "/Images/Icons/shears-badge.png" : "/Images/Icons/shears-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoBackpack">Info</div>
+                <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(gameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png")')"></div>
+            </div>
             <input type="hidden" name="badgeType" />
         </form>
     </div>
@@ -290,9 +305,25 @@
         }
     }
     const handleBadgeClick = (div, badgeType) => {
+        const allInfoboxes = document.querySelectorAll(".single-tool__badge__infobox__enabled");
+        allInfoboxes.forEach((infobox) => {
+            infobox.classList.remove("single-tool__badge__infobox__enabled");
+        });
+
+        const infoboxId = `info${badgeType}`;
+        const infobox = document.getElementById(infoboxId);
+
+        if (infobox) {
+            infobox.classList.add("single-tool__badge__infobox__enabled");
+
+            setTimeout(() => {
+                infobox.classList.remove("single-tool__badge__infobox__enabled");
+            }, 2000);
+        }
+
         var formBadge = div.closest("form");
         formBadge.querySelector("[name='badgeType']").value = badgeType;
-        formBadge.submit();
+        //formBadge.submit();
     }
     const changeLocation = (div, locationId) => {
         if (!cardFlipped && availableConnectionsIds.includes(locationId)) {
