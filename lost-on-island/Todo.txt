@@ -7,18 +7,15 @@ IMPORTANT
 Co nám zbývá?:
 fight system
 
-spravit risky button
 
 Badges
-
-spravit vytékající obsah (mapa atd) - overflowhidden nepomáhá? 
 
 správné přičítání tahů
 
 shipwreck:
- - aktualizace inventáře s rozbalenim
  - stavba i s malo mnozstvi materialu
- spánek/energie?poš
+ 
+ spánek/energie?
  
 UX (text, vyskakovací okna..., cursor pointer)
 

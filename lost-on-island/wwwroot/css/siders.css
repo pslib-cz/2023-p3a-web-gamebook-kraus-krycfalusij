@@ -343,7 +343,7 @@
 .inventory__item {
     position: relative;
     display: grid;
-    grid-template-columns: 3em 13.5em 4em; 
+    grid-template-columns: 3em 13em 4em; 
     margin-left: 2em;
     grid-auto-rows: auto;
     gap: 0.5em;

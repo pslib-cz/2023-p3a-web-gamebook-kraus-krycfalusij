@@ -184,9 +184,12 @@ namespace lost_on_island.Pages.Game
             {
                 return RedirectToPage("/Game/Cheater");
             }
+            if (gameState.CurrentLocationId != locationId)
+            {
+                gameState.IsInventoryOpen = false; 
+            }
 
             UpdateGameState(gameState, locationId);
-
 
             if (_locationProvider.IsSpecialLocation(locationId))
             {
@@ -254,6 +257,7 @@ namespace lost_on_island.Pages.Game
             {
                 _sessionStorage.Save("GameState", gameState); 
             }
+            _sessionStorage.Save("GameState", gameState);
 
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
@@ -261,6 +265,7 @@ namespace lost_on_island.Pages.Game
         public IActionResult OnPostEatItem(string itemName, int itemCount)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState.IsInventoryOpen = true;
 
             if (itemName == "food" && gameState.Inventory.Items[itemName] >= itemCount)
             {
@@ -270,6 +275,7 @@ namespace lost_on_island.Pages.Game
 
                 _sessionStorage.Save("GameState", gameState);
             }
+            _sessionStorage.Save("GameState", gameState);
 
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }

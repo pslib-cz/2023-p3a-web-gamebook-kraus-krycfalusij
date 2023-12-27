@@ -39,14 +39,17 @@ namespace lost_on_island.Pages.Game
             {
                 return RedirectToPage("/Game/Cheater");
             }
-            Console.WriteLine(gameState.shipBuildingPhases[gameState.CurrentShipBuildingPhaseIndex].RequiredMaterials["wood"]);
+
+            if (gameState.CurrentLocationId != 2)
+            {
+                gameState.IsInventoryOpen = false;
+            }
 
             // Aktualizace CurrentLocationId na 2
             gameState.CurrentLocationId = 2;
             gameState.Turns += 1;
 
             _sessionStorage.Save("GameState", gameState);
-
 
             CurrentLocation = _locationProvider.GetLocationById(gameState.CurrentLocationId);
 
@@ -64,9 +67,9 @@ namespace lost_on_island.Pages.Game
                 });
             }
 
-
             return Page();
         }
+
 
         public IActionResult OnPostHandleChangeLocation(string locationIdInputValue)
         {
@@ -75,16 +78,6 @@ namespace lost_on_island.Pages.Game
                 return RedirectToPage("/Game/Location", new { locationId = 3 });
             }
             return RedirectToPage("/Game/Shipwreck");
-        }
-                public IActionResult OnPostRemoveItem(string itemName, int itemCount)
-        {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-            if (gameState.RemoveItem(itemName, itemCount))
-            {
-                _sessionStorage.Save("GameState", gameState); 
-            }
-
-            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
 
         public IActionResult OnPostBuildShipPhase(string phaseName)
@@ -113,18 +106,34 @@ namespace lost_on_island.Pages.Game
 
             return RedirectToPage("/Game/Shipwreck");
         }
+        public IActionResult OnPostRemoveItem(string itemName, int itemCount)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState.IsInventoryOpen = true;
+
+            if (gameState.RemoveItem(itemName, itemCount))
+            {
+                _sessionStorage.Save("GameState", gameState);
+            }
+            _sessionStorage.Save("GameState", gameState);
+
+            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+        }
+
         public IActionResult OnPostEatItem(string itemName, int itemCount)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState.IsInventoryOpen = true;
 
             if (itemName == "food" && gameState.Inventory.Items[itemName] >= itemCount)
             {
-                gameState.UpdateHealthAndEnergy(1, 1);
+                gameState.UpdateHealthAndEnergy(1, 0);
 
                 gameState.RemoveItem(itemName, itemCount);
 
                 _sessionStorage.Save("GameState", gameState);
             }
+            _sessionStorage.Save("GameState", gameState);
 
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }

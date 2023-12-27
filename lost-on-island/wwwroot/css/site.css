@@ -265,7 +265,7 @@ a {
 }
 
 .button-toggle {
-    padding: 2em;
+    padding: 1.75em;
     border-radius: 50%;
     border: 4px solid black;
     cursor: pointer;
@@ -282,8 +282,8 @@ a {
 
 form:has(.button-toggle) {
     position: fixed;
-    margin-left: 70vw;
-    top: 60vh;
+    margin-left: 40vw;
+    top: 65vh;
     z-index: 5;
 }
 
@@ -291,7 +291,12 @@ form:has(.button-toggle) {
     background-color: var(--red)
 }
 
-
+@media only screen and (max-width: 767px) {
+    form:has(.button-toggle) {
+        margin-left: 75vw;
+        top: 60vh;
+    }
+}
 
 .shipbuilding {
     border-radius: 8px;
