@@ -21,8 +21,11 @@ namespace lost_on_island.Services
             {
                 return new T();
             }
+            
             return JsonSerializer.Deserialize<T>(value);
         }
+
+
 
         public void Save(string key, T value)
         {

@@ -13,12 +13,13 @@ Badges
 
 spravit vytékající obsah (mapa atd) - overflowhidden nepomáhá? 
 
+správné přičítání tahů
+
 shipwreck:
  - aktualizace inventáře s rozbalenim
- - eating / removing items
  - stavba i s malo mnozstvi materialu
  spánek/energie?poš
  
-UX (text, vyskakovací okna...)
+UX (text, vyskakovací okna..., cursor pointer)
 
 Final stránka, Prolog, Cheater stránka

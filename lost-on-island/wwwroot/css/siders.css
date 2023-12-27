@@ -343,7 +343,7 @@
 .inventory__item {
     position: relative;
     display: grid;
-    grid-template-columns: 3em 15em 4em; 
+    grid-template-columns: 3em 13.5em 4em; 
     margin-left: 2em;
     grid-auto-rows: auto;
     gap: 0.5em;
@@ -478,14 +478,16 @@
 
 .inventory__item__eat-button {
     padding: 5px 10px;
-    background-color: var(--green); /* Choose a color that signifies health or energy */
+    background-color: var(--red); /* Choose a color that signifies health or energy */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 5px; /* To separate it from the remove button */
 }
 
     .inventory__item__eat-button:hover {
-        background-color: #28a745; /* Darker shade of green for hover state */
+        cursor: pointer;
+    }
+    .inventory__item__remove-button:hover {
+        cursor: pointer;
     }

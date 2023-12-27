@@ -262,7 +262,7 @@ namespace lost_on_island.Pages.Game
 
             if (itemName == "food" && gameState.Inventory.Items[itemName] >= itemCount)
             {
-                gameState.UpdateHealthAndEnergy(1, 0); 
+                gameState.UpdateHealthAndEnergy(1, 1); 
 
                 gameState.RemoveItem(itemName, itemCount);
 

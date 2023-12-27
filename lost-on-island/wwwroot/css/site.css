@@ -294,7 +294,6 @@ form:has(.button-toggle) {
 
 
 .shipbuilding {
-    padding: 1em;
     border-radius: 8px;
     margin: auto;
     display: flex;
@@ -411,3 +410,63 @@ form:has(.button-toggle) {
     .material-icon.bamboo {
         background-image: url(/Images/Icons/bamboo.png);
     }
+
+@media only screen and (max-width: 768px) {
+    .shipbuilding {
+        max-width: 75%;
+        margin-top: 0.5em
+    }
+
+    .shipbuilding__phase__name {
+        font-size: 1.15em;
+    }
+
+    .shipbuilding__phase button {
+        padding: 6px 8px;
+        font-size: 1.1em;
+    }
+
+    .shipbuilding__phase__info {
+        font-size: 1em;
+        padding: 0.25em;
+    }
+
+    .shipbuilding .material-icon {
+        height: 1.5em;
+        width: 1.5em;
+    }
+
+    .shipbuilding .material-amount {
+        bottom: 5px;
+        left: 4px;
+    }
+}
+
+
+@media only screen and (max-width: 389px) {
+    .shipbuilding {
+        gap: 8px;
+        max-width: 65%;
+        margin-top: -1em;
+    }
+    .shipbuilding__phase__name {
+        font-size: 0.9em;
+    }
+    .shipbuilding__phase button {
+        padding: 6px 8px;
+        font-size: 0.9em;
+    }
+    .shipbuilding__phase__info{
+        font-size: 0.75em;
+        padding: 0.25em;
+    }
+    .shipbuilding .material-icon{
+        height: 1.5em;
+        width: 1.5em;
+    }
+    .shipbuilding .material-amount {
+        bottom: 5px;
+        left: 4px;
+    }
+    
+}
