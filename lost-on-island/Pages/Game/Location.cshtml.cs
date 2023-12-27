@@ -248,6 +248,8 @@ namespace lost_on_island.Pages.Game
         public IActionResult OnPostRemoveItem(string itemName, int itemCount)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState.IsInventoryOpen = true;
+
             if (gameState.RemoveItem(itemName, itemCount))
             {
                 _sessionStorage.Save("GameState", gameState); 
@@ -262,7 +264,7 @@ namespace lost_on_island.Pages.Game
 
             if (itemName == "food" && gameState.Inventory.Items[itemName] >= itemCount)
             {
-                gameState.UpdateHealthAndEnergy(1, 1); 
+                gameState.UpdateHealthAndEnergy(1, 0); 
 
                 gameState.RemoveItem(itemName, itemCount);
 

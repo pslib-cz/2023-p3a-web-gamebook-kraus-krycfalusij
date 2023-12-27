@@ -20,8 +20,6 @@ public class GameState
 
     public int InventoryCapacity { get; set; } = 20;
 
-    public bool IsInventoryOpen { get; set; } = false;
-
     public Inventory Inventory { get; set; } = new Inventory();
     public int CurrentShipBuildingPhaseIndex { get; set; } = 0;
 
@@ -34,6 +32,17 @@ public class GameState
         new ShipBuildingPhase("Kormidlo", new Dictionary<string, int>{{"wood", 15}, {"iron", 15}, {"stone", 10}})
 };
 
+    public bool IsInventoryOpen { get; set; } = false;
+
+    public void OpenInventory()
+    {
+        IsInventoryOpen = true;
+    }
+
+    public void CloseInventory()
+    {
+        IsInventoryOpen = false;
+    }
 
     public void AddTool(string badgeType)
     {

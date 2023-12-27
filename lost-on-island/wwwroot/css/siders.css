@@ -491,3 +491,21 @@
     .inventory__item__remove-button:hover {
         cursor: pointer;
     }
+
+
+@media only screen and (max-width: 1600px) {
+    .inventory__header__close-button button {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: unset;
+        border: none;
+    }
+    .inventory__toggler button {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: unset;
+        border: none;
+    }
+}
