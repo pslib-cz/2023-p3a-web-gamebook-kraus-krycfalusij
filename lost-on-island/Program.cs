@@ -20,6 +20,8 @@ builder.Services.AddScoped(typeof(ISessionStorage<>), typeof(SessionStorage<>));
 
 var app = builder.Build();
 
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -30,7 +32,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseSession(); 
+app.UseSession();
 app.UseAuthorization();
 
 app.MapRazorPages();
