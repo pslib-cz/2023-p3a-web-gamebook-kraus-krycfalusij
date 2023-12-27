@@ -7,6 +7,10 @@ IMPORTANT
 Co nám zbývá?:
 1) fight system
 2) Badges
+3) shipwreck:
+ - aktualizace inventáře s rozbalenim
+ - eating / removing items
+ - stavba i s malo mnozstvi materialu
 3) spánek/energie?
 4) UX (text, vyskakovací okna...)
 5) Final stránka, Prolog, Cheater stránka
