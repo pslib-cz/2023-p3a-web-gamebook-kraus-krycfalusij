@@ -5,13 +5,20 @@ IMPORTANT
 - jídlo přidává životy místo jídla
 
 Co nám zbývá?:
-1) fight system
-2) Badges
-3) spravit vytékající obsah (mapa atd) - overflowhidden nepomáhá? 
-4) shipwreck:
+fight system
+
+spravit risky button
+
+Badges
+
+spravit vytékající obsah (mapa atd) - overflowhidden nepomáhá? 
+
+shipwreck:
  - aktualizace inventáře s rozbalenim
  - eating / removing items
  - stavba i s malo mnozstvi materialu
-5) spánek/energie?poš
-6) UX (text, vyskakovací okna...)
-7) Final stránka, Prolog, Cheater stránka
+ spánek/energie?poš
+ 
+UX (text, vyskakovací okna...)
+
+Final stránka, Prolog, Cheater stránka

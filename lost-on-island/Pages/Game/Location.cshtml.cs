@@ -178,7 +178,6 @@ namespace lost_on_island.Pages.Game
 
             if (!IsValidTransition(gameState, locationId))
             {
-                Console.WriteLine("teï");
                 return RedirectToPage("/Game/Cheater");
             }
             if (gameState.InFight)
@@ -195,6 +194,7 @@ namespace lost_on_island.Pages.Game
             }
 
             gameState.Turns += 1;
+            
 
             _sessionStorage.Save("GameState", gameState);
             LoadLocationData(locationId, GameState.IsRiskyMode);
