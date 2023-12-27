@@ -24,12 +24,11 @@
 
 html {
     font-size: 0.875em;
-    font-family: var(--font-family-base);
-}
-
-html {
-    font-size: 0.875em;
     font-family: 'Source Serif 4', serif;
+    font-family: var(--font-family-base);
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 @media (min-width: 768px) {
@@ -51,17 +50,21 @@ html {
 
 body {
     width: 100vw;
-    height: 100vh;
     overflow: hidden;
     margin: 0;
     user-select: none;
-    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+main {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .game-container {
     width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -70,6 +73,9 @@ body {
     align-items: center;
     justify-content: space-between;
     overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .location__title__container {

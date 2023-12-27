@@ -321,6 +321,10 @@
     .inventory__container {
         top: 8em;
     }
+    .inventory__items__section .inventory__item {
+        grid-template-columns: 2.5em 12em 4em;
+    }
+
 }
 
 @media only screen and (min-width: 1600px) {
