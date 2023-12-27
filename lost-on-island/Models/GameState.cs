@@ -23,14 +23,14 @@ public class GameState
     public Inventory Inventory { get; set; } = new Inventory();
     public int CurrentShipBuildingPhaseIndex { get; set; } = 0;
 
-    public List<ShipBuildingPhase> shipBuildingPhases = new List<ShipBuildingPhase>
-{
-        new ShipBuildingPhase("Skelet lodi", new Dictionary<string, int>{{"wood", 3}}),
-        new ShipBuildingPhase("Pokročilý skelet lodi", new Dictionary<string, int>{{"wood", 20}, {"rope", 10}, {"bamboo", 10}}),
-        new ShipBuildingPhase("Kabina", new Dictionary<string, int>{{"stone", 20}, {"rope", 5}}),
-        new ShipBuildingPhase("Plachta", new Dictionary<string, int>{{"wood", 10}, {"rope", 15}, {"wool", 10}, {"bamboo", 10}}),
-        new ShipBuildingPhase("Kormidlo", new Dictionary<string, int>{{"wood", 15}, {"iron", 15}, {"stone", 10}})
-};
+    public List<ShipBuildingPhase> shipBuildingPhases { get; set; } = new List<ShipBuildingPhase>
+    {
+            new ShipBuildingPhase("Skelet lodi", new Dictionary<string, int>{{"wood", 3}, {"stone", 1}}),
+            new ShipBuildingPhase("Pokročilý skelet lodi", new Dictionary<string, int>{{"wood", 20}, {"rope", 10}, {"bamboo", 10}}),
+            new ShipBuildingPhase("Kabina", new Dictionary<string, int>{{"stone", 20}, {"rope", 5}}),
+            new ShipBuildingPhase("Plachta", new Dictionary<string, int>{{"wood", 10}, {"rope", 15}, {"wool", 10}, {"bamboo", 10}}),
+            new ShipBuildingPhase("Kormidlo", new Dictionary<string, int>{{"wood", 15}, {"iron", 15}, {"stone", 10}})
+    };
 
     public bool IsInventoryOpen { get; set; } = false;
 
@@ -138,8 +138,11 @@ public class GameState
                 {
                     int amountToReduce = Math.Min(Inventory.Items[material], currentPhase.RequiredMaterials[material]);
                     Inventory.Items[material] -= amountToReduce;
+
                     currentPhase.RequiredMaterials[material] -= amountToReduce;
+                    
                     Console.WriteLine(currentPhase.RequiredMaterials[material]);
+                    
                     if (currentPhase.RequiredMaterials[material] <= 0)
                     {
                         materialsToRemove.Add(material);

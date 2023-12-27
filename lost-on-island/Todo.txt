@@ -4,22 +4,18 @@
 IMPORTANT
 - jídlo přidává životy místo jídla
 
-Co nám zbývá?:
-fight system
+TO DO:
+fight system (kompletně)
 
+Badges (dodělat)
 
-Badges
+správné přičítání tahů (opravit)
 
-správné přičítání tahů
+spánek/energie? (domyslet, dodělat)
 
-shipwreck:
- - stavba i s malo mnozstvi materialu
+Enemy karty odstranit popisek "0 životů"
  
- spánek/energie?
-
- risky karty neubírají 2* životů
- 
-UX (text, vyskakovací okna..., cursor pointer)
+UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 
 
 Final stránka, Prolog, Cheater stránka
 

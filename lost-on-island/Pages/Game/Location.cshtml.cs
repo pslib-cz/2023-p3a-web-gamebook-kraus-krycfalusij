@@ -134,13 +134,26 @@ namespace lost_on_island.Pages.Game
             {
                 if (selectedCard.Item == "enemy")
                 {
+                    
                     gameState.InFight = true; // Hr·Ë vstupuje do boje
                     _sessionStorage.Save("GameState", gameState);
                     return RedirectToPage("/Game/Fight", new { cardPackId = (gameState.CurrentLocationId), enemyId = selectedCard.Id });
+                    
                 }
                 else if (selectedCard.Item == "accident") // neöùastnÈ n·hody co berou ûivoty
                 {
-                    gameState.UpdateHealthAndEnergy(selectedCard.ItemCount, 0);
+                    if(gameState.IsRiskyMode)
+                    {
+                        gameState.UpdateHealthAndEnergy(selectedCard.ItemCount * 2, 0);
+                        _sessionStorage.Save("GameState", gameState);
+                        return RedirectToPage("/Game/Location", new { locationId = gameState.CurrentLocationId });
+                    }
+                    if (!gameState.IsRiskyMode)
+                    {
+                        gameState.UpdateHealthAndEnergy(selectedCard.ItemCount, 0);
+                        _sessionStorage.Save("GameState", gameState);
+                        return RedirectToPage("/Game/Location", new { locationId = gameState.CurrentLocationId });
+                    }
                 }
                 else
                 {
@@ -155,6 +168,10 @@ namespace lost_on_island.Pages.Game
 
         private IActionResult ProcessCard(Card card, GameState gameState)
         {
+            if (gameState.IsRiskyMode)
+            {
+                card.ItemCount *= 2;
+            }
             gameState.AddItem(card.Item, card.ItemCount);
 
             gameState.CheckGameProgress();

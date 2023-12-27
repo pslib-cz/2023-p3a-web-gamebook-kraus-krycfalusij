@@ -100,12 +100,14 @@ namespace lost_on_island.Pages.Game
 
                 // Uložit upravený GameState zpìt do session storage
                 _sessionStorage.Save("GameState", gameState);
-                Console.WriteLine(gameState.shipBuildingPhases[0].RequiredMaterials["wood"]);
                 return RedirectToPage("/Game/Shipwreck");
             }
 
             return RedirectToPage("/Game/Shipwreck");
         }
+
+
+        
         public IActionResult OnPostRemoveItem(string itemName, int itemCount)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
