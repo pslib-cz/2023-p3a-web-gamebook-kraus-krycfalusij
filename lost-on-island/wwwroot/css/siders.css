@@ -43,7 +43,6 @@
     grid-template-columns: 1fr;
     grid-auto-rows: 65px 420px auto;
     position: absolute;
-    height: 550px;
     width: 90%;
     max-width: 500px;
     background: white;
@@ -269,7 +268,6 @@
     grid-template-columns: 1fr;
     grid-auto-rows: 65px auto;
     position: absolute;
-    height: 550px;
     width: 90%;
     max-width: 500px;
     background-color: var(--beige);
