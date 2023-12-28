@@ -2,7 +2,7 @@
 @model lost_on_island.Pages.Game.ShipwreckModel
 @{
     var jsAvailableConnectionsIds = Json.Serialize(Model.AvailableConnectionsIds);
-    var currentPhase = Model.gameState.shipBuildingPhases.ElementAtOrDefault(Model.gameState.CurrentShipBuildingPhaseIndex);
+    var currentPhase = Model.GameState.shipBuildingPhases.ElementAtOrDefault(Model.GameState.CurrentShipBuildingPhaseIndex);
 
 }
 
@@ -15,7 +15,7 @@
     </div>
 
 
-    <div class="map_overlay"></div>
+    <div onClick="disableMap()" class="map-overlay"></div>
     <div class="toggler map__toggler" onclick="enableMap()">
         <img class="toggler__icon" src="/Images/Icons/map.png" />
     </div>
@@ -54,18 +54,18 @@
     </div>
 
 
-    <div class="inventory_overlay @(Model.gameState.IsInventoryOpen? "inventory_overlay--active" : "" )"></div>
+    <div id="inventoryOverlay" class="inventory-overlay @(Model.GameState.IsInventoryOpen? "inventory-overlay--active" : "" )" onClick="disableInventory()"></div>
     <div class="toggler inventory__toggler" onclick="enableInventory()">
         <img class="toggler__icon" src="/Images/Icons/inventory.png" />
     </div>
-    <div class="inventory__container @(Model.gameState.IsInventoryOpen ? "inventory__container__enabled" : "")">
+    <div class="inventory__container @(Model.GameState.IsInventoryOpen ? "inventory__container__enabled" : "")">
         <div class="inventory__header__section">
             <p class="inventory__header">Inventář</p>
             <span class="inventory__header__close-button" onclick="disableInventory()"></span>
         </div>
         <div class="inventory__items__section">
             <div class="inventory__item">
-                <span class="inventory__item__count">@Model.gameState.Inventory.Items["food"]×</span>
+                <span class="inventory__item__count">@Model.GameState.Inventory.Items["food"]×</span>
                 <img class="inventory__item__icon" src="/Images/icons/food.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Jídlo</span>
@@ -82,7 +82,7 @@
             </div>
 
             <div class="inventory__item">
-                <span class="inventory__item__count">@Model.gameState.Inventory.Items["wood"]×</span>
+                <span class="inventory__item__count">@Model.GameState.Inventory.Items["wood"]×</span>
                 <img class="inventory__item__icon" src="/Images/icons/wood.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Dřevo</span>
@@ -100,7 +100,7 @@
             </div>
 
             <div class="inventory__item">
-                <span class="inventory__item__count">@Model.gameState.Inventory.Items["stone"]×</span>
+                <span class="inventory__item__count">@Model.GameState.Inventory.Items["stone"]×</span>
                 <img class="inventory__item__icon" src="/Images/icons/stone.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Kámen</span>
@@ -118,7 +118,7 @@
             </div>
 
             <div class="inventory__item">
-                <span class="inventory__item__count">@Model.gameState.Inventory.Items["iron"]×</span>
+                <span class="inventory__item__count">@Model.GameState.Inventory.Items["iron"]×</span>
                 <img class="inventory__item__icon" src="/Images/icons/iron.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Železo</span>
@@ -136,7 +136,7 @@
             </div>
 
             <div class="inventory__item">
-                <span class="inventory__item__count">@Model.gameState.Inventory.Items["rope"]×</span>
+                <span class="inventory__item__count">@Model.GameState.Inventory.Items["rope"]×</span>
                 <img class="inventory__item__icon" src="/Images/icons/rope.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Lano</span>
@@ -155,7 +155,7 @@
             </div>
 
             <div class="inventory__item">
-                <span class="inventory__item__count">@Model.gameState.Inventory.Items["wool"]×</span>
+                <span class="inventory__item__count">@Model.GameState.Inventory.Items["wool"]×</span>
                 <img class="inventory__item__icon" src="/Images/icons/wool.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Vlna</span>
@@ -173,7 +173,7 @@
             </div>
 
             <div class="inventory__item">
-                <span class="inventory__item__count">@Model.gameState.Inventory.Items["bamboo"]×</span>
+                <span class="inventory__item__count">@Model.GameState.Inventory.Items["bamboo"]×</span>
                 <img class="inventory__item__icon" src="/Images/icons/bamboo.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Bambus</span>
@@ -194,12 +194,12 @@
         <div class="inventory__capacity">
             <img class="inventory__item__icon" src="/Images/icons/inventory.png" />
             <p>
-                Kapacita: @Model.gameState.Inventory.Items.Values.Sum() / @Model.gameState.InventoryCapacity
+                Kapacita: @Model.GameState.Inventory.Items.Values.Sum() / @Model.GameState.InventoryCapacity
             </p>
         </div>
-        @if (@Model.gameState.CurrentShipBuildingPhaseIndex < Model.gameState.shipBuildingPhases.Count)
+        @if (@Model.GameState.CurrentShipBuildingPhaseIndex < Model.GameState.shipBuildingPhases.Count)
         {
-            var gameState = Model.gameState.shipBuildingPhases[Model.gameState.CurrentShipBuildingPhaseIndex];
+            var gameState = Model.GameState.shipBuildingPhases[Model.GameState.CurrentShipBuildingPhaseIndex];
             <div class="inventory__shipbuild">
                 <p>Aktuálně potřeba:</p>
                 <ul class="materials-list">
@@ -216,9 +216,9 @@
     </div>
 
     <div class="shipbuilding">
-        @foreach (var phase in Model.gameState.shipBuildingPhases)
+        @foreach (var phase in Model.GameState.shipBuildingPhases)
         {
-            var isCurrentPhase = Model.gameState.shipBuildingPhases.IndexOf(phase) == Model.gameState.CurrentShipBuildingPhaseIndex;
+            var isCurrentPhase = Model.GameState.shipBuildingPhases.IndexOf(phase) == Model.GameState.CurrentShipBuildingPhaseIndex;
             <form method="post" asp-page-handler="BuildShipPhase">
                 <div class="shipbuilding__phase @(isCurrentPhase ? "" : "deactive")">
                     <input type="hidden" name="phaseName" value="@phase.Name" />
@@ -246,31 +246,189 @@
         }
     </div>
 
-
-
-
-
     <div class="game-stats">
         <div class="game-stats__energy">
             <span class="icon--energy"></span>
-            Energie: @Model.gameState.Energy/20
+            Energie: @Model.GameState.Energy/20
         </div>
         <div class="game-stats__health">
             <span class="icon--health"></span>
-            Zdraví: @Model.gameState.Health/20
+            Zdraví: @Model.GameState.Health/20
         </div>
         <div class="game-stats__turns">
-            Počet tahů: @Model.gameState.Turns
+            Počet tahů: @Model.GameState.Turns
         </div>
-        
-        <div class="badges-list">
-            <div class="single-tool__badge" style="background-image: url('@(Model.gameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
-            <div class="single-tool__badge" style="background-image: url('@(Model.gameState.Axe ? "/Images/Icons/axe-badge.png" : "/Images/Icons/axe-badge-disabled.png")')"></div>
-            <div class="single-tool__badge" style="background-image: url('@(Model.gameState.Pickaxe ? "/Images/Icons/pickaxe-badge.png" : "/Images/Icons/pickaxe-badge-disabled.png")')"></div>
-            <div class="single-tool__badge" style="background-image: url('@(Model.gameState.Shears ? "/Images/Icons/shears-badge.png" : "/Images/Icons/shears-badge-disabled.png")')"></div>
-            <div class="single-tool__badge" style="background-image: url('@(Model.gameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png")')"></div>
-        </div>
-           
+        <form method="post" asp-page-handler="HandleBadgeClick" class="badges-list">
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoSword">
+                    @{
+                        var toolSword = Model.Tools.FirstOrDefault(tool => tool.Type == "Sword");
+
+                        if (toolSword != null)
+                        {
+                            <p>@toolSword.Title</p>
+
+                            foreach (var singleMaterial in toolSword.Materials)
+                            {
+                                <p>@singleMaterial.Title : @singleMaterial.Count</p>
+                            }
+
+                            bool canCraft = true;
+
+                            for (int i = 0; i < toolSword.Materials.Count; i++)
+                            {
+                                var itemType = toolSword.Materials[i].Type.ToLowerInvariant();
+                                var itemCount = toolSword.Materials[i].Count;
+
+                                canCraft = canCraft && (Model.GameState.Inventory.Items[itemType] >= itemCount);
+                            }
+                            if (!Model.GameState.Sword)
+                            {
+                                <button type="button" onclick="@if (canCraft) {
+                        @($"handleBadgeCraft(this, '{toolSword.Type}')")
+}">Koupit</button>
+                            }
+                        }
+                    }
+                </div>
+                <div onclick="handleBadgeClick(this, 'Sword')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoAxe">
+                    @{
+                        var toolAxe = Model.Tools.FirstOrDefault(tool => tool.Type == "Axe");
+
+                        if (toolAxe != null)
+                        {
+                            <p>@toolAxe.Title</p>
+
+                            foreach (var singleMaterial in toolAxe.Materials)
+                            {
+                                <p>@singleMaterial.Title : @singleMaterial.Count</p>
+                            }
+
+                            bool canCraft = true;
+
+                            for (int i = 0; i < toolAxe.Materials.Count; i++)
+                            {
+                                var itemType = toolAxe.Materials[i].Type.ToLowerInvariant();
+                                var itemCount = toolAxe.Materials[i].Count;
+
+                                canCraft = canCraft && (Model.GameState.Inventory.Items[itemType] >= itemCount);
+                            }
+                            if (!Model.GameState.Axe)
+                            {
+                                <button type="button" onclick="@if (canCraft) {
+                        @($"handleBadgeCraft(this, '{toolAxe.Type}')")
+}">Koupit</button>
+                            }
+                        }
+                    }
+                </div>
+                <div onclick="handleBadgeClick(this, 'Axe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Axe ? "/Images/Icons/axe-badge.png" : "/Images/Icons/axe-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoPickaxe">
+                    @{
+                        var toolPickaxe = Model.Tools.FirstOrDefault(tool => tool.Type == "Pickaxe");
+
+                        if (toolPickaxe != null)
+                        {
+                            <p>@toolPickaxe.Title</p>
+
+                            foreach (var singleMaterial in toolPickaxe.Materials)
+                            {
+                                <p>@singleMaterial.Title : @singleMaterial.Count</p>
+                            }
+
+                            bool canCraft = true;
+
+                            for (int i = 0; i < toolPickaxe.Materials.Count; i++)
+                            {
+                                var itemType = toolPickaxe.Materials[i].Type.ToLowerInvariant();
+                                var itemCount = toolPickaxe.Materials[i].Count;
+
+                                canCraft = canCraft && (Model.GameState.Inventory.Items[itemType] >= itemCount);
+                            }
+                            if (!Model.GameState.Pickaxe)
+                            {
+                                <button type="button" onclick="@if (canCraft) {
+                        @($"handleBadgeCraft(this, '{toolPickaxe.Type}')")
+}">Koupit</button>
+                            }
+                        }
+                    }
+                </div>
+                <div onclick="handleBadgeClick(this, 'Pickaxe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Pickaxe ? "/Images/Icons/pickaxe-badge.png" : "/Images/Icons/pickaxe-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoShears">
+                    @{
+                        var toolShears = Model.Tools.FirstOrDefault(tool => tool.Type == "Shears");
+
+                        if (toolShears != null)
+                        {
+                            <p>@toolShears.Title</p>
+
+                            foreach (var singleMaterial in toolShears.Materials)
+                            {
+                                <p>@singleMaterial.Title : @singleMaterial.Count</p>
+                            }
+
+                            bool canCraft = true;
+
+                            for (int i = 0; i < toolShears.Materials.Count; i++)
+                            {
+                                var itemType = toolShears.Materials[i].Type.ToLowerInvariant();
+                                var itemCount = toolShears.Materials[i].Count;
+
+                                canCraft = canCraft && (Model.GameState.Inventory.Items[itemType] >= itemCount);
+                            }
+                            if (!Model.GameState.Shears)
+                            {
+                                <button type="button" onclick="@if (canCraft) {
+                        @($"handleBadgeCraft(this, '{toolShears.Type}')")
+}">Koupit</button>
+                            }
+                        }
+                    }
+                </div>
+                <div onclick="handleBadgeClick(this, 'Shears')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Shears ? "/Images/Icons/shears-badge.png" : "/Images/Icons/shears-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoBackpack">
+                    @{
+                        var toolBackpack = Model.Tools.FirstOrDefault(tool => tool.Type == "Backpack");
+                        if (toolBackpack != null)
+                        {
+                            <p>@toolBackpack.Title</p>
+
+                            foreach (var singleMaterial in toolBackpack.Materials)
+                            {
+                                <p>@singleMaterial.Title : @singleMaterial.Count</p>
+                            }
+
+                            bool canCraft = true;
+
+                            for (int i = 0; i < toolBackpack.Materials.Count; i++)
+                            {
+                                var itemType = toolBackpack.Materials[i].Type.ToLowerInvariant();
+                                var itemCount = toolBackpack.Materials[i].Count;
+
+                                canCraft = canCraft && (Model.GameState.Inventory.Items[itemType] >= itemCount);
+                            }
+                            if (!Model.GameState.Backpack)
+                            {
+                                <button type="button" onclick="@if (canCraft) {
+                        @($"handleBadgeCraft(this, '{toolBackpack.Type}')")}">Koupit</button>
+                            }
+                        }
+                    }
+                </div>
+                <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png")')"></div>
+            </div>
+            <input type="hidden" name="badgeType" />
+        </form>
     </div>
 
     <script>
@@ -282,40 +440,47 @@
         formBadge.querySelector("[name='badgeType']").value = badgeType;
         formBadge.submit();
     }
-        const changeLocation = (div, locationId) => {
-            if (locationId === 3) {
-                var formLocation = div.closest("form");
-                formLocation.querySelector("[name='locationIdInputValue']").value = locationId;
-                formLocation.submit();
-            }
-        };
+
+    const changeLocation = (div, locationId) => {
+        if (locationId === 3) {
+            var formLocation = div.closest("form");
+            formLocation.querySelector("[name='locationIdInputValue']").value = locationId;
+            formLocation.submit();
+        }
+    };
 
     const enableMap = () => {
         var map = document.querySelector(".map__container");
         map.classList.add("map__container__enabled");
-        var overlay = document.querySelector(".map_overlay");
-        overlay.classList.add("map_overlay--active");
+        var overlay = document.querySelector(".map-overlay");
+        overlay.classList.add("map-overlay--active");
     }
 
     const disableMap = () => {
         var map = document.querySelector(".map__container");
         map.classList.remove("map__container__enabled");
-        var overlay = document.querySelector(".map_overlay");
-        overlay.classList.remove("map_overlay--active");
+        var overlay = document.querySelector(".map-overlay");
+        overlay.classList.remove("map-overlay--active");
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        if (@Model.GameState.IsInventoryOpen) {
+            enableInventory();
+        }
+    });
 
     const enableInventory = () => {
         var inventory = document.querySelector(".inventory__container");
         inventory.classList.add("inventory__container__enabled");
-        var overlay = document.querySelector(".inventory_overlay");
-        overlay.classList.add("inventory_overlay--active");
+        var overlay = document.querySelector(".inventory-overlay");
+        overlay.classList.add("inventory-overlay--active");
     }
 
     const disableInventory = () => {
         var inventory = document.querySelector(".inventory__container");
         inventory.classList.remove("inventory__container__enabled");
-        var overlay = document.querySelector(".inventory_overlay");
-        overlay.classList.remove("inventory_overlay--active");
+        var overlay = document.querySelector(".inventory-overlay");
+        overlay.classList.remove("inventory-overlay--active");
     }
 
 </script>

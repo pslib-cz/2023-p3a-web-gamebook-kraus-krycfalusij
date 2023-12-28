@@ -191,33 +191,32 @@ namespace lost_on_island.Pages.Game
 
         public IActionResult OnGet(int locationId)
         {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-            GameState = gameState;
+            GameState = _sessionStorage.LoadOrCreate("GameState");
 
-            if (!IsValidTransition(gameState, locationId))
+            if (!IsValidTransition(GameState, locationId))
             {
                 return RedirectToPage("/Game/Cheater");
             }
-            if (gameState.InFight)
+            if (GameState.InFight)
             {
                 return RedirectToPage("/Game/Cheater");
             }
-            if (gameState.CurrentLocationId != locationId)
+            if (GameState.CurrentLocationId != locationId)
             {
-                gameState.IsInventoryOpen = false; 
+                GameState.IsInventoryOpen = false; 
             }
 
-            UpdateGameState(gameState, locationId);
+            UpdateGameState(GameState, locationId);
 
             if (_locationProvider.IsSpecialLocation(locationId))
             {
-                return RedirectToSpecialPage(locationId, gameState);
+                return RedirectToSpecialPage(locationId, GameState);
             }
 
-            gameState.Turns += 1;
+            GameState.Turns += 1;
             
 
-            _sessionStorage.Save("GameState", gameState);
+            _sessionStorage.Save("GameState", GameState);
             LoadLocationData(locationId, GameState.IsRiskyMode);
 
             return Page();
