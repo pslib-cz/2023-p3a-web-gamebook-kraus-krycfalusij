@@ -2,36 +2,18 @@
 - 2× větší risk na enemy neznamená 2× větší risk celkově (když z 10 uděláme šanci 20 a celek je 110, 20 / 110 není 20%;)
 - Při kraftění tool se přičte tah, to nechceme
 
-IMPORTANT
-- jídlo přidává životy místo jídla
 
 TO DO:
-- spravit risky button
 fight system (kompletně)
 
 Badges (dodělat)
 
-shipwreck:
- - aktualizace inventáře s rozbalenim
- - eating / removing items
- - stavba i s malo mnozstvi materialu
- spánek/energie?poš
 správné přičítání tahů (opravit)
 
 spánek/energie? (domyslet, dodělat)
 
 Enemy karty odstranit popisek "0 životů"
- - aktualizace inventáře s rozbalenim
-- UX (text, vyskakovací okna...)
-- Final stránka, Prolog, Cheater stránka
+
 UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 
-
-Final stránka, Prolog, Cheater stránka
-
- - eating / removing items
- - stavba i s malo mnozstvi materialu
- spánek/energie?poš
- 
-UX (text, vyskakovací okna...)
 
 Final stránka, Prolog, Cheater stránka
