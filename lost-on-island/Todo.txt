@@ -8,11 +8,7 @@ fight system (kompletně)
 
 Badges (dodělat)
 
-správné přičítání tahů (opravit)
-
 spánek/energie? (domyslet, dodělat)
-
-Enemy karty odstranit popisek "0 životů"
 
 UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 
 

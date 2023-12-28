@@ -36,6 +36,7 @@ namespace lost_on_island.Pages.Game
             Tools = new Tools().ToolsList;
             GameState = _sessionStorage.LoadOrCreate("GameState");
 
+            Console.WriteLine(GameState);
             // Ovìøení, zda je uživatel na správném locationId
             if (GameState.CurrentLocationId != 2 && GameState.CurrentLocationId != 3)
             {
@@ -84,62 +85,69 @@ namespace lost_on_island.Pages.Game
 
         public IActionResult OnPostBuildShipPhase(string phaseName)
         {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
+            var GameState = _sessionStorage.LoadOrCreate("GameState");
 
             // Zkontrolovat, zda je aktuální fáze odpovídá fázi urèené parametrem phaseName
-            var currentPhase = gameState.shipBuildingPhases[gameState.CurrentShipBuildingPhaseIndex];
+            var currentPhase = GameState.shipBuildingPhases[GameState.CurrentShipBuildingPhaseIndex];
             if (currentPhase != null && currentPhase.Name == phaseName)
             {
                 // Snížit požadované materiály pro aktuální fázi
-                gameState.ReduceRequiredMaterials();
+                GameState.ReduceRequiredMaterials();
 
                 // Zkontrolovat, zda jsou všechny materiály pro tuto fázi dokonèeny
                 bool phaseCompleted = currentPhase.RequiredMaterials.Count == 0 || currentPhase.RequiredMaterials.All(rm => rm.Value <= 0);
                 if (phaseCompleted)
                 {
-                    gameState.CurrentShipBuildingPhaseIndex++; // Pøesun na další fázi, pokud je souèasná fáze kompletní
+                    GameState.CurrentShipBuildingPhaseIndex++; // Pøesun na další fázi, pokud je souèasná fáze kompletní
                 }
 
                 // Uložit upravený GameState zpìt do session storage
-                _sessionStorage.Save("GameState", gameState);
+                _sessionStorage.Save("GameState", GameState);
                 return RedirectToPage("/Game/Shipwreck");
             }
 
             return RedirectToPage("/Game/Shipwreck");
         }
 
-
-        
-        public IActionResult OnPostRemoveItem(string itemName, int itemCount)
+        public IActionResult OnPostHandleBadgeClick(string badgeType)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
-            gameState.IsInventoryOpen = true;
-
-            if (gameState.RemoveItem(itemName, itemCount))
-            {
-                _sessionStorage.Save("GameState", gameState);
-            }
+            gameState.AddTool(badgeType);
             _sessionStorage.Save("GameState", gameState);
-
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+        }
+
+
+        public IActionResult OnPostRemoveItem(string itemName, int itemCount)
+        {
+            var GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState.IsInventoryOpen = true;
+
+            if (GameState.RemoveItem(itemName, itemCount))
+            {
+                _sessionStorage.Save("GameState", GameState);
+            }
+            _sessionStorage.Save("GameState", GameState);
+
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
         }
 
         public IActionResult OnPostEatItem(string itemName, int itemCount)
         {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-            gameState.IsInventoryOpen = true;
+            var GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState.IsInventoryOpen = true;
 
-            if (itemName == "food" && gameState.Inventory.Items[itemName] >= itemCount)
+            if (itemName == "food" && GameState.Inventory.Items[itemName] >= itemCount)
             {
-                gameState.UpdateHealthAndEnergy(1, 0);
+                GameState.UpdateHealthAndEnergy(1, 0);
 
-                gameState.RemoveItem(itemName, itemCount);
+                GameState.RemoveItem(itemName, itemCount);
 
-                _sessionStorage.Save("GameState", gameState);
+                _sessionStorage.Save("GameState", GameState);
             }
-            _sessionStorage.Save("GameState", gameState);
+            _sessionStorage.Save("GameState", GameState);
 
-            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
         }
 
 

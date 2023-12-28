@@ -227,9 +227,11 @@
     transition-duration: 0.5s;
 }
 
-.map-overlay--active, .inventory-overlay--active {
-    visibility: visible;
-    opacity: 1;
+@media only screen and (max-width: 1599px) {
+    .map-overlay--active, .inventory-overlay--active {
+        visibility: visible;
+        opacity: 1;
+    } 
 }
 
 

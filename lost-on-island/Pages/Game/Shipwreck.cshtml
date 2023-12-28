@@ -2,8 +2,6 @@
 @model lost_on_island.Pages.Game.ShipwreckModel
 @{
     var jsAvailableConnectionsIds = Json.Serialize(Model.AvailableConnectionsIds);
-    var currentPhase = Model.GameState.shipBuildingPhases.ElementAtOrDefault(Model.GameState.CurrentShipBuildingPhaseIndex);
-
 }
 
 <div class="game-container" style="background-image: url('@Url.Content("~/Images/location-shipwreck.png")')">
@@ -199,7 +197,8 @@
         </div>
         @if (@Model.GameState.CurrentShipBuildingPhaseIndex < Model.GameState.shipBuildingPhases.Count)
         {
-            var gameState = Model.GameState.shipBuildingPhases[Model.GameState.CurrentShipBuildingPhaseIndex];
+            var currentPhase = Model.GameState.shipBuildingPhases[Model.GameState.CurrentShipBuildingPhaseIndex];
+            var GameState = Model.GameState.shipBuildingPhases[Model.GameState.CurrentShipBuildingPhaseIndex];
             <div class="inventory__shipbuild">
                 <p>Aktuálně potřeba:</p>
                 <ul class="materials-list">
@@ -420,12 +419,13 @@
                             if (!Model.GameState.Backpack)
                             {
                                 <button type="button" onclick="@if (canCraft) {
-                        @($"handleBadgeCraft(this, '{toolBackpack.Type}')")}">Koupit</button>
+                        @($"handleBadgeCraft(this, '{toolBackpack.Type}')")
+}">Koupit</button>
                             }
                         }
                     }
                 </div>
-                <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png")')"></div>
+                <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png" )')"></div>
             </div>
             <input type="hidden" name="badgeType" />
         </form>
@@ -434,12 +434,6 @@
     <script>
     var cardFlipped = false;
     const availableConnectionsIds = @Html.Raw(jsAvailableConnectionsIds);
-
-    const handleBadgeClick = (div, badgeType) => {
-        var formBadge = div.closest("form");
-        formBadge.querySelector("[name='badgeType']").value = badgeType;
-        formBadge.submit();
-    }
 
     const changeLocation = (div, locationId) => {
         if (locationId === 3) {
@@ -482,6 +476,32 @@
         var overlay = document.querySelector(".inventory-overlay");
         overlay.classList.remove("inventory-overlay--active");
     }
+
+        const handleBadgeClick = (div, badgeType) => {
+            const allInfoboxes = document.querySelectorAll(".single-tool__badge__infobox__enabled");
+            allInfoboxes.forEach((infobox) => {
+                infobox.classList.remove("single-tool__badge__infobox__enabled");
+            });
+
+            const infoboxId = `info${badgeType}`;
+            const infobox = document.getElementById(infoboxId);
+
+            if (infobox) {
+                infobox.classList.add("single-tool__badge__infobox__enabled");
+
+                setTimeout(() => {
+                    infobox.classList.remove("single-tool__badge__infobox__enabled");
+                }, 2000);
+            }
+
+            var formBadge = div.closest("form");
+            formBadge.querySelector("[name='badgeType']").value = badgeType;
+        }
+        const handleBadgeCraft = (button, badgeType) => {
+            var formBadge = button.closest("form");
+            formBadge.querySelector("[name='badgeType']").value = badgeType;
+            formBadge.submit();
+        }
 
 </script>
 </div>

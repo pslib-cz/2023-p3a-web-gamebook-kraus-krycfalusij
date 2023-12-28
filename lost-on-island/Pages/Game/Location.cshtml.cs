@@ -29,7 +29,7 @@ namespace lost_on_island.Pages.Game
             _sessionStorage = sessionStorage;
         }
 
-        private bool IsValidTransition(GameState gameState, int targetLocationId)
+        private bool IsValidTransition(GameState GameState, int targetLocationId)
         {
 
             // Definice ID pro speciální lokace
@@ -45,35 +45,35 @@ namespace lost_on_island.Pages.Game
             {
                 case deathId:
                     // Smrt mùže nastat kdykoliv, ale pouze pokud je hráè mrtvý
-                    return gameState.IsPlayerDead;
+                    return GameState.IsPlayerDead;
 
                 case endgameId:
                     // Na konec hry lze pøejít pouze pokud hra skonèila
-                    return gameState.HasGameEnded;
+                    return GameState.HasGameEnded;
 
                 case prologId:
                     // Na prolog lze pøejít pouze z indexu
-                    return gameState.CurrentLocationId == indexId;
+                    return GameState.CurrentLocationId == indexId;
 
                 case shipwreckId:
                     // Na loï lze pøejít z prologu nebo opakovanì z pláže
-                    return gameState.CurrentLocationId == prologId || gameState.CurrentLocationId == beachId;
+                    return GameState.CurrentLocationId == prologId || GameState.CurrentLocationId == beachId;
 
                 case indexId:
                     // Na index lze pøejít pouze na zaèátku hry
-                    return gameState.CurrentLocationId == 0;
+                    return GameState.CurrentLocationId == 0;
 
                 default:
                     // Pro ostatní lokace platí standardní logika
-                    return _locationProvider.IsValidConnection(gameState.CurrentLocationId, targetLocationId);
+                    return _locationProvider.IsValidConnection(GameState.CurrentLocationId, targetLocationId);
             }
         }
 
 
-        private void UpdateGameState(GameState gameState, int locationId)
+        private void UpdateGameState(GameState GameState, int locationId)
         {
-            gameState.CurrentLocationId = locationId;
-            _sessionStorage.Save("GameState", gameState);
+            GameState.CurrentLocationId = locationId;
+            _sessionStorage.Save("GameState", GameState);
         }
 
         private void LoadLocationData(int locationId, bool isRiskyMode)
@@ -127,57 +127,58 @@ namespace lost_on_island.Pages.Game
 
         public IActionResult OnPostHandleCardClick(int cardId)
         {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
+            var GameState = _sessionStorage.LoadOrCreate("GameState");
 
-            var selectedCard = GetSelectedCard(gameState.CurrentLocationId, cardId);
+            GameState.Turns += 1;
+            var selectedCard = GetSelectedCard(GameState.CurrentLocationId, cardId);
 
             if (selectedCard != null)
             {
                 if (selectedCard.Item == "enemy")
                 {
                     
-                    gameState.InFight = true; // Hráè vstupuje do boje
-                    _sessionStorage.Save("GameState", gameState);
-                    return RedirectToPage("/Game/Fight", new { cardPackId = (gameState.CurrentLocationId), enemyId = selectedCard.Id });
+                    GameState.InFight = true; // Hráè vstupuje do boje
+                    _sessionStorage.Save("GameState", GameState);
+                    return RedirectToPage("/Game/Fight", new { cardPackId = (GameState.CurrentLocationId), enemyId = selectedCard.Id });
                     
                 }
                 else if (selectedCard.Item == "accident") // nešastné náhody co berou životy
                 {
-                    if(gameState.IsRiskyMode)
+                    if(GameState.IsRiskyMode)
                     {
-                        gameState.UpdateHealthAndEnergy(selectedCard.ItemCount * 2, 0);
-                        _sessionStorage.Save("GameState", gameState);
-                        return RedirectToPage("/Game/Location", new { locationId = gameState.CurrentLocationId });
+                        GameState.UpdateHealthAndEnergy(selectedCard.ItemCount * 2, 0);
+                        _sessionStorage.Save("GameState", GameState);
+                        return RedirectToPage("/Game/Location", new { locationId = GameState.CurrentLocationId });
                     }
-                    if (!gameState.IsRiskyMode)
+                    if (!GameState.IsRiskyMode)
                     {
-                        gameState.UpdateHealthAndEnergy(selectedCard.ItemCount, 0);
-                        _sessionStorage.Save("GameState", gameState);
-                        return RedirectToPage("/Game/Location", new { locationId = gameState.CurrentLocationId });
+                        GameState.UpdateHealthAndEnergy(selectedCard.ItemCount, 0);
+                        _sessionStorage.Save("GameState", GameState);
+                        return RedirectToPage("/Game/Location", new { locationId = GameState.CurrentLocationId });
                     }
                 }
                 else
                 {
-                    ProcessCard(selectedCard, gameState);
+                    ProcessCard(selectedCard, GameState);
                 }
 
-                _sessionStorage.Save("GameState", gameState);
+                _sessionStorage.Save("GameState", GameState);
             }
 
-            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
         }
 
-        private IActionResult ProcessCard(Card card, GameState gameState)
+        private IActionResult ProcessCard(Card card, GameState GameState)
         {
-            if (gameState.IsRiskyMode)
+            if (GameState.IsRiskyMode)
             {
                 card.ItemCount *= 2;
             }
-            gameState.AddItem(card.Item, card.ItemCount);
+            GameState.AddItem(card.Item, card.ItemCount);
 
-            gameState.CheckGameProgress();
+            GameState.CheckGameProgress();
 
-            _sessionStorage.Save("GameState", gameState);
+            _sessionStorage.Save("GameState", GameState);
 
             return Page();
         }
@@ -203,7 +204,12 @@ namespace lost_on_island.Pages.Game
             }
             if (GameState.CurrentLocationId != locationId)
             {
-                GameState.IsInventoryOpen = false; 
+                GameState.IsInventoryOpen = false;
+                
+            }
+            if (GameState.CurrentLocationId != locationId && GameState.CurrentLocationId != 0 && GameState.CurrentLocationId != 1)
+            {
+                GameState.Turns += 1;
             }
 
             UpdateGameState(GameState, locationId);
@@ -213,7 +219,6 @@ namespace lost_on_island.Pages.Game
                 return RedirectToSpecialPage(locationId, GameState);
             }
 
-            GameState.Turns += 1;
             
 
             _sessionStorage.Save("GameState", GameState);
@@ -223,7 +228,7 @@ namespace lost_on_island.Pages.Game
         }
 
 
-        private IActionResult RedirectToSpecialPage(int locationId, GameState gameState)
+        private IActionResult RedirectToSpecialPage(int locationId, GameState GameState)
         {
 
             switch (locationId)
@@ -245,19 +250,19 @@ namespace lost_on_island.Pages.Game
 
         public IActionResult OnPostToggleRiskyMode()
         {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-            gameState.IsRiskyMode = !gameState.IsRiskyMode;
-            _sessionStorage.Save("GameState", gameState);
+            var GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState.IsRiskyMode = !GameState.IsRiskyMode;
+            _sessionStorage.Save("GameState", GameState);
 
-            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
         }
 
         public IActionResult OnPostHandleBadgeClick(string badgeType)
         {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-            gameState.AddTool(badgeType);
-            _sessionStorage.Save("GameState", gameState);
-            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+            var GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState.AddTool(badgeType);
+            _sessionStorage.Save("GameState", GameState);
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
         }
 
         public IActionResult OnPostHandleChangeLocation(string locationIdInputValue)
@@ -267,34 +272,34 @@ namespace lost_on_island.Pages.Game
         
         public IActionResult OnPostRemoveItem(string itemName, int itemCount)
         {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-            gameState.IsInventoryOpen = true;
+            var GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState.IsInventoryOpen = true;
 
-            if (gameState.RemoveItem(itemName, itemCount))
+            if (GameState.RemoveItem(itemName, itemCount))
             {
-                _sessionStorage.Save("GameState", gameState); 
+                _sessionStorage.Save("GameState", GameState); 
             }
-            _sessionStorage.Save("GameState", gameState);
+            _sessionStorage.Save("GameState", GameState);
 
-            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
         }
 
         public IActionResult OnPostEatItem(string itemName, int itemCount)
         {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-            gameState.IsInventoryOpen = true;
+            var GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState.IsInventoryOpen = true;
 
-            if (itemName == "food" && gameState.Inventory.Items[itemName] >= itemCount)
+            if (itemName == "food" && GameState.Inventory.Items[itemName] >= itemCount)
             {
-                gameState.UpdateHealthAndEnergy(1, 0); 
+                GameState.UpdateHealthAndEnergy(1, 0); 
 
-                gameState.RemoveItem(itemName, itemCount);
+                GameState.RemoveItem(itemName, itemCount);
 
-                _sessionStorage.Save("GameState", gameState);
+                _sessionStorage.Save("GameState", GameState);
             }
-            _sessionStorage.Save("GameState", gameState);
+            _sessionStorage.Save("GameState", GameState);
 
-            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
         }
   
 
