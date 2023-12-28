@@ -1,0 +1,52 @@
+﻿@page
+@model lost_on_island.Pages.Game.PrologPortModel
+@{
+    ViewData["Title"] = "Přístav";
+}
+
+<div class="game-container prolog-page prolog-page--port">
+    <div class="location__title__container">
+        <h1 class="location__title--font location__title--header">Přístav  Auckland</h1>
+        <p class="location__title--font location__title--description">Nový zéland ; podzim 1923</p>
+    </div>
+
+    <div class="port_text">
+        <span id="typed-text1" class="port_text__text">
+        </span>
+        <span id ="typed-text2" class="port_text__text">
+        </span>
+
+        <div class="port_text__buttons">
+            <a class="port_text__button" asp-page="/Game/Location" asp-route-locationId="11">Pokračovat</a>
+            <a class="port_text__button port_text__button--skip" asp-page="/Game/Location" asp-route-locationId="2">Přeskočit prolog</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var typed1 = new Typed('#typed-text1', {
+            strings: ["Psal se rok 1923 a ty, jako každý podzim, se vydáváš na dlouhou výpravu do vod Tichého oceánu. Jakožto zkušený mořeplavec po svém otci jsi se rozhodl prozkoumat odlehlé části, které dosud nebyly příliš prozkoumány."],
+            typeSpeed: 25,
+            onComplete: function () {
+                startTyped2();
+            },
+            showCursor: false,
+            loop: false
+        });
+
+        function startTyped2() {
+            var typed2 = new Typed('#typed-text2', {
+                strings: ["Vyplul si se svojí lodí Maria z hlavního přístavu Auckland směr novým drobrodružstvím..."],
+                typeSpeed: 25,
+                startDelay: 1000,
+                showCursor: false,
+                loop: false
+            });
+        }
+    });
+
+</script>
