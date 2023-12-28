@@ -36,7 +36,14 @@
                             <h3 class="card__title">@Model.SingleLocationCard.Title</h3>
                             <p class ="card__description">@Model.SingleLocationCard.Description</p>
                             <img class="card__icon" src="@Model.SingleLocationCard.Img" alt="Card Image" />
-                            <p class ="card__description">@(Model.SingleLocationCard.ItemCount > 0 ? "+" : "")@Model.SingleLocationCard.ItemCount @Model.SingleLocationCard.ItemDescription</p>
+                            @if (Model.SingleLocationCard.Item != "enemy")
+                            {
+                                <p class="card__description">@(Model.SingleLocationCard.ItemCount > 0 ? "+" : "")@Model.SingleLocationCard.ItemCount @Model.SingleLocationCard.ItemDescription</p>
+                            }
+                            else
+                            {
+                                <p></p>
+                            }
                         </div>
                     </div>
                 </div>
