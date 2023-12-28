@@ -15,6 +15,7 @@ namespace lost_on_island.Pages.Game
         private readonly ISessionStorage<GameState> _sessionStorage;
         public GameState GameState { get; set; }
         public Location CurrentLocation { get; set; }
+        public List<Tool> Tools { get; set; }
         public List<Connection> AvailableConnections { get; set; }
         public List<Cards.Card> LocationCards { get; set; }
         public Card SingleLocationCard { get; set; }
@@ -91,7 +92,7 @@ namespace lost_on_island.Pages.Game
                 });
             }
 
-
+            Tools = new Tools().ToolsList;
             LocationCards = new Cards().CardPacks.FirstOrDefault(pack => pack.Id == locationId)?.CardsInPack;
 
             int totalProbability = LocationCards.Sum(card => card.Probability);

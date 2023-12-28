@@ -193,7 +193,6 @@
     .map__header__close-button {
         opacity: 0;
     }
-
 }
 
 @media only screen and (min-width: 1700px) {
@@ -213,7 +212,7 @@
 
 }
 
-.map_overlay, .inventory_overlay {
+.map-overlay, .inventory-overlay {
     visibility: hidden;
     opacity: 0;
     position: fixed;
@@ -228,7 +227,7 @@
     transition-duration: 0.5s;
 }
 
-.map_overlay--active, .inventory_overlay--active {
+.map-overlay--active, .inventory-overlay--active {
     visibility: visible;
     opacity: 1;
 }
