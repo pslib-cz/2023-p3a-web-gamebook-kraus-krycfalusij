@@ -5,16 +5,33 @@
 IMPORTANT
 - jídlo přidává životy místo jídla
 
-CO ZBÝVÁ
-- fight system
+TO DO:
 - spravit risky button
-- Badges
+fight system (kompletně)
+
+Badges (dodělat)
 
 shipwreck:
  - aktualizace inventáře s rozbalenim
  - eating / removing items
  - stavba i s malo mnozstvi materialu
  spánek/energie?poš
- 
+správné přičítání tahů (opravit)
+
+spánek/energie? (domyslet, dodělat)
+
+Enemy karty odstranit popisek "0 životů"
+ - aktualizace inventáře s rozbalenim
 - UX (text, vyskakovací okna...)
 - Final stránka, Prolog, Cheater stránka
+UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 
+
+Final stránka, Prolog, Cheater stránka
+
+ - eating / removing items
+ - stavba i s malo mnozstvi materialu
+ spánek/energie?poš
+ 
+UX (text, vyskakovací okna...)
+
+Final stránka, Prolog, Cheater stránka

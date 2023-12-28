@@ -54,11 +54,11 @@
     </div>
 
 
-    <div class="inventory_overlay"></div>
+    <div class="inventory_overlay @(Model.gameState.IsInventoryOpen? "inventory_overlay--active" : "" )"></div>
     <div class="toggler inventory__toggler" onclick="enableInventory()">
         <img class="toggler__icon" src="/Images/Icons/inventory.png" />
     </div>
-    <div class="inventory__container">
+    <div class="inventory__container @(Model.gameState.IsInventoryOpen ? "inventory__container__enabled" : "")">
         <div class="inventory__header__section">
             <p class="inventory__header">Inventář</p>
             <span class="inventory__header__close-button" onclick="disableInventory()"></span>
@@ -214,7 +214,7 @@
             </div>
         }
     </div>
-    
+
     <div class="shipbuilding">
         @foreach (var phase in Model.gameState.shipBuildingPhases)
         {
@@ -245,6 +245,8 @@
             </form>
         }
     </div>
+
+
 
 
 

@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <div onClick="disableInventory()"  class="inventory-overlay"></div>
+     <div id="inventoryOverlay" class="inventory_overlay @(Model.GameState.IsInventoryOpen? "inventory_overlay--active" : "" )" onClick="disableInventory()"></div>
     <div class="toggler inventory__toggler" onclick="enableInventory()">
         <img class="toggler__icon" src="/Images/Icons/inventory.png" />
     </div>
@@ -494,7 +494,7 @@
             enableInventory();
         }
     });
-
+    
     function enableInventory() {
         var inventory = document.querySelector(".inventory__container");
         inventory.classList.add("inventory__container__enabled");
@@ -508,6 +508,7 @@
         var overlay = document.querySelector(".inventory-overlay");
         overlay.classList.remove("inventory-overlay--active");
     }
+    
 
 </script>
 

@@ -11,18 +11,12 @@
             RequiredMaterials = requiredMaterials;
         }
 
-        // Metoda pro kontrolu, zda hráč má dostatek materiálů pro danou fázi
-        public bool HasPlayerEnoughMaterials(Inventory inventory)
+
+        public bool CanBuildPhase()
         {
-            foreach (var requirement in RequiredMaterials)
-            {
-                if (!inventory.Items.ContainsKey(requirement.Key) || inventory.Items[requirement.Key] < requirement.Value)
-                {
-                    return false; // Hráč nemá dostatek materiálů
-                }
-            }
-            return true; // Hráč má dostatek materiálů
+            return RequiredMaterials.All(rm => rm.Value <= 0);
         }
     }
+
 
 }

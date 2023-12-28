@@ -24,12 +24,11 @@
 
 html {
     font-size: 0.875em;
-    font-family: var(--font-family-base);
-}
-
-html {
-    font-size: 0.875em;
     font-family: 'Source Serif 4', serif;
+    font-family: var(--font-family-base);
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 @media (min-width: 768px) {
@@ -51,17 +50,21 @@ html {
 
 body {
     width: 100vw;
-    height: 100vh;
     overflow: hidden;
     margin: 0;
     user-select: none;
-    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+main {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .game-container {
     width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -70,6 +73,9 @@ body {
     align-items: center;
     justify-content: space-between;
     overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .location__title__container {
@@ -281,7 +287,7 @@ a {
 }
 
 .button-toggle {
-    padding: 2em;
+    padding: 1.75em;
     border-radius: 50%;
     border: 4px solid black;
     cursor: pointer;
@@ -298,8 +304,8 @@ a {
 
 form:has(.button-toggle) {
     position: fixed;
-    margin-left: 70vw;
-    top: 60vh;
+    margin-left: 40vw;
+    top: 65vh;
     z-index: 5;
 }
 
@@ -307,10 +313,14 @@ form:has(.button-toggle) {
     background-color: var(--red)
 }
 
-
+@media only screen and (max-width: 767px) {
+    form:has(.button-toggle) {
+        margin-left: 75vw;
+        top: 60vh;
+    }
+}
 
 .shipbuilding {
-    padding: 1em;
     border-radius: 8px;
     margin: auto;
     display: flex;
@@ -427,3 +437,63 @@ form:has(.button-toggle) {
     .material-icon.bamboo {
         background-image: url(/Images/Icons/bamboo.png);
     }
+
+@media only screen and (max-width: 768px) {
+    .shipbuilding {
+        max-width: 75%;
+        margin-top: 0.5em
+    }
+
+    .shipbuilding__phase__name {
+        font-size: 1.15em;
+    }
+
+    .shipbuilding__phase button {
+        padding: 6px 8px;
+        font-size: 1.1em;
+    }
+
+    .shipbuilding__phase__info {
+        font-size: 1em;
+        padding: 0.25em;
+    }
+
+    .shipbuilding .material-icon {
+        height: 1.5em;
+        width: 1.5em;
+    }
+
+    .shipbuilding .material-amount {
+        bottom: 5px;
+        left: 4px;
+    }
+}
+
+
+@media only screen and (max-width: 389px) {
+    .shipbuilding {
+        gap: 8px;
+        max-width: 65%;
+        margin-top: -1em;
+    }
+    .shipbuilding__phase__name {
+        font-size: 0.9em;
+    }
+    .shipbuilding__phase button {
+        padding: 6px 8px;
+        font-size: 0.9em;
+    }
+    .shipbuilding__phase__info{
+        font-size: 0.75em;
+        padding: 0.25em;
+    }
+    .shipbuilding .material-icon{
+        height: 1.5em;
+        width: 1.5em;
+    }
+    .shipbuilding .material-amount {
+        bottom: 5px;
+        left: 4px;
+    }
+    
+}

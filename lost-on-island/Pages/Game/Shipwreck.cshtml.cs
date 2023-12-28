@@ -40,12 +40,16 @@ namespace lost_on_island.Pages.Game
                 return RedirectToPage("/Game/Cheater");
             }
 
+            if (gameState.CurrentLocationId != 2)
+            {
+                gameState.IsInventoryOpen = false;
+            }
+
             // Aktualizace CurrentLocationId na 2
             gameState.CurrentLocationId = 2;
             gameState.Turns += 1;
 
             _sessionStorage.Save("GameState", gameState);
-
 
             CurrentLocation = _locationProvider.GetLocationById(gameState.CurrentLocationId);
 
@@ -63,9 +67,9 @@ namespace lost_on_island.Pages.Game
                 });
             }
 
-
             return Page();
         }
+
 
         public IActionResult OnPostHandleChangeLocation(string locationIdInputValue)
         {
@@ -75,53 +79,65 @@ namespace lost_on_island.Pages.Game
             }
             return RedirectToPage("/Game/Shipwreck");
         }
-                public IActionResult OnPostRemoveItem(string itemName, int itemCount)
-        {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-            if (gameState.RemoveItem(itemName, itemCount))
-            {
-                _sessionStorage.Save("GameState", gameState); 
-            }
-
-            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
-        }
 
         public IActionResult OnPostBuildShipPhase(string phaseName)
         {
             gameState = _sessionStorage.LoadOrCreate("GameState");
-            var phaseIndex = gameState.CurrentShipBuildingPhaseIndex;
-            var currentPhase = gameState.shipBuildingPhases.ElementAtOrDefault(phaseIndex);
 
+            // Zkontrolovat, zda je aktuální fáze odpovídá fázi urèené parametrem phaseName
+            var currentPhase = gameState.shipBuildingPhases[gameState.CurrentShipBuildingPhaseIndex];
             if (currentPhase != null && currentPhase.Name == phaseName)
             {
-                bool canBuild = true;
-                foreach (var material in currentPhase.RequiredMaterials)
+                // Snížit požadované materiály pro aktuální fázi
+                gameState.ReduceRequiredMaterials();
+
+                // Zkontrolovat, zda jsou všechny materiály pro tuto fázi dokonèeny
+                bool phaseCompleted = currentPhase.RequiredMaterials.Count == 0 || currentPhase.RequiredMaterials.All(rm => rm.Value <= 0);
+                if (phaseCompleted)
                 {
-                    int playerAmount = gameState.Inventory.Items.GetValueOrDefault(material.Key, 0);
-                    if (playerAmount < material.Value)
-                    {
-                        canBuild = false;
-                        gameState.Inventory.Items[material.Key] = 0; // Hráè využije vše co má
-                        currentPhase.RequiredMaterials[material.Key] -= playerAmount; // Snížíme požadavek na materiál
-                    }
-                    else
-                    {
-                        gameState.Inventory.Items[material.Key] -= material.Value; // Odeèteme materiál pro postavení
-                    }
+                    gameState.CurrentShipBuildingPhaseIndex++; // Pøesun na další fázi, pokud je souèasná fáze kompletní
                 }
 
-                if (canBuild)
-                {
-                    gameState.CurrentShipBuildingPhaseIndex++; // Pøesuneme se na další fázi
-                    _sessionStorage.Save("GameState", gameState);
-                }
-
-                // Zde se vrátíme na stránku Shipwreck bez potvrzovací stránky
+                // Uložit upravený GameState zpìt do session storage
+                _sessionStorage.Save("GameState", gameState);
                 return RedirectToPage("/Game/Shipwreck");
             }
 
-            // Fáze neodpovídá aktuálnímu indexu nebo neexistuje
             return RedirectToPage("/Game/Shipwreck");
+        }
+
+
+        
+        public IActionResult OnPostRemoveItem(string itemName, int itemCount)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState.IsInventoryOpen = true;
+
+            if (gameState.RemoveItem(itemName, itemCount))
+            {
+                _sessionStorage.Save("GameState", gameState);
+            }
+            _sessionStorage.Save("GameState", gameState);
+
+            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+        }
+
+        public IActionResult OnPostEatItem(string itemName, int itemCount)
+        {
+            var gameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState.IsInventoryOpen = true;
+
+            if (itemName == "food" && gameState.Inventory.Items[itemName] >= itemCount)
+            {
+                gameState.UpdateHealthAndEnergy(1, 0);
+
+                gameState.RemoveItem(itemName, itemCount);
+
+                _sessionStorage.Save("GameState", gameState);
+            }
+            _sessionStorage.Save("GameState", gameState);
+
+            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
 
 

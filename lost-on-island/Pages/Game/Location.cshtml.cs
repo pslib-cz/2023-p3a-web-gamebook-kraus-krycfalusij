@@ -135,13 +135,26 @@ namespace lost_on_island.Pages.Game
             {
                 if (selectedCard.Item == "enemy")
                 {
+                    
                     gameState.InFight = true; // Hráè vstupuje do boje
                     _sessionStorage.Save("GameState", gameState);
                     return RedirectToPage("/Game/Fight", new { cardPackId = (gameState.CurrentLocationId), enemyId = selectedCard.Id });
+                    
                 }
                 else if (selectedCard.Item == "accident") // nešastné náhody co berou životy
                 {
-                    gameState.UpdateHealthAndEnergy(selectedCard.ItemCount, 0);
+                    if(gameState.IsRiskyMode)
+                    {
+                        gameState.UpdateHealthAndEnergy(selectedCard.ItemCount * 2, 0);
+                        _sessionStorage.Save("GameState", gameState);
+                        return RedirectToPage("/Game/Location", new { locationId = gameState.CurrentLocationId });
+                    }
+                    if (!gameState.IsRiskyMode)
+                    {
+                        gameState.UpdateHealthAndEnergy(selectedCard.ItemCount, 0);
+                        _sessionStorage.Save("GameState", gameState);
+                        return RedirectToPage("/Game/Location", new { locationId = gameState.CurrentLocationId });
+                    }
                 }
                 else
                 {
@@ -156,6 +169,10 @@ namespace lost_on_island.Pages.Game
 
         private IActionResult ProcessCard(Card card, GameState gameState)
         {
+            if (gameState.IsRiskyMode)
+            {
+                card.ItemCount *= 2;
+            }
             gameState.AddItem(card.Item, card.ItemCount);
 
             gameState.CheckGameProgress();
@@ -185,9 +202,12 @@ namespace lost_on_island.Pages.Game
             {
                 return RedirectToPage("/Game/Cheater");
             }
+            if (gameState.CurrentLocationId != locationId)
+            {
+                gameState.IsInventoryOpen = false; 
+            }
 
             UpdateGameState(gameState, locationId);
-
 
             if (_locationProvider.IsSpecialLocation(locationId))
             {
@@ -249,10 +269,13 @@ namespace lost_on_island.Pages.Game
         public IActionResult OnPostRemoveItem(string itemName, int itemCount)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState.IsInventoryOpen = true;
+
             if (gameState.RemoveItem(itemName, itemCount))
             {
                 _sessionStorage.Save("GameState", gameState); 
             }
+            _sessionStorage.Save("GameState", gameState);
 
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
@@ -260,6 +283,7 @@ namespace lost_on_island.Pages.Game
         public IActionResult OnPostEatItem(string itemName, int itemCount)
         {
             var gameState = _sessionStorage.LoadOrCreate("GameState");
+            gameState.IsInventoryOpen = true;
 
             if (itemName == "food" && gameState.Inventory.Items[itemName] >= itemCount)
             {
@@ -269,6 +293,7 @@ namespace lost_on_island.Pages.Game
 
                 _sessionStorage.Save("GameState", gameState);
             }
+            _sessionStorage.Save("GameState", gameState);
 
             return RedirectToPage(new { locationId = gameState.CurrentLocationId });
         }
