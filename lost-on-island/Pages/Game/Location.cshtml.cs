@@ -137,11 +137,11 @@ namespace lost_on_island.Pages.Game
             {
                 if (selectedCard.Item == "enemy")
                 {
-                    
-                    GameState.InFight = true; 
+                    GameState.InFight = true;
+                    GameState.PreviousLocationId = GameState.CurrentLocationId;
                     _sessionStorage.Save("GameState", GameState);
-                    return RedirectToPage("/Game/Fight", new { cardPackId = (GameState.CurrentLocationId), enemyId = selectedCard.Id });
-                    
+
+                    return RedirectToPage("/Game/Fight", new { cardPackId = GameState.CurrentLocationId, enemyId = selectedCard.Id });
                 }
                 else if (selectedCard.Item == "accident") 
                 {

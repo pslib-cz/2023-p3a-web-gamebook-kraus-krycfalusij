@@ -1,14 +1,33 @@
-﻿@page "/Game/Fight/{enemyId:int}"
+﻿@page "/Game/Fight/{cardPackId:int}/{enemyId:int}"
 @model lost_on_island.Pages.Game.FightModel
 
-<h2>@Model.Enemy?.Title</h2>
-@if (Model.Enemy != null)
-{
-    <img src="@Model.Enemy.Img" alt="@Model.Enemy.Title" />
-    <p>@Model.Enemy.Description</p>
+<div class="game-container" style="background-image: url('@ViewData["BackgroundImage"]')">
+    <h1>@ViewData["LocationName"]</h1>
 
-}
-else
-{
-    <p>Informace o nepříteli nebyly nalezeny.</p>
-}
+    <h2>@Model.Enemy?.Title</h2>
+    @if (Model.Enemy != null)
+    {
+        <img src="@Model.Enemy.Img" alt="@Model.Enemy.Title" />
+        <p>@Model.Enemy.Description</p>
+
+        @if (Model.CurrentQuestion != null)
+        {
+            <h3>@Model.CurrentQuestion.Text</h3>
+            foreach (var option in Model.CurrentQuestion.Options)
+            {
+                <form method="post" asp-page-handler="Answer">
+                    <input type="hidden" name="enemyId" value="@Model.Enemy.Id" />
+                    <button type="submit" name="userAnswer" value="@option">@option</button>
+                </form>
+            }
+        }
+        else
+        {
+            <p>Žádná otázka není k dispozici. Klikněte <a asp-page="/Game/Location" asp-route-locationId="@Model.GameState.PreviousLocationId">zde</a> pro návrat.</p>
+        }
+    }
+    else
+    {
+        <p>Informace o nepříteli nebyly nalezeny. Klikněte <a asp-page="/Game/Location" asp-route-locationId="@Model.GameState.PreviousLocationId">zde</a> pro návrat.</p>
+    }
+</div>

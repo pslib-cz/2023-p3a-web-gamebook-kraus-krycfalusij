@@ -8,8 +8,8 @@ fight system (kompletně)
 
 Badges (dodělat)
 
-spánek/energie? (domyslet, dodělat)
+spánek/energie? (domyslet, dodělat)xx
 
 UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 
 
-Final stránka, Prolog, Cheater stránka
+Final stránka, Cheater stránka
