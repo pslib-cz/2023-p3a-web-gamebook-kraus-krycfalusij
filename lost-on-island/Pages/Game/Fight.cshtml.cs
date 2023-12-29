@@ -24,7 +24,6 @@ namespace lost_on_island.Pages.Game
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
 
-            // Ovìøení, zda jsme v bojovém režimu
             if (!GameState.InFight)
             {
                 return RedirectToPage("/Game/Cheater");
@@ -33,25 +32,22 @@ namespace lost_on_island.Pages.Game
             Enemy = GetEnemy(cardPackId, enemyId);
             if (Enemy == null) { return NotFound(); }
 
-            // Získání náhodné otázky
             CurrentQuestion = GameState.GetRandomQuestion();
-            GameState.CurrentQuestion = CurrentQuestion; // Uložení aktuální otázky do GameState
+            GameState.CurrentQuestion = CurrentQuestion;
             _sessionStorage.Save("GameState", GameState);
 
             return Page();
         }
 
-
         public IActionResult OnPostAnswer(int enemyId, string userAnswer)
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
 
-            // Naètení otázky z GameState
+            Console.WriteLine(userAnswer);
             CurrentQuestion = GameState.CurrentQuestion;
 
             if (CurrentQuestion == null)
             {
-                // Zpracování situace, kdy otázka není dostupná
                 return RedirectToPage("/Game/Cheater");
             }
 
@@ -59,9 +55,8 @@ namespace lost_on_island.Pages.Game
             GameState.UpdateHealth(damage);
             GameState.InFight = false;
 
-            // Uložení stavu hry a pøesmìrování na pøedchozí lokaci
             _sessionStorage.Save("GameState", GameState);
-            return RedirectToPage("/Game/Location", new { locationId = GameState.PreviousLocationId });
+            return RedirectToPage("/Game/Location", new { locationId = GameState.PreviousLocation.Id });
         }
 
         private Card GetEnemy(int cardPackId, int enemyId)

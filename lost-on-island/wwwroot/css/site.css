@@ -493,5 +493,123 @@ form:has(.button-toggle) {
 }
 
 
+.correct-answer {
+    background-color: var(--green);
+}
+
+.wrong-answer {
+    background-color: var(--red); 
+}
+
+.answer-button:disabled {
+    opacity: 0.5; 
+}
 
 
+.fight-page .location__title--header {
+    margin-top: 0.5em;
+}
+
+.fight-page .location__title--description {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.fight-page .card {
+    position: absolute;
+    z-index: 5;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(8em*1.15);
+    height: calc(12.25em*1.15);
+}
+
+.fight-page img.card__icon {
+    height: 70px;
+    width: 70px;
+}
+
+.fight-page-page .card--front {
+    backface-visibility: visible;
+}
+
+.fight-page-question {
+    display: flex;
+    flex-direction: column;
+    margin-top: 14em;
+    gap: 0.5em;
+    max-width: 90vw;
+}
+.fight-page-question h3 {
+    margin: 0;
+    border: 3px solid black;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    font-size: 1em;
+    background-color: var(--beige);
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.fight-page-question form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    grid-auto-rows: auto;
+}
+
+.fight-page-question button {
+    border: 3px solid black;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 389px) {
+    .fight-page .card {
+        top: 32%;
+        width: calc(8em*0.9);
+        height: calc(12.25em*0.9);
+    }
+    .fight-page img.card__icon {
+        height: 40px;
+        width: 40px;
+    }
+    .fight-page-question {
+        font-size: 0.9em;
+    }
+
+}
+
+@media only screen and (min-width: 768px) {
+    .fight-page .card {
+        width: calc(8em*1);
+        height: calc(12.25em*1);
+        margin-top: 1em;
+    }
+    .fight-page-question {
+        font-size: 0.9em;
+        margin-top: 14em;
+        max-width: 700px;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+
+    .fight-page .card {
+        position: absolute;
+        z-index: 5;
+        top: 30%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(8em*1.15);
+        height: calc(12.25em*1.15);
+    }
+    .fight-page img.card__icon {
+        height: 70px;
+        width: 70px;
+    }
+
+}

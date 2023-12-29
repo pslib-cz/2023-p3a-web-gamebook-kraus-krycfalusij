@@ -10,6 +10,10 @@ Badges (dodělat)
 
 spánek/energie? (domyslet, dodělat)xx
 
+Ošetřit nutnost nůžek, krumpáče atd k těžení materiálu.
+
+Informativní text například "- 2 životy" nebo "+ 3 dřeva" vlevo dole obrazovky - ideálně obecná funkce použitelná na všech stránkách s různými texty
+
 UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 
 
 Final stránka, Cheater stránka

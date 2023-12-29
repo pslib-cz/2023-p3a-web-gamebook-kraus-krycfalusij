@@ -19,8 +19,8 @@ public class GameState
     public bool Backpack { get; set; } = false;
 
     public int InventoryCapacity { get; set; } = 20;
-    
-    public int PreviousLocationId { get; set; }
+
+    public Location? PreviousLocation { get; set; }
 
     public Inventory Inventory { get; set; } = new Inventory();
     public int CurrentShipBuildingPhaseIndex { get; set; } = 0;

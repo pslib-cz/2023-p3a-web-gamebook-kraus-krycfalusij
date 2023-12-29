@@ -19,13 +19,11 @@
         {
             if (userAnswer.Equals(CorrectAnswer, StringComparison.OrdinalIgnoreCase))
             {
-                // Hráč odpověděl správně, náhodné poškození mezi 1 a 2
-                return _random.Next(1, 3); // Vrátí 1 nebo 2
+                return _random.Next(1, 3); 
             }
             else
             {
-                // Hráč odpověděl nesprávně, náhodné poškození mezi 4 a 8
-                return _random.Next(4, 9); // Vrátí hodnotu mezi 4 a 8
+                return _random.Next(4, 9); 
             }
         }
     }

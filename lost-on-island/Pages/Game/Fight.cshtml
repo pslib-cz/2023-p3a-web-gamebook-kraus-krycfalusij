@@ -1,33 +1,127 @@
 ﻿@page "/Game/Fight/{cardPackId:int}/{enemyId:int}"
 @model lost_on_island.Pages.Game.FightModel
 
-<div class="game-container" style="background-image: url('@ViewData["BackgroundImage"]')">
-    <h1>@ViewData["LocationName"]</h1>
 
-    <h2>@Model.Enemy?.Title</h2>
+<div class="game-container fight-page">
+
+    <div style="background-image: url('@Url.Content($"~/../{Model.GameState.PreviousLocation?.ImagePath}")')" class="background-overlay"></div>
+
+    <div class="location__title__container">
+        <h1 class="location__title--font location__title--header">@Model.GameState.PreviousLocation?.Title</h1>
+        <span class="location__title--description">Odpověz správně pro obranu!</span>
+    </div>
+
+
+    <div class="card flipped">
+        <div class="card--front" style="background-image: url('@(Model.GameState.IsRiskyMode ? "/Images/card-risk-foreground.png" : "/Images/card-safe-foreground.png")');">
+            <h3 class="card__title">@Model.Enemy.Title</h3>
+            <img class="card__icon" src="@Model.Enemy.Img" alt="Enemy Image" />
+            <p class="card__description">@Model.Enemy.Description</p>
+        </div>
+    </div>
+
+    <div class="fight-page-question">
     @if (Model.Enemy != null)
     {
-        <img src="@Model.Enemy.Img" alt="@Model.Enemy.Title" />
-        <p>@Model.Enemy.Description</p>
 
         @if (Model.CurrentQuestion != null)
         {
             <h3>@Model.CurrentQuestion.Text</h3>
-            foreach (var option in Model.CurrentQuestion.Options)
-            {
-                <form method="post" asp-page-handler="Answer">
-                    <input type="hidden" name="enemyId" value="@Model.Enemy.Id" />
-                    <button type="submit" name="userAnswer" value="@option">@option</button>
-                </form>
-            }
+            <form id="answerForm" method="post" asp-page-handler="Answer">
+                <input type="hidden" id="userAnswer" name="userAnswer" value="" />
+                @foreach (var option in Model.CurrentQuestion.Options)
+                {
+                    <button type="button"
+                            class="answer-button"
+                            onclick="handleAnswerClick(this, '@option', '@Model.GameState.PreviousLocation.Id')"
+                            data-correct="@option.Equals(Model.CurrentQuestion.CorrectAnswer, StringComparison.OrdinalIgnoreCase)">
+                        @option
+                    </button>
+                }
+            </form>
+
+
+
+
         }
         else
         {
-            <p>Žádná otázka není k dispozici. Klikněte <a asp-page="/Game/Location" asp-route-locationId="@Model.GameState.PreviousLocationId">zde</a> pro návrat.</p>
+            <p>Žádná otázka není k dispozici. Klikněte <a asp-page="/Game/Location" asp-route-locationId="@Model.GameState.PreviousLocation?.Id">zde</a> pro návrat.</p>
         }
     }
     else
     {
-        <p>Informace o nepříteli nebyly nalezeny. Klikněte <a asp-page="/Game/Location" asp-route-locationId="@Model.GameState.PreviousLocationId">zde</a> pro návrat.</p>
+        <p>Informace o nepříteli nebyly nalezeny. Klikněte <a asp-page="/Game/Location" asp-route-locationId="@Model.GameState.PreviousLocation?.Id">zde</a> pro návrat.</p>
     }
+    </div>
+
+    <div class="game-stats">
+        <div class="game-stats__energy">
+            <span class="icon--energy"></span>
+            Energie: @Model.GameState.Energy/20
+        </div>
+        <div class="game-stats__health">
+            <span class="icon--health"></span>
+            Zdraví: @Model.GameState.Health/20
+        </div>
+        <div class="game-stats__turns">
+            Počet tahů: @Model.GameState.Turns
+        </div>
+        <form method="post" asp-page-handler="HandleBadgeClick" class="badges-list">
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoSword">
+               
+                </div>
+                <div onclick="handleBadgeClick(this, 'Sword')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoAxe">
+                    
+                </div>
+                <div onclick="handleBadgeClick(this, 'Axe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Axe ? "/Images/Icons/axe-badge.png" : "/Images/Icons/axe-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoPickaxe">
+             
+                </div>
+                <div onclick="handleBadgeClick(this, 'Pickaxe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Pickaxe ? "/Images/Icons/pickaxe-badge.png" : "/Images/Icons/pickaxe-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoShears">
+         
+                </div>
+                <div onclick="handleBadgeClick(this, 'Shears')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Shears ? "/Images/Icons/shears-badge.png" : "/Images/Icons/shears-badge-disabled.png")')"></div>
+            </div>
+            <div class="single-tool__badge__wrapper">
+                <div class="single-tool__badge__infobox" id="infoBackpack">
+             
+                </div>
+                <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png" )')"></div>
+            </div>
+            <input type="hidden" name="badgeType" />
+        </form>
+    </div>
 </div>
+
+<script>
+    function handleAnswerClick(button, answer, previousLocationId) {
+        var isCorrect = button.getAttribute('data-correct') === 'True';
+        if (isCorrect) {
+            button.classList.add('correct-answer');
+        } else {
+            button.classList.add('wrong-answer');
+        }
+        var buttons = document.getElementsByClassName('answer-button');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = true;
+        }
+
+        document.getElementById('userAnswer').value = answer;
+
+        setTimeout(function () {
+            document.getElementById('answerForm').submit();
+        }, 1000); 
+    }
+</script>
+
+

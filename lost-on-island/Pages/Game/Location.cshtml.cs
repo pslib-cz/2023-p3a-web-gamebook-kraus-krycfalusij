@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using static lost_on_island.Models.Cards;
 
 namespace lost_on_island.Pages.Game
@@ -138,7 +139,8 @@ namespace lost_on_island.Pages.Game
                 if (selectedCard.Item == "enemy")
                 {
                     GameState.InFight = true;
-                    GameState.PreviousLocationId = GameState.CurrentLocationId;
+                    GameState.PreviousLocation = _locationProvider.GetLocationById(GameState.CurrentLocationId);
+
                     _sessionStorage.Save("GameState", GameState);
 
                     return RedirectToPage("/Game/Fight", new { cardPackId = GameState.CurrentLocationId, enemyId = selectedCard.Id });
