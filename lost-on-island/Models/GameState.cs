@@ -19,6 +19,8 @@ public class GameState
     public bool Backpack { get; set; } = false;
 
     public int InventoryCapacity { get; set; } = 20;
+    
+    public int PreviousLocationId { get; set; }
 
     public Inventory Inventory { get; set; } = new Inventory();
     public int CurrentShipBuildingPhaseIndex { get; set; } = 0;
@@ -31,6 +33,7 @@ public class GameState
             new ShipBuildingPhase("Plachta", new Dictionary<string, int>{{"wood", 10}, {"rope", 15}, {"wool", 10}, {"bamboo", 10}}),
             new ShipBuildingPhase("Kormidlo", new Dictionary<string, int>{{"wood", 15}, {"iron", 15}, {"stone", 10}})
     };
+
 
     public bool IsInventoryOpen { get; set; } = false;
 
@@ -122,7 +125,18 @@ public class GameState
 
     public void CheckGameProgress()
     {
-        // logika dokončení hry?
+        if (shipBuildingPhases[CurrentShipBuildingPhaseIndex].CanBuildPhase())
+        {
+            if (CurrentShipBuildingPhaseIndex == shipBuildingPhases.Count - 1)
+            {
+                HasGameEnded = true;
+            }
+        }
+    }
+
+    public void UpdateHealth(int damage)
+    {
+        Health = Math.Max(0, Health - damage); 
     }
 
     public void ReduceRequiredMaterials()
@@ -158,4 +172,21 @@ public class GameState
         }
     }
 
+
+    public Question CurrentQuestion { get; set; }
+
+    public List<Question> Questions { get; set; } = new List<Question>
+    {
+            new Question("Jaký je nejvyšší vrchol světa?", new List<string> {"Mount Everest", "K2", "Kangchenjunga", "Lhotse"}, "Mount Everest"),
+            new Question("Které město je hlavním městem Francie?", new List<string> {"Marseille", "Lyon", "Paříž", "Nice"}, "Paříž"),
+            new Question("Kdo je autorem románu '1984'?", new List<string> {"George Orwell", "Aldous Huxley", "Ray Bradbury", "Arthur C. Clarke"}, "George Orwell")
+    };
+
+    private Random _random = new Random();
+
+    public Question GetRandomQuestion()
+    {
+        int index = _random.Next(Questions.Count);
+        return Questions[index];
+    }
 }

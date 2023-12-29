@@ -32,8 +32,9 @@ namespace lost_on_island.Pages.Game
         private bool IsValidTransition(GameState GameState, int targetLocationId)
         {
 
-            // Definice ID pro speci·lnÌ lokace
-            const int prologId = 1;
+            const int prologPortId = 10;
+            const int prologOceanId = 11;
+            const int prologIslandId = 12;
             const int shipwreckId = 2;
             const int beachId = 3;
             const int deathId = 8;
@@ -44,27 +45,27 @@ namespace lost_on_island.Pages.Game
             switch (targetLocationId)
             {
                 case deathId:
-                    // Smrt m˘ûe nastat kdykoliv, ale pouze pokud je hr·Ë mrtv˝
                     return GameState.IsPlayerDead;
 
                 case endgameId:
-                    // Na konec hry lze p¯ejÌt pouze pokud hra skonËila
                     return GameState.HasGameEnded;
 
-                case prologId:
-                    // Na prolog lze p¯ejÌt pouze z indexu
-                    return GameState.CurrentLocationId == indexId;
+                case prologPortId:
+                    return GameState.CurrentLocationId == indexId || GameState.CurrentLocationId == prologOceanId;
+
+                case prologOceanId:
+                    return GameState.CurrentLocationId == prologPortId || GameState.CurrentLocationId == prologIslandId;
+
+                case prologIslandId:
+                    return GameState.CurrentLocationId == prologOceanId;
 
                 case shipwreckId:
-                    // Na loÔ lze p¯ejÌt z prologu nebo opakovanÏ z pl·ûe
-                    return GameState.CurrentLocationId == prologId || GameState.CurrentLocationId == beachId;
+                    return GameState.CurrentLocationId == prologIslandId || GameState.CurrentLocationId == beachId || GameState.CurrentLocationId == prologOceanId || GameState.CurrentLocationId == prologPortId;
 
                 case indexId:
-                    // Na index lze p¯ejÌt pouze na zaË·tku hry
                     return GameState.CurrentLocationId == 0;
 
                 default:
-                    // Pro ostatnÌ lokace platÌ standardnÌ logika
                     return _locationProvider.IsValidConnection(GameState.CurrentLocationId, targetLocationId);
             }
         }
@@ -136,13 +137,13 @@ namespace lost_on_island.Pages.Game
             {
                 if (selectedCard.Item == "enemy")
                 {
-                    
-                    GameState.InFight = true; // Hr·Ë vstupuje do boje
+                    GameState.InFight = true;
+                    GameState.PreviousLocationId = GameState.CurrentLocationId;
                     _sessionStorage.Save("GameState", GameState);
-                    return RedirectToPage("/Game/Fight", new { cardPackId = (GameState.CurrentLocationId), enemyId = selectedCard.Id });
-                    
+
+                    return RedirectToPage("/Game/Fight", new { cardPackId = GameState.CurrentLocationId, enemyId = selectedCard.Id });
                 }
-                else if (selectedCard.Item == "accident") // neöùastnÈ n·hody co berou ûivoty
+                else if (selectedCard.Item == "accident") 
                 {
                     if(GameState.IsRiskyMode)
                     {
@@ -219,8 +220,6 @@ namespace lost_on_island.Pages.Game
                 return RedirectToSpecialPage(locationId, GameState);
             }
 
-            
-
             _sessionStorage.Save("GameState", GameState);
             LoadLocationData(locationId, GameState.IsRiskyMode);
 
@@ -234,8 +233,12 @@ namespace lost_on_island.Pages.Game
             switch (locationId)
             {
                 
-                case 1:
-                    return RedirectToPage("/Game/Prolog");
+                case 10:
+                    return RedirectToPage("/Game/PrologPort");
+                case 11:
+                    return RedirectToPage("/Game/PrologOcean");
+                case 12:
+                    return RedirectToPage("/Game/PrologIsland");
                 case 2:
                     return RedirectToPage("/Game/Shipwreck");
                 case 8: 

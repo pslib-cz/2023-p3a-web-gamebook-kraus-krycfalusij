@@ -1,0 +1,36 @@
+﻿@page
+@model lost_on_island.Pages.Game.PrologOceanModel
+@{
+    ViewData["Title"] = "Tichý oceán";
+}
+
+<div class="game-container prolog-page prolog-page--ocean">
+    <div class="location__title__container">
+        <h1 class="location__title--font location__title--header">Tichý oceán</h1>
+        <p class="location__title--font location__title--description">Neznámo kde ; podzim 1923</p>
+    </div>
+    <div class="port_text">
+        <span id="typed-text1" class="port_text__text">
+        </span>
+
+
+        <div class="port_text__buttons">
+            <a class="port_text__button" asp-page="/Game/Location" asp-route-locationId="12">Pokračovat</a>
+            <a class="port_text__button port_text__button--skip" asp-page="/Game/Location" asp-route-locationId="2">Přeskočit prolog</a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var typed1 = new Typed('#typed-text1', {
+            strings: ["Třetí den cesty večer tě potkala ohromná mořská bouře a loď se stala neovladatelná. Bouře pokračovala celou noc během toho, co si spal."],
+            typeSpeed: 25,
+            showCursor: false,
+            loop: false
+        });
+
+    });
+
+</script>
