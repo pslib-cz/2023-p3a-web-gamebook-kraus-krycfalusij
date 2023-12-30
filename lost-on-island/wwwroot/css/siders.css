@@ -45,7 +45,7 @@
     grid-auto-rows: 65px 420px auto;
     position: fixed;
     width: 90%;
-    max-width: 500px;
+    max-width: 450px;
     background: white;
     border: solid var(--black);
     border-width: 3px 0 3px 3px;
@@ -186,18 +186,12 @@
         display: none;
     }
     .map__container {
-        width: 400px;
+        width: 420px;
         top: 20%;
         right: 0;
     }
     .map__header__close-button {
         opacity: 0;
-    }
-}
-
-@media only screen and (min-width: 1700px) {
-    .map__container {
-        width: 450px;
     }
 }
 
@@ -272,7 +266,7 @@
     grid-auto-rows: 65px auto;
     position: fixed;
     width: 90%;
-    max-width: 500px;
+    max-width: 400px;
     background-color: var(--beige);
     border: solid var(--black);
     border-width: 3px 3px 3px 0;
@@ -291,45 +285,14 @@
     margin-right: auto;
 }
 
-.inventory__item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    /* další styly podle vašich potřeb */
-}
-
-.inventory__item__count {
-    font-weight: bold;
-    margin-right: 5px;
-}
-
 .inventory__item__name {
     text-transform: capitalize;
-}
-
-
-@media only screen and (min-width: 1700px) {
-
-    .inventory__container {
-        width: 450px;
-    }
-}
-
-@media only screen and (max-width: 400px) {
-
-    .inventory__container {
-        top: 8em;
-    }
-    .inventory__items__section .inventory__item {
-        grid-template-columns: 2.5em 12em 4em;
-    }
-
 }
 
 @media only screen and (min-width: 1600px) {
 
     .inventory__container {
-        width: 400px;
+        width: 420px;
         top: 20%;
         left: 0;
     }
@@ -339,7 +302,6 @@
     }
 }
 
-
 .inventory__items__section {
     padding: 0.5em;
     gap: 0.25em;
@@ -347,19 +309,19 @@
     flex-direction: column;
 }
 .inventory__item {
-    position: relative;
     display: grid;
-    grid-template-columns: 3em 13em 4em; 
-    margin-left: 2em;
+    grid-template-columns: 2em 3em minmax(auto, 13em) 5em; 
     grid-auto-rows: auto;
     gap: 0.5em;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
 }
 
 .inventory__item__count {
+    margin-left: 0.25em;
     font-size: 1.5em;
-    position: absolute;
-    left: -1.2em;
-    bottom: 15px;
+    font-weight: bold;
 }
 
 .inventory__item__icon {

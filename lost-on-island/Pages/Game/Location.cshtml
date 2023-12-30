@@ -8,7 +8,6 @@
 
 <div class="game-container">
     <div style="background-image: url('@Url.Content($"~/../{Model.CurrentLocation.ImagePath}")')" class="background-overlay"></div>
-
     <div class="location__title__container">
         <h1 class="location__title--font location__title--header">@Model.CurrentLocation.Title</h1>
         <p class="location__title--font location__title--description">@Model.CurrentLocation.Description</p>
@@ -100,7 +99,7 @@
         </div>
         <div class="inventory__items__section">
             <div class="inventory__item">
-                <span class="inventory__item__count">@Model.GameState.Inventory.Items["food"]×</span>
+                <p class="inventory__item__count">@Model.GameState.Inventory.Items["food"]×</p>
                 <img class="inventory__item__icon" src="/Images/icons/food.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Jídlo</span>
@@ -515,7 +514,13 @@
         var overlay = document.querySelector(".inventory-overlay");
         overlay.classList.remove("inventory-overlay--active");
     }
-    
 
+    /* pro zvukové efekty
+    playClickSound()
+    function playClickSound() {
+        var audio = new Audio("/sounds/click-sound-1.mp3");
+        audio.play();
+    }
+    */
 </script>
 

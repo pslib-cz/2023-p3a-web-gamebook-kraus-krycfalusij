@@ -283,9 +283,7 @@
                             }
                             if (!Model.GameState.Sword)
                             {
-                                <button type="button" onclick="@if (canCraft) {
-                        @($"handleBadgeCraft(this, '{toolSword.Type}')")
-}">Koupit</button>
+                                <button type="button" onclick="@if (canCraft) {@($"handleBadgeCraft(this, '{toolSword.Type}')")}">Koupit</button>
                             }
                         }
                     }
@@ -317,9 +315,7 @@
                             }
                             if (!Model.GameState.Axe)
                             {
-                                <button type="button" onclick="@if (canCraft) {
-                        @($"handleBadgeCraft(this, '{toolAxe.Type}')")
-}">Koupit</button>
+                                <button type="button" onclick="@if (canCraft) {@($"handleBadgeCraft(this, '{toolAxe.Type}')")}">Koupit</button>
                             }
                         }
                     }
@@ -351,9 +347,7 @@
                             }
                             if (!Model.GameState.Pickaxe)
                             {
-                                <button type="button" onclick="@if (canCraft) {
-                        @($"handleBadgeCraft(this, '{toolPickaxe.Type}')")
-}">Koupit</button>
+                                <button type="button" onclick="@if (canCraft) {@($"handleBadgeCraft(this, '{toolPickaxe.Type}')")}">Koupit</button>
                             }
                         }
                     }
@@ -385,9 +379,7 @@
                             }
                             if (!Model.GameState.Shears)
                             {
-                                <button type="button" onclick="@if (canCraft) {
-                        @($"handleBadgeCraft(this, '{toolShears.Type}')")
-}">Koupit</button>
+                                <button type="button" onclick="@if (canCraft) {@($"handleBadgeCraft(this, '{toolShears.Type}')")}">Koupit</button>
                             }
                         }
                     }
@@ -418,9 +410,7 @@
                             }
                             if (!Model.GameState.Backpack)
                             {
-                                <button type="button" onclick="@if (canCraft) {
-                        @($"handleBadgeCraft(this, '{toolBackpack.Type}')")
-}">Koupit</button>
+                                <button type="button" onclick="@if (canCraft) {@($"handleBadgeCraft(this, '{toolBackpack.Type}')")}">Koupit</button>
                             }
                         }
                     }
@@ -430,8 +420,9 @@
             <input type="hidden" name="badgeType" />
         </form>
     </div>
+</div>
 
-    <script>
+<script>
     var cardFlipped = false;
     const availableConnectionsIds = @Html.Raw(jsAvailableConnectionsIds);
 
@@ -477,31 +468,30 @@
         overlay.classList.remove("inventory-overlay--active");
     }
 
-        const handleBadgeClick = (div, badgeType) => {
-            const allInfoboxes = document.querySelectorAll(".single-tool__badge__infobox__enabled");
-            allInfoboxes.forEach((infobox) => {
+    const handleBadgeClick = (div, badgeType) => {
+        const allInfoboxes = document.querySelectorAll(".single-tool__badge__infobox__enabled");
+        allInfoboxes.forEach((infobox) => {
+            infobox.classList.remove("single-tool__badge__infobox__enabled");
+        });
+
+        const infoboxId = `info${badgeType}`;
+        const infobox = document.getElementById(infoboxId);
+
+        if (infobox) {
+            infobox.classList.add("single-tool__badge__infobox__enabled");
+
+            setTimeout(() => {
                 infobox.classList.remove("single-tool__badge__infobox__enabled");
-            });
-
-            const infoboxId = `info${badgeType}`;
-            const infobox = document.getElementById(infoboxId);
-
-            if (infobox) {
-                infobox.classList.add("single-tool__badge__infobox__enabled");
-
-                setTimeout(() => {
-                    infobox.classList.remove("single-tool__badge__infobox__enabled");
-                }, 2000);
-            }
-
-            var formBadge = div.closest("form");
-            formBadge.querySelector("[name='badgeType']").value = badgeType;
+            }, 2000);
         }
-        const handleBadgeCraft = (button, badgeType) => {
-            var formBadge = button.closest("form");
-            formBadge.querySelector("[name='badgeType']").value = badgeType;
-            formBadge.submit();
-        }
+
+        var formBadge = div.closest("form");
+        formBadge.querySelector("[name='badgeType']").value = badgeType;
+    }
+    const handleBadgeCraft = (button, badgeType) => {
+        var formBadge = button.closest("form");
+        formBadge.querySelector("[name='badgeType']").value = badgeType;
+        formBadge.submit();
+    }
 
 </script>
-</div>

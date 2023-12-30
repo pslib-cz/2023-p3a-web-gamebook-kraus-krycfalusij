@@ -1,12 +1,9 @@
 ﻿- Kvízy
 - 2× větší risk na enemy neznamená 2× větší risk celkově (když z 10 uděláme šanci 20 a celek je 110, 20 / 110 není 20%;)
-- Při kraftění tool se přičte tah, to nechceme
 
 
 TO DO:
 fight system (kompletně)
-
-Badges (dodělat)
 
 spánek/energie? (domyslet, dodělat)xx
 

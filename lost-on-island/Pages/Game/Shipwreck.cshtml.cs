@@ -111,10 +111,16 @@ namespace lost_on_island.Pages.Game
 
         public IActionResult OnPostHandleBadgeClick(string badgeType)
         {
-            var gameState = _sessionStorage.LoadOrCreate("GameState");
-            gameState.AddTool(badgeType);
-            _sessionStorage.Save("GameState", gameState);
-            return RedirectToPage(new { locationId = gameState.CurrentLocationId });
+            var GameState = _sessionStorage.LoadOrCreate("GameState");
+            Tools = new Tools().ToolsList;
+            var tool = Tools.FirstOrDefault(t => t.Type == badgeType);
+            foreach (var material in tool.Materials)
+            {
+                GameState.RemoveItem(material.Type, material.Count);
+            }
+            GameState.AddTool(badgeType);
+            _sessionStorage.Save("GameState", GameState);
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
         }
 
 
