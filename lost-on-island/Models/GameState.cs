@@ -176,11 +176,60 @@ public class GameState
     public Question CurrentQuestion { get; set; }
 
     public List<Question> Questions { get; set; } = new List<Question>
-    {
-            new Question("Jaký je nejvyšší vrchol světa?", new List<string> {"Mount Everest", "K2", "Kangchenjunga", "Lhotse"}, "Mount Everest"),
-            new Question("Které město je hlavním městem Francie?", new List<string> {"Marseille", "Lyon", "Paříž", "Nice"}, "Paříž"),
-            new Question("Kdo je autorem románu '1984'?", new List<string> {"George Orwell", "Aldous Huxley", "Ray Bradbury", "Arthur C. Clarke"}, "George Orwell")
-    };
+{
+    new Question("Jaký typ uzlu je nejvhodnější pro stavbu přístřešku?", new List<string> {"Námornický uzel", "Klouzavý uzel", "Osmičkový uzel", "Palstek"}, "Námornický uzel"),
+    new Question("Jaký materiál je nejlepší pro vytvoření provizorního filtru na vodu?", new List<string> {"Písek", "Uhlí", "Kameny", "Listy"}, "Uhlí"),
+    new Question("Který předmět je nejlepší pro získání potravy na opuštěném ostrově?", new List<string> {"Rybářský prut", "Nůž", "Síť", "Luk a šípy"}, "Rybářský prut"),
+    new Question("Jaký druh ohně je nejlepší pro vaření?", new List<string> {"Vysoký oheň", "Ohniště s kameny", "Rozdělaný oheň s větvemi", "Uhlíkový oheň"}, "Uhlíkový oheň"),
+    new Question("Jakou techniku byste použili k získání vody ze vzduchu v suchém prostředí?", new List<string> {"Kondenzace", "Destilace", "Filtrace", "Absorpce"}, "Kondenzace"),
+    new Question("Co je nejlepší udělat, pokud vás v divočině uštkne jedovatý had?", new List<string> {"Vysát jed", "Přeříznout ránu", "Aplikovat led", "Udržet klid a vyhledat lékařskou pomoc"}, "Udržet klid a vyhledat lékařskou pomoc"),
+    new Question("Který materiál je nejlepší pro výrobu provizorního nástroje na opuštěném ostrově?", new List<string> {"Dřevo", "Kámen", "Kosti", "Škeble"}, "Kámen"),
+    new Question("Jaký typ signálu byste vytvořili na pláži, abyste přilákali pozornost záchranářského letadla?", new List<string> {"Velký kruh", "Dlouhý pruh", "Tři malé kruhy", "Tři rovnoběžné čáry"}, "Tři rovnoběžné čáry"),
+    new Question("Jaký druh potravy byste měli vyhledávat jako první na opuštěném ostrově?",
+             new List<string> {"Ovoce", "Ryby", "Hmyz", "Listovou zeleninu"}, "Ryby"),
+    new Question("Který přírodní materiál je nejlepší pro vytvoření provizorního úkrytu?",
+                 new List<string> {"Listy", "Tráva", "Větve", "Bambus"}, "Bambus"),
+    new Question("Jaký druh ohně je nejefektivnější pro vysílání signálu nouze?",
+                 new List<string> {"Malý a kontrolovaný oheň", "Oheň s mokrým dřevem", "Velký a jasný oheň", "Oheň s přidanými zelenými listy"}, "Oheň s přidanými zelenými listy"),
+    new Question("Který přírodní zdroj je nejlepší pro vytvoření nástroje na rybolov?",
+                 new List<string> {"Pevný kámen", "Bambus", "Ostří kosti", "Dřevěná větev"}, "Ostří kosti"),
+    new Question("Jaký typ přístřešku je nejvhodnější pro tropické klima?",
+                 new List<string> {"Hluboká jáma", "Vysoko postavený přístřešek", "Přístřešek s hustými stěnami", "Přístřešek otevřený na všech stranách"}, "Vysoko postavený přístřešek"),
+    new Question("Která dovednost je nejvíce kritická pro přežití v arktických podmínkách?",
+                 new List<string> {"Umění stavět ohně", "Schopnost lovit", "Znalost první pomoci", "Stavění sněhového přístřešku"}, "Stavění sněhového přístřešku"),
+    new Question("Jaký druh rostliny je nejlepší pro získání vlákna na výrobu provazů?",
+                 new List<string> {"Borovice", "Kopriva", "Bambus", "Lopuch"}, "Kopriva"),
+    new Question("Jaký přírodní materiál je nejlepší pro izolaci těla při nízkých teplotách?",
+                 new List<string> {"Mech", "Listí", "Březová kůra", "Tráva"}, "Mech"),
+    new Question("Co je nejdůležitější při výběru místa pro tábor na opuštěném ostrově?",
+                 new List<string> {"Přístup k vodě", "Otevřené prostranství", "Blízkost potravinových zdrojů", "Výšková poloha"}, "Přístup k vodě"),
+    new Question("Který typ signálu byste použili v noci k přilákání pozornosti záchranářů?",
+                 new List<string> {"Kouřový signál", "Zrcadlo", "Vysílačka", "Světelný signál"}, "Světelný signál"),
+    new Question("Jakou rostlinu byste měli použít pro léčení drobných řezných ran v divočině?",
+                 new List<string> {"Pampeliška", "Aloe vera", "Kopřiva", "Lopuch"}, "Aloe vera"),
+    new Question("Jaký předmět je nezbytný pro orientaci v neznámém terénu?",
+                 new List<string> {"Kompas", "Mapa", "Baterka", "Hodinky"}, "Kompas"),
+    new Question("Jaká je nejbezpečnější metoda získávání vody ze zdroje v divočině?",
+                 new List<string> {"Přímo pít", "Filtrace", "Vaření", "Sběr rosy"}, "Vaření"),
+    new Question("Který typ jídla byste měli prioritně shánět v zimních podmínkách?",
+                 new List<string> {"Ovoce", "Zelenina", "Ryby", "Měkkýše"}, "Ryby"),
+    new Question("Který přírodní materiál je nejlepší pro výrobu nástrojů na zpracování dřeva?",
+                 new List<string> {"Kámen", "Kosti", "Dřevo", "Škeble"}, "Kámen"),
+
+    new Question("Jaký typ úkrytu byste měli stavět v deštném lese?",
+                 new List<string> {"Nízký a kompaktní", "Vysoko ve stromech", "Blízko vodního zdroje", "S otevřeným plánem"}, "Vysoko ve stromech"),
+
+    new Question("Jaký přírodní útvar je nejlepší pro orientaci ve volné přírodě?",
+                 new List<string> {"Řeka", "Skála", "Vrchol hory", "Údolí"}, "Řeka"),
+
+    new Question("Který typ rostliny je nejlepší pro získání vody v aridních oblastech?",
+                 new List<string> {"Kaktus", "Borovice", "Pampeliška", "Lopuch"}, "Kaktus"),
+    new Question("Jaké jsou klíčové znaky jedovatých rostlin, kterým byste se měli vyhnout?",
+                 new List<string> {"Lesklé listy", "Mléčný latex", "Hladké okraje listů", "Světlé květy"}, "Mléčný latex"),
+    new Question("Který nástroj je nejúčinnější pro lov větších zvířat v divočině?",
+                 new List<string> {"Pasti", "Luk a šípy", "Oštěp", "Síť"}, "Oštěp")
+};
+
 
     private Random _random = new Random();
 
