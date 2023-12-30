@@ -7,11 +7,10 @@ public class GameState
     public bool HasGameEnded { get; set; } = false;
     public int Energy { get; set; } = 20;
     public int Health { get; set; } = 20;
-    public int Turns { get; set; } = 0;
+    public int Turns { get; set; } = -2;
     public bool InFight { get; set; } = false;
     public bool IsRiskyMode { get; set; } = false;
-
-
+    public string InfoText { get; set; } = "";
     public bool Sword { get; set; } = false;
     public bool Axe { get; set; } = false;
     public bool Pickaxe { get; set; } = false;
@@ -71,11 +70,18 @@ public class GameState
         }
     }
 
+    public void UpdateInfoText(string message)
+    {
+        InfoText = message;
+    }
+
+
     public bool AddItem(string name, int count)
     {
         int currentTotalCount = Inventory.Items.Values.Sum();
         if (currentTotalCount + count > InventoryCapacity)
         {
+            InfoText = "Nemůžeš to vzít, máš plný inventář.";
             return false;
         }
 
@@ -87,15 +93,18 @@ public class GameState
         {
             Inventory.Items.Add(name, count);
         }
+        UpdateInfoText($"+{count}× {name}");
+
         return true;
     }
-
 
     public bool RemoveItem(string name, int count)
     {
         if (Inventory.Items.ContainsKey(name) && Inventory.Items[name] >= count)
         {
             Inventory.Items[name] -= count;
+            UpdateInfoText($"-{count}× {name}");
+
             return true;
         }
         return false;
@@ -103,40 +112,47 @@ public class GameState
 
     public void UpdateHealthAndEnergy(int healthChange, int energyChange)
     {
-        if (healthChange + Health > 20)
+        int originalHealth = Health;
+        int originalEnergy = Energy;
+
+        Health = Math.Min(20, Health + healthChange);
+        Energy = Math.Min(20, Energy + energyChange);
+
+        if (Health != originalHealth)
         {
-            Health = 20;
+            UpdateInfoText($"{(Health - originalHealth > 0 ? "+" : "")}{Health - originalHealth} životů");
         }
-        else
+        if (Energy != originalEnergy)
         {
-            Health += healthChange;
+            UpdateInfoText($"{(Energy - originalEnergy > 0 ? "+" : "")}{Energy - originalEnergy} energie");
         }
-        if (Energy + energyChange > 20)
-        {
-            Energy = 20;
-        }
-        else
-        {
-            Energy += energyChange;
-        }
-        if (Health <= 0 || Energy <= 0) IsPlayerDead = true;
+
+        CheckGameProgress();
     }
 
+
+    public bool ShouldRedirectToEndGame { get; private set; }
+    public bool ShouldRedirectToDeath { get; private set; }
 
     public void CheckGameProgress()
     {
-        if (shipBuildingPhases[CurrentShipBuildingPhaseIndex].CanBuildPhase())
+        if (Health <= 0 || Energy <= 0)
         {
-            if (CurrentShipBuildingPhaseIndex == shipBuildingPhases.Count - 1)
-            {
-                HasGameEnded = true;
-            }
+            IsPlayerDead = true;
+            ShouldRedirectToDeath = true;
+        }
+        else if (CurrentShipBuildingPhaseIndex >= shipBuildingPhases.Count)
+        {
+            HasGameEnded = true;
+            ShouldRedirectToEndGame = true;
         }
     }
 
+
     public void UpdateHealth(int damage)
     {
-        Health = Math.Max(0, Health - damage); 
+        Health = Math.Max(0, Health - damage);
+        CheckGameProgress();
     }
 
     public void ReduceRequiredMaterials()
@@ -164,12 +180,13 @@ public class GameState
                 }
             }
 
-            // Odstranění materiálů s nulovým nebo záporným množstvím
             foreach (var material in materialsToRemove)
             {
                 currentPhase.RequiredMaterials.Remove(material);
             }
         }
+        CheckGameProgress();
+
     }
 
 

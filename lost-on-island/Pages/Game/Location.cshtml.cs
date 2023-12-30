@@ -147,7 +147,8 @@ namespace lost_on_island.Pages.Game
                 }
                 else if (selectedCard.Item == "accident") 
                 {
-                    if(GameState.IsRiskyMode)
+                    GameState.InfoText = "Bohužel, nehody se stávají.";
+                    if (GameState.IsRiskyMode)
                     {
                         GameState.UpdateHealthAndEnergy(selectedCard.ItemCount * 2, 0);
                         _sessionStorage.Save("GameState", GameState);
@@ -186,6 +187,7 @@ namespace lost_on_island.Pages.Game
             return Page();
         }
 
+
         private Card GetSelectedCard(int currentLocationId, int cardId)
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
@@ -196,7 +198,16 @@ namespace lost_on_island.Pages.Game
         public IActionResult OnGet(int locationId)
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState.CheckGameProgress();
 
+            if (GameState.ShouldRedirectToDeath)
+            {
+                return RedirectToPage("/Game/Death");
+            }
+            else if (GameState.ShouldRedirectToEndGame)
+            {
+                return RedirectToPage("/Game/End");
+            }
             if (!IsValidTransition(GameState, locationId))
             {
                 return RedirectToPage("/Game/Cheater");
@@ -277,7 +288,6 @@ namespace lost_on_island.Pages.Game
         }
 
 
-
         public IActionResult OnPostHandleChangeLocation(string locationIdInputValue)
         {
             return RedirectToPage(new { locationId = locationIdInputValue });
@@ -292,6 +302,8 @@ namespace lost_on_island.Pages.Game
             {
                 _sessionStorage.Save("GameState", GameState); 
             }
+            GameState.InfoText = "Bordel pøece nepotøebuju...";
+
             _sessionStorage.Save("GameState", GameState);
 
             return RedirectToPage(new { locationId = GameState.CurrentLocationId });
@@ -310,6 +322,7 @@ namespace lost_on_island.Pages.Game
 
                 _sessionStorage.Save("GameState", GameState);
             }
+            GameState.InfoText = "Jídlo prospívá zdraví.";
             _sessionStorage.Save("GameState", GameState);
 
             return RedirectToPage(new { locationId = GameState.CurrentLocationId });

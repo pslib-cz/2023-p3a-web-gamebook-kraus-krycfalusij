@@ -131,7 +131,7 @@ a {
 
 .game-stats {
     height: 190px;
-    background-image: url(../Images/gamestats.png);
+    background-image: url(../Images/gamestatsbackground.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -198,8 +198,25 @@ a {
 .game-stats__turns {
     transform: translateX(-50%);
     position: absolute;
-    top: 10%;
+    bottom: 13%;
     left: 50%;
+}
+
+.game-stats__info-text {
+    transform: translateX(-50%);
+    position: absolute;
+    top: 12%;
+    left: 50%;
+}
+
+.game-info-text {
+    transform: translateX(-50%);
+    position: absolute;
+    top: 10%;
+    display: none; 
+    color: white;
+    font-weight: bold;
+    left: 50%
 }
 
 @media only screen and (min-width: 390px) {
@@ -214,6 +231,7 @@ a {
         height: 220px;
         width: 450px;
     }
+
 }
 
 .game-stats__health {
@@ -256,7 +274,7 @@ a {
         font-size: 0.9em;
     }
     .game-stats__turns {
-        bottom: 37%;
+        bottom: 13%;
     }
     .game-stats__energy {
         bottom: 30%;
@@ -265,6 +283,12 @@ a {
     .game-stats__health {
         bottom: 30%;
     }
+    .game-stats__info-text {
+        transform: translateX(-50%);
+        position: absolute;
+        top: 12%;
+        left: 50%;
+    }
 }
 @media only screen and (min-width: 1600px) {
     .game-stats {
@@ -272,7 +296,7 @@ a {
         width: 500px;
     }
     .game-stats__turns {
-        top: 12%;
+        bottom: 13%;
     }
 }
 
@@ -613,3 +637,9 @@ form:has(.button-toggle) {
     }
 
 }
+
+
+button:hover {
+    cursor: pointer;
+}
+

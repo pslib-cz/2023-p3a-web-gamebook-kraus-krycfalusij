@@ -9,7 +9,7 @@ NAVÍC
 - UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 
 - Informativní text například "- 2 životy" nebo "+ 3 dřeva" vlevo dole obrazovky - ideálně obecná funkce použitelná na všech stránkách s různými text
 - 2× větší risk na enemy neznamená 2× větší risk celkově (když z 10 uděláme šanci 20 a celek je 110, 20 / 110 není 20%;)
-- Celková optimalizace hratelnosti samotné hry
+- Celková optimalizace hratelnosti samotné hry - šance
 
 Extra navíc? 
 - Sound effecty???

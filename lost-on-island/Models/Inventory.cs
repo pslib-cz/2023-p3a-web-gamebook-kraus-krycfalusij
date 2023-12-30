@@ -19,13 +19,4 @@ public class Inventory
             ["bamboo"] = 0
         };
     }
-
-
-    /*
-    public class InventoryItem
-    {
-        public string Name { get; set; } 
-        public int Count { get; set; }
-    }
-    */
 }

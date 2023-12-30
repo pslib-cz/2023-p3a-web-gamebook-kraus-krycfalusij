@@ -249,11 +249,14 @@
             }
     </div>
 
-
     <div class="game-stats">
+
         <div class="game-stats__energy">
             <span class="icon--energy"></span>
             Energie: @Model.GameState.Energy/20
+        </div>
+        <div class="game-stats__info-text">
+            @Model.GameState.InfoText
         </div>
         <div class="game-stats__health">
             <span class="icon--health"></span>
@@ -515,6 +518,7 @@
         overlay.classList.remove("inventory-overlay--active");
     }
 
+    
     /* pro zvukové efekty
     playClickSound()
     function playClickSound() {

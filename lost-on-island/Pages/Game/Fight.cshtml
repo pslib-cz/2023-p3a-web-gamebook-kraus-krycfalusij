@@ -60,6 +60,9 @@
             <span class="icon--energy"></span>
             Energie: @Model.GameState.Energy/20
         </div>
+        <div class="game-stats__info-text">
+            @Model.GameState.InfoText
+        </div>
         <div class="game-stats__health">
             <span class="icon--health"></span>
             Zdraví: @Model.GameState.Health/20
@@ -107,8 +110,12 @@
     function handleAnswerClick(button, answer, previousLocationId) {
         var isCorrect = button.getAttribute('data-correct') === 'True';
         if (isCorrect) {
+            var infoText = document.querySelector('.game-stats__info-text');
+            infoText.innerHTML = 'Správně! Nepřítel tě tolik nezranil.';
             button.classList.add('correct-answer');
         } else {
+            var infoText = document.querySelector('.game-stats__info-text');
+            infoText.innerHTML = 'Špatně! Nepřítel tě velmi zranil.';
             button.classList.add('wrong-answer');
         }
         var buttons = document.getElementsByClassName('answer-button');
@@ -119,8 +126,9 @@
         document.getElementById('userAnswer').value = answer;
 
         setTimeout(function () {
+            infoText.innerHTML = '';
             document.getElementById('answerForm').submit();
-        }, 1000); 
+        }, 1500); 
     }
 </script>
 

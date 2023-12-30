@@ -51,7 +51,7 @@ namespace lost_on_island.Pages.Game
             // Aktualizace CurrentLocationId na 2
             GameState.CurrentLocationId = 2;
             GameState.Turns += 1;
-
+            GameState.InfoText = "Zde mùžeš opravovat svou loï!";
             _sessionStorage.Save("GameState", GameState);
 
             CurrentLocation = _locationProvider.GetLocationById(GameState.CurrentLocationId);
@@ -69,15 +69,18 @@ namespace lost_on_island.Pages.Game
                     }
                 });
             }
-
+            
             return Page();
         }
 
 
         public IActionResult OnPostHandleChangeLocation(string locationIdInputValue)
         {
+            GameState = _sessionStorage.LoadOrCreate("GameState");
             if (locationIdInputValue == "3") 
             {
+                GameState.InfoText = "";
+                _sessionStorage.Save("GameState", GameState);
                 return RedirectToPage("/Game/Location", new { locationId = 3 });
             }
             return RedirectToPage("/Game/Shipwreck");
@@ -86,28 +89,38 @@ namespace lost_on_island.Pages.Game
         public IActionResult OnPostBuildShipPhase(string phaseName)
         {
             var GameState = _sessionStorage.LoadOrCreate("GameState");
-
-            // Zkontrolovat, zda je aktuální fáze odpovídá fázi urèené parametrem phaseName
             var currentPhase = GameState.shipBuildingPhases[GameState.CurrentShipBuildingPhaseIndex];
+
             if (currentPhase != null && currentPhase.Name == phaseName)
             {
-                // Snížit požadované materiály pro aktuální fázi
                 GameState.ReduceRequiredMaterials();
+                GameState.InfoText = "Opravuješ loï!";
 
-                // Zkontrolovat, zda jsou všechny materiály pro tuto fázi dokonèeny
                 bool phaseCompleted = currentPhase.RequiredMaterials.Count == 0 || currentPhase.RequiredMaterials.All(rm => rm.Value <= 0);
                 if (phaseCompleted)
                 {
-                    GameState.CurrentShipBuildingPhaseIndex++; // Pøesun na další fázi, pokud je souèasná fáze kompletní
+                    GameState.InfoText = "Dokonèil jsi aktuální fázi lodi!";
+                    GameState.CurrentShipBuildingPhaseIndex++;
                 }
 
-                // Uložit upravený GameState zpìt do session storage
+                GameState.CheckGameProgress();
                 _sessionStorage.Save("GameState", GameState);
+
+                if (GameState.IsPlayerDead)
+                {
+                    return RedirectToPage("/Game/Death");
+                }
+                else if (GameState.HasGameEnded)
+                {
+                    return RedirectToPage("/Game/EndGame");
+                }
+
                 return RedirectToPage("/Game/Shipwreck");
             }
 
             return RedirectToPage("/Game/Shipwreck");
         }
+
 
         public IActionResult OnPostHandleBadgeClick(string badgeType)
         {
