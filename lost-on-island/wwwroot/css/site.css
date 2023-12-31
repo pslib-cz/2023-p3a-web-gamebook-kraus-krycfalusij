@@ -149,10 +149,6 @@ a {
     gap: 15px;
 }
 
-.single-tool__badge__wrapper {
-    position: relative;
-}
-
 .single-tool__badge {
     width: 45px;
     height: 45px;
@@ -161,22 +157,26 @@ a {
 }
 
 .single-tool__badge__infobox {
-    background-image: url(../Images/Icons/infobox-background.png);
+    background-image: url(../Images/Icons/infobox-background-wide.png);
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
+    transform: translateX(-50%);
     border-radius: 5px;
     border: 3px solid var(--black);
     visibility: hidden;
     opacity: 0;
     position: absolute;
-    bottom: 60px;
-    left: -50px;
-    height: 100px;
-    width: 150px;
     z-index: 10;
     transition-duration: 1s;
-    padding: 0.5em;
+    padding: 0.5em 1.5em;
     box-sizing: border-box;
+    left: 50%;
+    bottom: 140px;
+    height: 120px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
 }
 
 .single-tool__badge__infobox:hover {
@@ -191,8 +191,48 @@ a {
     transition-duration: 0.3s;
 }
 
-.single-tool__badge__infobox > p {
+.infobox__description {
+    margin: 0.25em 0;
+}
+
+.infobox__materials__container {
+    display: flex;
+}
+
+.infobox__single__material__container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.infobox__material__title {
     margin: 0;
+    font-size: 1.25em;
+}
+
+.infobox__single__material__icon {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    margin-left: 10px;
+}
+
+.infobox__single__material__description {
+    margin: 0;
+}
+
+.infobox__button--buy {
+    background-color: var(--brown-dark);
+    color: var(--white);
+    text-decoration: none;
+    border: 2px solid var(--black);
+    border-radius: 5px;
+    padding: 0.25em 0.75em;
+    margin-top: 10px;
+}
+
+.infobox__button--buy:hover {
+    background-color: var(--brown-extra-dark);
 }
 
 .game-stats__turns {
@@ -220,6 +260,10 @@ a {
 }
 
 @media only screen and (min-width: 390px) {
+    .single-tool__badge__infobox {
+        width: 400px;
+        height: 130px;
+    }
     .badges-list {
         gap: 20px;
     }
@@ -231,7 +275,12 @@ a {
         height: 220px;
         width: 450px;
     }
+}
 
+@media only screen and (min-width: 768px) {
+    .single-tool__badge__infobox {
+        height: 140px;
+    }
 }
 
 .game-stats__health {

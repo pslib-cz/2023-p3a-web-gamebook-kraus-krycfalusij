@@ -1,5 +1,5 @@
 ﻿TO DO:
-- Ošetřit nutnost nůžek, krumpáče atd k těžení materiálu.
+- Popisky na kartách když nemáš nástroj
 - Final stránka, Cheater stránka
 - Badges - připsat k čemu to je, například batoh by byl "Zvyšuje kapacitu inventáře z 20 na 40" nebo tak něco...
 - Optimalizovat CSS pro rozlišení notebooků (někdě to občas přes sebe vytéká :// např. loď)
@@ -10,6 +10,7 @@ NAVÍC
 - Informativní text například "- 2 životy" nebo "+ 3 dřeva" vlevo dole obrazovky - ideálně obecná funkce použitelná na všech stránkách s různými text
 - 2× větší risk na enemy neznamená 2× větší risk celkově (když z 10 uděláme šanci 20 a celek je 110, 20 / 110 není 20%;)
 - Celková optimalizace hratelnosti samotné hry - šance
+- změnit obrázek infoboxu aby seděl
 
 Extra navíc? 
 - Sound effecty???

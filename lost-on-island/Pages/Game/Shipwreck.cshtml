@@ -268,15 +268,18 @@
 
                         if (toolSword != null)
                         {
-                            <p>@toolSword.Title</p>
-
-                            foreach (var singleMaterial in toolSword.Materials)
-                            {
-                                <p>@singleMaterial.Title : @singleMaterial.Count</p>
-                            }
-
+                            <p class="infobox__material__title">@toolSword.Title</p>
+                            <div class="infobox__materials__container">
+                                @foreach (var singleMaterial in toolSword.Materials)
+                                {
+                                    <div class="infobox__single__material__container">
+                                        <p class="infobox__single__material__description">@singleMaterial.Title: @singleMaterial.Count</p>
+                                        <img class="infobox__single__material__icon" src="/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
+                                    </div>
+                                }
+                            </div>
+                            <p class="infobox__description">@toolSword.Description</p>
                             bool canCraft = true;
-
                             for (int i = 0; i < toolSword.Materials.Count; i++)
                             {
                                 var itemType = toolSword.Materials[i].Type.ToLowerInvariant();
@@ -286,7 +289,9 @@
                             }
                             if (!Model.GameState.Sword)
                             {
-                                <button type="button" onclick="@if (canCraft) {@($"handleBadgeCraft(this, '{toolSword.Type}')")}">Koupit</button>
+                                <button class="infobox__button--buy" style="@(canCraft ? null : "background-color: lightgray; color: gray; border-color: gray")" type="button" onclick="@if (canCraft) {
+                        @($"handleBadgeCraft(this, '{toolSword.Type}')")
+}">Koupit</button>
                             }
                         }
                     }
@@ -300,15 +305,18 @@
 
                         if (toolAxe != null)
                         {
-                            <p>@toolAxe.Title</p>
-
-                            foreach (var singleMaterial in toolAxe.Materials)
-                            {
-                                <p>@singleMaterial.Title : @singleMaterial.Count</p>
-                            }
-
+                            <p class="infobox__material__title">@toolAxe.Title</p>
+                            <div class="infobox__materials__container">
+                                @foreach (var singleMaterial in toolAxe.Materials)
+                                {
+                                    <div class="infobox__single__material__container">
+                                        <p class="infobox__single__material__description">@singleMaterial.Title: @singleMaterial.Count</p>
+                                        <img class="infobox__single__material__icon" src="/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
+                                    </div>
+                                }
+                            </div>
+                            <p class="infobox__description">@toolAxe.Description</p>
                             bool canCraft = true;
-
                             for (int i = 0; i < toolAxe.Materials.Count; i++)
                             {
                                 var itemType = toolAxe.Materials[i].Type.ToLowerInvariant();
@@ -318,7 +326,9 @@
                             }
                             if (!Model.GameState.Axe)
                             {
-                                <button type="button" onclick="@if (canCraft) {@($"handleBadgeCraft(this, '{toolAxe.Type}')")}">Koupit</button>
+                                <button class="infobox__button--buy" style="@(canCraft ? null : "background-color: lightgray; color: gray; border-color: gray")" type="button" onclick="@if (canCraft) {
+                        @($"handleBadgeCraft(this, '{toolAxe.Type}')")
+}">Koupit</button>
                             }
                         }
                     }
@@ -332,15 +342,18 @@
 
                         if (toolPickaxe != null)
                         {
-                            <p>@toolPickaxe.Title</p>
-
-                            foreach (var singleMaterial in toolPickaxe.Materials)
-                            {
-                                <p>@singleMaterial.Title : @singleMaterial.Count</p>
-                            }
-
+                            <p class="infobox__material__title">@toolPickaxe.Title</p>
+                            <div class="infobox__materials__container">
+                                @foreach (var singleMaterial in toolPickaxe.Materials)
+                                {
+                                    <div class="infobox__single__material__container">
+                                        <p class="infobox__single__material__description">@singleMaterial.Title: @singleMaterial.Count</p>
+                                        <img class="infobox__single__material__icon" src="/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
+                                    </div>
+                                }
+                            </div>
+                            <p class="infobox__description">@toolPickaxe.Description</p>
                             bool canCraft = true;
-
                             for (int i = 0; i < toolPickaxe.Materials.Count; i++)
                             {
                                 var itemType = toolPickaxe.Materials[i].Type.ToLowerInvariant();
@@ -350,7 +363,9 @@
                             }
                             if (!Model.GameState.Pickaxe)
                             {
-                                <button type="button" onclick="@if (canCraft) {@($"handleBadgeCraft(this, '{toolPickaxe.Type}')")}">Koupit</button>
+                                <button class="infobox__button--buy" style="@(canCraft ? null : "background-color: lightgray; color: gray; border-color: gray")" type="button" onclick="@if (canCraft) {
+                        @($"handleBadgeCraft(this, '{toolPickaxe.Type}')")
+}">Koupit</button>
                             }
                         }
                     }
@@ -364,15 +379,18 @@
 
                         if (toolShears != null)
                         {
-                            <p>@toolShears.Title</p>
-
-                            foreach (var singleMaterial in toolShears.Materials)
-                            {
-                                <p>@singleMaterial.Title : @singleMaterial.Count</p>
-                            }
-
+                            <p class="infobox__material__title">@toolShears.Title</p>
+                            <div class="infobox__materials__container">
+                                @foreach (var singleMaterial in toolShears.Materials)
+                                {
+                                    <div class="infobox__single__material__container">
+                                        <p class="infobox__single__material__description">@singleMaterial.Title: @singleMaterial.Count</p>
+                                        <img class="infobox__single__material__icon" src="/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
+                                    </div>
+                                }
+                            </div>
+                            <p class="infobox__description">@toolShears.Description</p>
                             bool canCraft = true;
-
                             for (int i = 0; i < toolShears.Materials.Count; i++)
                             {
                                 var itemType = toolShears.Materials[i].Type.ToLowerInvariant();
@@ -382,7 +400,9 @@
                             }
                             if (!Model.GameState.Shears)
                             {
-                                <button type="button" onclick="@if (canCraft) {@($"handleBadgeCraft(this, '{toolShears.Type}')")}">Koupit</button>
+                                <button class="infobox__button--buy" style="@(canCraft ? null : "background-color: lightgray; color: gray; border-color: gray")" type="button" onclick="@if (canCraft) {
+                        @($"handleBadgeCraft(this, '{toolShears.Type}')")
+}">Koupit</button>
                             }
                         }
                     }
@@ -393,17 +413,21 @@
                 <div class="single-tool__badge__infobox" id="infoBackpack">
                     @{
                         var toolBackpack = Model.Tools.FirstOrDefault(tool => tool.Type == "Backpack");
+
                         if (toolBackpack != null)
                         {
-                            <p>@toolBackpack.Title</p>
-
-                            foreach (var singleMaterial in toolBackpack.Materials)
-                            {
-                                <p>@singleMaterial.Title : @singleMaterial.Count</p>
-                            }
-
+                            <p class="infobox__material__title">@toolBackpack.Title</p>
+                            <div class="infobox__materials__container">
+                                @foreach (var singleMaterial in toolBackpack.Materials)
+                                {
+                                    <div class="infobox__single__material__container">
+                                        <p class="infobox__single__material__description">@singleMaterial.Title: @singleMaterial.Count</p>
+                                        <img class="infobox__single__material__icon" src="/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
+                                    </div>
+                                }
+                            </div>
+                            <p class="infobox__description">@toolBackpack.Description</p>
                             bool canCraft = true;
-
                             for (int i = 0; i < toolBackpack.Materials.Count; i++)
                             {
                                 var itemType = toolBackpack.Materials[i].Type.ToLowerInvariant();
@@ -413,7 +437,9 @@
                             }
                             if (!Model.GameState.Backpack)
                             {
-                                <button type="button" onclick="@if (canCraft) {@($"handleBadgeCraft(this, '{toolBackpack.Type}')")}">Koupit</button>
+                                <button class="infobox__button--buy" style="@(canCraft ? null : "background-color: lightgray; color: gray; border-color: gray")" type="button" onclick="@if (canCraft) {
+                        @($"handleBadgeCraft(this, '{toolBackpack.Type}')")
+}">Koupit</button>
                             }
                         }
                     }

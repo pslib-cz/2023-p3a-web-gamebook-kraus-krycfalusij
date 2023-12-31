@@ -125,6 +125,21 @@ namespace lost_on_island.Pages.Game
                     break;
                 }
             }
+
+            if (SingleLocationCard.Item == "wood" && GameState.Axe)
+            {
+                SingleLocationCard.ItemCount *= 2;
+            }
+            if (SingleLocationCard.Item == "iron" && !GameState.Pickaxe)
+            {
+                SingleLocationCard.Description = "Jejda, na tohle potøebuješ krumpáè";
+                SingleLocationCard.ItemCount = 0;
+            }
+            if (SingleLocationCard.Item == "wool" && !GameState.Shears)
+            {
+                SingleLocationCard.Description = "Jejda, na tohle potøebuješ nùžky";
+                SingleLocationCard.ItemCount = 0;
+            }
         }
 
         public IActionResult OnPostHandleCardClick(int cardId)
@@ -178,10 +193,16 @@ namespace lost_on_island.Pages.Game
             {
                 card.ItemCount *= 2;
             }
+            if ((card.Item == "iron" && !GameState.Pickaxe) || (card.Item == "wool" && !GameState.Shears))
+            {
+                card.ItemCount = 0;
+            }
+            else if (card.Item == "wood" && GameState.Axe)
+            {
+                card.ItemCount *= 2;
+            }
             GameState.AddItem(card.Item, card.ItemCount);
-
             GameState.CheckGameProgress();
-
             _sessionStorage.Save("GameState", GameState);
 
             return Page();
@@ -316,7 +337,7 @@ namespace lost_on_island.Pages.Game
 
             if (itemName == "food" && GameState.Inventory.Items[itemName] >= itemCount)
             {
-                GameState.UpdateHealthAndEnergy(1, 0); 
+                GameState.UpdateHealthAndEnergy(2, 0); 
 
                 GameState.RemoveItem(itemName, itemCount);
 
