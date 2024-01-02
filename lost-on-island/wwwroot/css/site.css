@@ -388,7 +388,7 @@ form:has(.button-toggle) {
 }
 
 .shipbuilding {
-    border-radius: 8px;
+    border-radius: 8px 8px 0px 16px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -410,7 +410,7 @@ form:has(.button-toggle) {
     align-items: center;
     background-color: var(--brown);
     border-radius: 1em 1em 0em 0em;
-    padding: 0.5em;
+    padding: 0.25em;
 }
 .shipbuilding__phase__info {
     background-color: var(--white);
@@ -690,5 +690,55 @@ form:has(.button-toggle) {
 
 button:hover {
     cursor: pointer;
+}
+
+@media only screen and (max-width: 480px) {
+    div.location__title__container {
+        margin-top: 1em;
+    }
+
+    div.toggler {
+        width: 4em;
+        height: 5em;
+    }
+    div.inventory__container {
+        top: 8em;
+    }
+
+    div.shipbuilding__phase__name{
+        font-size: 1.25em;
+        padding: 0.25em;
+    }
+
+    div.shipbuilding button {
+        font-size: 1em;
+        border-radius: 8px 8px 0px 16px;
+    }
+    div.inventory__items__section {
+        padding-top: 0em;
+        padding-bottom: 0em;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-height: 885px) {
+    div.shipbuilding {
+        display: grid;
+        width: 65vw;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: auto;
+        justify-content: center;
+        margin-top: 2em;
+    }
+
+    div.shipbuilding__phase {
+        text-align: center;
+    }
+
+
+    div.shipbuilding form:last-child {
+        grid-column: 1 / span 2; 
+        width: calc(50% - 0.5em); 
+        justify-self: center;
+    }
 }
 
