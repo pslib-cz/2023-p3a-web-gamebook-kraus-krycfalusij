@@ -26,11 +26,17 @@ public class GameState
 
     public List<ShipBuildingPhase> shipBuildingPhases { get; set; } = new List<ShipBuildingPhase>
     {
-            new ShipBuildingPhase("Skelet lodi", new Dictionary<string, int>{{"wood", 3}, {"stone", 1}}),
+            new ShipBuildingPhase("Skelet lodi", new Dictionary<string, int>{ { "wood", 1 } }),
+            new ShipBuildingPhase("Skelet lodi", new Dictionary<string, int>{{"wood", 1}}),
+            new ShipBuildingPhase("Skelet lodi", new Dictionary<string, int>{{"wood", 1}}),
+            new ShipBuildingPhase("Skelet lodi", new Dictionary<string, int>{{"wood", 1}}),
+            new ShipBuildingPhase("Skelet lodi", new Dictionary<string, int>{{"wood", 1}})
+
+            /*
             new ShipBuildingPhase("Pokročilý skelet lodi", new Dictionary<string, int>{{"wood", 20}, {"rope", 10}, {"bamboo", 10}}),
             new ShipBuildingPhase("Kabina", new Dictionary<string, int>{{"stone", 20}, {"rope", 5}}),
             new ShipBuildingPhase("Plachta", new Dictionary<string, int>{{"wood", 10}, {"rope", 15}, {"wool", 10}, {"bamboo", 10}}),
-            new ShipBuildingPhase("Kormidlo", new Dictionary<string, int>{{"wood", 15}, {"iron", 15}, {"stone", 10}})
+            new ShipBuildingPhase("Kormidlo", new Dictionary<string, int>{{"wood", 15}, {"iron", 15}, {"stone", 10}})*/
     };
 
 

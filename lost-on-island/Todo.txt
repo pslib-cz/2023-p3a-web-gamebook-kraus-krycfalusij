@@ -1,8 +1,6 @@
 ﻿TO DO:
 - Popisky na kartách když nemáš nástroj
 - Final stránka, Cheater stránka
-- Badges - připsat k čemu to je, například batoh by byl "Zvyšuje kapacitu inventáře z 20 na 40" nebo tak něco...
-- Optimalizovat CSS pro rozlišení notebooků (někdě to občas přes sebe vytéká :// např. loď)
 
 NAVÍC
 - spánek a energie?
