@@ -43,7 +43,6 @@ namespace lost_on_island.Pages.Game
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
 
-            Console.WriteLine(userAnswer);
             CurrentQuestion = GameState.CurrentQuestion;
 
             if (CurrentQuestion == null)
