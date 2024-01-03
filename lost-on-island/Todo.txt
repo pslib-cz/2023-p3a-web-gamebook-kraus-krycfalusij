@@ -1,6 +1,7 @@
 ﻿TO DO:
-- Popisky na kartách když nemáš nástroj
 - Final stránka, Cheater stránka
+- Mapa je zapnutá ikdyž nemá
+- Responzivita na notebook (16:10)
 
 NAVÍC
 - spánek a energie?
