@@ -58,6 +58,7 @@ namespace lost_on_island.Pages.Game
             return RedirectToPage("/Game/Location", new { locationId = GameState.PreviousLocation.Id });
         }
 
+
         private Card GetEnemy(int cardPackId, int enemyId)
         {
             var cards = new Cards();

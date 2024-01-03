@@ -80,7 +80,7 @@ namespace lost_on_island.Services
             _connections.Add(new Connection { FromLocationId = 4, ToLocationId = 5, Description = "Les" });
             _connections.Add(new Connection { FromLocationId = 5, ToLocationId = 4, Description = "Louka" });
 
-
+            _connections.Add(new Connection { FromLocationId = 9, ToLocationId = 0, Description = "Nová hra" });
 
 
             _connections.Add(new Connection { FromLocationId = 4, ToLocationId = 6, Description = "Jeskyně" });

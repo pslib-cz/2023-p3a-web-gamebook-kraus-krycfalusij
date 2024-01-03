@@ -24,13 +24,22 @@ namespace lost_on_island.Pages.Game
                 Response.Redirect("/Game/Cheater");
             }
 
+            if (GameState.IsPlayerDead)
+                ResetGameState();
             GameState.CurrentLocationId = 9;
-            GameState.Turns += 1;
 
             _sessionStorage.Save("GameState", GameState);
 
 
             return Page();
+        }
+
+        private void ResetGameState()
+        {
+            GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState = new GameState();
+            GameState.CurrentLocationId = 9;
+            _sessionStorage.Save("GameState", GameState);
         }
     }
 }

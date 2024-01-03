@@ -567,18 +567,6 @@ form:has(.button-toggle) {
 }
 
 
-.correct-answer {
-    background-color: var(--green);
-}
-
-.wrong-answer {
-    background-color: var(--red); 
-}
-
-.answer-button:disabled {
-    opacity: 0.5; 
-}
-
 
 .fight-page .location__title--header {
     margin-top: 0.5em;

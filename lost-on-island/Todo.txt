@@ -1,12 +1,18 @@
 ﻿TO DO:
 - Final stránka, Cheater stránka
-- Mapa je zapnutá ikdyž nemá
-- Responzivita na notebook (16:10)
+- RESPONZIVITA KURVA
+- Dodělat návod jak hrát
+- Informativní text například "- 2 životy" nebo "+ 3 dřeva" vlevo dole obrazovky - ideálně obecná funkce použitelná na všech stránkách s různými text
+- Batoh zvýší kapacitu na 40
+- Když sním či odeberu předmět aktualizuju tak stránku a mohu tak cheatovat (!Opravit)
+
+- Lepší font místo times new roman (lmao Stehla dyzajner)
+- 50% barva na tagy na mapě (pozadí však musí být bílé a přes to tu barvu asi) (kadza)
+- Menu (ukončit hru, nová hra atd - kazda)
 
 NAVÍC
 - spánek a energie?
 - UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 
-- Informativní text například "- 2 životy" nebo "+ 3 dřeva" vlevo dole obrazovky - ideálně obecná funkce použitelná na všech stránkách s různými text
 - 2× větší risk na enemy neznamená 2× větší risk celkově (když z 10 uděláme šanci 20 a celek je 110, 20 / 110 není 20%;)
 - Celková optimalizace hratelnosti samotné hry - šance
 - změnit obrázek infoboxu aby seděl

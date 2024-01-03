@@ -109,27 +109,34 @@
 <script>
     function handleAnswerClick(button, answer, previousLocationId) {
         var isCorrect = button.getAttribute('data-correct') === 'True';
+        var infoText = document.querySelector('.game-stats__info-text');
+
         if (isCorrect) {
-            var infoText = document.querySelector('.game-stats__info-text');
+            button.style.backgroundColor = 'green'; 
+            button.style.color = 'white';
             infoText.innerHTML = 'Správně! Nepřítel tě tolik nezranil.';
-            button.classList.add('correct-answer');
         } else {
-            var infoText = document.querySelector('.game-stats__info-text');
+            button.style.backgroundColor = 'red';
+            button.style.color = 'white';
             infoText.innerHTML = 'Špatně! Nepřítel tě velmi zranil.';
-            button.classList.add('wrong-answer');
         }
+
         var buttons = document.getElementsByClassName('answer-button');
         for (var i = 0; i < buttons.length; i++) {
             buttons[i].disabled = true;
+            buttons[i].style.opacity = '0.5'; 
         }
+
+        button.style.opacity = '1';
 
         document.getElementById('userAnswer').value = answer;
 
         setTimeout(function () {
-            infoText.innerHTML = '';
             document.getElementById('answerForm').submit();
-        }, 1500); 
+        }, 1500);
     }
+
 </script>
+
 
 
