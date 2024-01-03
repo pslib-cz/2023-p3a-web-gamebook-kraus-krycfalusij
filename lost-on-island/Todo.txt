@@ -1,12 +1,11 @@
 ﻿TO DO:
 - Final stránka, Cheater stránka
 - RESPONZIVITA KURVA
-- Dodělat návod jak hrát
 - Informativní text například "- 2 životy" nebo "+ 3 dřeva" vlevo dole obrazovky - ideálně obecná funkce použitelná na všech stránkách s různými text
 - Batoh zvýší kapacitu na 40
-- Když sním či odeberu předmět aktualizuju tak stránku a mohu tak cheatovat (!Opravit)
+- Sníží meč poškození? (jen se ptám Tomáši)
 
-- Lepší font místo times new roman (lmao Stehla dyzajner)
+- Dodělat návod jak hrát
 - 50% barva na tagy na mapě (pozadí však musí být bílé a přes to tu barvu asi) (kadza)
 - Menu (ukončit hru, nová hra atd - kazda)
 

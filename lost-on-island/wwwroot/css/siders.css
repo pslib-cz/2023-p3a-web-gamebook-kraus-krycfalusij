@@ -319,6 +319,7 @@
 }
 
 .inventory__item__count {
+    margin:0;
     margin-left: 0.25em;
     font-size: 1.5em;
     font-weight: bold;
