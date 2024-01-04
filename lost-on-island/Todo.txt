@@ -2,9 +2,7 @@
 - Final stránka, Cheater stránka
 - RESPONZIVITA KURVA
 - Informativní text například "- 2 životy" nebo "+ 3 dřeva" vlevo dole obrazovky - ideálně obecná funkce použitelná na všech stránkách s různými text
-- Batoh zvýší kapacitu na 40
-- Sníží meč poškození? (jen se ptám Tomáši)
-
+- Na louce nebo všude? může dojít k zaseknutí otevřeného inventáře
 - Dodělat návod jak hrát
 - 50% barva na tagy na mapě (pozadí však musí být bílé a přes to tu barvu asi) (kadza)
 - Menu (ukončit hru, nová hra atd - kazda)

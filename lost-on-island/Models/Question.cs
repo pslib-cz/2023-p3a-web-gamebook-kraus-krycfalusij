@@ -13,18 +13,17 @@
             Options = options;
             CorrectAnswer = correctAnswer;
         }
-
-        // Vrátí náhodné poškození způsobené hráči na základě odpovědi
         public int EvaluateAnswer(string userAnswer)
         {
             if (userAnswer.Equals(CorrectAnswer, StringComparison.OrdinalIgnoreCase))
             {
-                return _random.Next(1, 3); 
+                return _random.Next(1, 2); 
             }
             else
             {
-                return _random.Next(4, 9); 
+                return _random.Next(4, 8); 
             }
+
         }
     }
 }

@@ -19,7 +19,6 @@ namespace lost_on_island.Pages.Game
             _sessionStorage = sessionStorage;
         }
 
-
         public IActionResult OnGet(int cardPackId, int enemyId)
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
@@ -51,13 +50,22 @@ namespace lost_on_island.Pages.Game
             }
 
             int damage = CurrentQuestion.EvaluateAnswer(userAnswer);
+            if (GameState.Sword)
+            {
+                if (damage == 1 || damage == 2)
+                    damage = 0;
+                else
+                {
+                    damage /= 2;
+                    Console.WriteLine(damage);
+                }
+            }
             GameState.UpdateHealth(damage);
             GameState.InFight = false;
 
             _sessionStorage.Save("GameState", GameState);
             return RedirectToPage("/Game/Location", new { locationId = GameState.PreviousLocation.Id });
         }
-
 
         private Card GetEnemy(int cardPackId, int enemyId)
         {

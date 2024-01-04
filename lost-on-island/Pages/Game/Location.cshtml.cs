@@ -304,6 +304,8 @@ namespace lost_on_island.Pages.Game
                 GameState.RemoveItem(material.Type, material.Count);
             }
             GameState.AddTool(badgeType);
+            if (GameState.Backpack)
+                GameState.InventoryCapacity = 40;
             _sessionStorage.Save("GameState", GameState);
             return RedirectToPage(new { locationId = GameState.CurrentLocationId });
         }

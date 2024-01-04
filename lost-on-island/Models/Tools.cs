@@ -11,7 +11,7 @@ namespace lost_on_island.Models
             {
                 Title = "Meč",
                 Type = "Sword",
-                Description = "Snižkuje efekt útoků enemy.",
+                Description = "Snižuje efekt útoků enemy.",
                 Materials = new List<Material>
                 {
                     new Material { Title = "Dřevo", Type = "wood", Count = 3 },
@@ -54,7 +54,7 @@ namespace lost_on_island.Models
             {
                 Title = "Batoh",
                 Type = "Backpack",
-                Description = "Zvyšuje maximální množství itemů v inventáři.",
+                Description = "Zvyšuje max. množství itemů v inventáři.",
                 Materials = new List<Material>
                 {
                     new Material { Title = "Vlna", Type = "wool", Count = 10 }

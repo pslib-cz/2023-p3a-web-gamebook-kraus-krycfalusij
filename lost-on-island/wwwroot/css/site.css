@@ -288,7 +288,7 @@ a {
 .game-stats__health {
     position: absolute;
     top: 24%;
-    right: 13%;
+    right: 15%;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -313,7 +313,7 @@ a {
 .game-stats__energy {
     position: absolute;
     top: 24%;
-    left: 13%;
+    left: 15%;
     display: flex;
     justify-content: center;
     align-content: center;

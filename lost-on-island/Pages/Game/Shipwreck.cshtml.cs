@@ -51,7 +51,7 @@ namespace lost_on_island.Pages.Game
             // Aktualizace CurrentLocationId na 2
             GameState.CurrentLocationId = 2;
             GameState.Turns += 1;
-            GameState.InfoText = "Zde mùžeš opravovat svou loï!";
+            GameState.InfoText = "Zde opravuješ svou loï.";
             _sessionStorage.Save("GameState", GameState);
 
             CurrentLocation = _locationProvider.GetLocationById(GameState.CurrentLocationId);
