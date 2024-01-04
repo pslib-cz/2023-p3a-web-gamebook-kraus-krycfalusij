@@ -140,7 +140,6 @@ namespace lost_on_island.Pages.Game
         public IActionResult OnPostRemoveItem(string itemName, int itemCount)
         {
             var GameState = _sessionStorage.LoadOrCreate("GameState");
-            GameState.IsInventoryOpen = true;
 
             if (GameState.RemoveItem(itemName, itemCount))
             {
@@ -154,7 +153,6 @@ namespace lost_on_island.Pages.Game
         public IActionResult OnPostEatItem(string itemName, int itemCount)
         {
             var GameState = _sessionStorage.LoadOrCreate("GameState");
-            GameState.IsInventoryOpen = true;
 
             if (itemName == "food" && GameState.Inventory.Items[itemName] >= itemCount)
             {

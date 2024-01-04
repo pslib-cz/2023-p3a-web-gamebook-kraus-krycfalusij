@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using static lost_on_island.Models.Cards;
 
 namespace lost_on_island.Pages.Game
@@ -237,11 +238,7 @@ namespace lost_on_island.Pages.Game
             {
                 return RedirectToPage("/Game/Cheater");
             }
-            if (GameState.CurrentLocationId != locationId)
-            {
-                GameState.IsInventoryOpen = false;
-                
-            }
+
             if (GameState.CurrentLocationId != locationId && GameState.CurrentLocationId != 0 && GameState.CurrentLocationId != 1)
             {
                 GameState.Turns += 1;
@@ -260,7 +257,8 @@ namespace lost_on_island.Pages.Game
             return Page();
         }
 
-
+        
+        
         private IActionResult RedirectToSpecialPage(int locationId, GameState GameState)
         {
 
@@ -319,7 +317,6 @@ namespace lost_on_island.Pages.Game
         public IActionResult OnPostRemoveItem(string itemName, int itemCount)
         {
             var GameState = _sessionStorage.LoadOrCreate("GameState");
-            GameState.IsInventoryOpen = true;
 
             if (GameState.RemoveItem(itemName, itemCount))
             {
@@ -335,7 +332,6 @@ namespace lost_on_island.Pages.Game
         public IActionResult OnPostEatItem(string itemName, int itemCount)
         {
             var GameState = _sessionStorage.LoadOrCreate("GameState");
-            GameState.IsInventoryOpen = true;
 
             if (itemName == "food" && GameState.Inventory.Items[itemName] >= itemCount)
             {

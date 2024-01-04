@@ -477,25 +477,34 @@
         overlay.classList.remove("map-overlay--active");
     }
 
+
     document.addEventListener("DOMContentLoaded", function () {
-        if (@Model.GameState.IsInventoryOpen) {
-            enableInventory();
+        var inventoryOpen = localStorage.getItem('inventoryOpen');
+        if (inventoryOpen === 'true') {
+            enableInventory(false);
         }
     });
 
-    const enableInventory = () => {
+    function enableInventory(withAnimation = true) {
         var inventory = document.querySelector(".inventory__container");
+        if (!withAnimation) {
+            inventory.classList.add("inventory__container__no-animation");
+        }
         inventory.classList.add("inventory__container__enabled");
         var overlay = document.querySelector(".inventory-overlay");
         overlay.classList.add("inventory-overlay--active");
+        localStorage.setItem('inventoryOpen', 'true');
     }
 
-    const disableInventory = () => {
+    function disableInventory() {
         var inventory = document.querySelector(".inventory__container");
         inventory.classList.remove("inventory__container__enabled");
+        inventory.classList.remove("inventory__container__no-animation");
         var overlay = document.querySelector(".inventory-overlay");
         overlay.classList.remove("inventory-overlay--active");
+        localStorage.setItem('inventoryOpen', 'false');
     }
+
 
     const handleBadgeClick = (div, badgeType) => {
         const allInfoboxes = document.querySelectorAll(".single-tool__badge__infobox__enabled");

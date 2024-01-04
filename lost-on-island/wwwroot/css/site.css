@@ -743,3 +743,7 @@ button:hover {
 button:hover {
     cursor: pointer;
 }
+
+div.inventory__container__no-animation {
+    transition-duration: 0s !important;
+}
