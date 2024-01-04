@@ -108,6 +108,9 @@
     position: absolute;
     padding: 0.25em 1em;
     border-radius: 3px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .location__tag::before {
@@ -128,16 +131,15 @@
 }
 
 .tag--green {
-    background-color: var(--green);
-
+    background-image: url(/Images/Icons/map-label-green.png);
 }
 
 .tag--yellow {
-    background-color: var(--yellow);
+    background-image: url(/Images/Icons/map-label-yellow.png);
 }
 
 .tag--red {
-    background-color: var(--red);
+    background-image: url(/Images/Icons/map-label-red.png);
 }
 
 .tag--shipwreck {
