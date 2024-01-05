@@ -35,8 +35,7 @@ namespace lost_on_island.Pages.Game
             Tools = new Tools().ToolsList;
             GameState = _sessionStorage.LoadOrCreate("GameState");
 
-            Console.WriteLine(GameState);
-            // Ovìøení, zda je uživatel na správném locationId
+
             if (GameState.CurrentLocationId != 2 && GameState.CurrentLocationId != 3 && GameState.CurrentLocationId != 8)
             {
                 return RedirectToPage("/Game/Cheater");
@@ -47,7 +46,6 @@ namespace lost_on_island.Pages.Game
                 GameState.IsInventoryOpen = false;
             }
 
-            // Aktualizace CurrentLocationId na 2
             GameState.CurrentLocationId = 2;
             GameState.Turns += 1;
             GameState.InfoText = "Zde opravuješ svou loï.";

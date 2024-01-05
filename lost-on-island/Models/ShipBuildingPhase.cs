@@ -11,7 +11,6 @@
             RequiredMaterials = requiredMaterials;
         }
 
-
         public bool CanBuildPhase()
         {
             return RequiredMaterials.All(rm => rm.Value <= 0);

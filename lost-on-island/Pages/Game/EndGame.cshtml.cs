@@ -19,7 +19,7 @@ namespace lost_on_island.Pages.Game
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
 
-            if (GameState.CurrentLocationId != 9 || GameState.HasGameEnded == false)
+            if (GameState.CurrentLocationId != 9 && GameState.HasGameEnded == false)
             {
                 Response.Redirect("/Game/Cheater");
             }

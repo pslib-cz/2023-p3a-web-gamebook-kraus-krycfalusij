@@ -228,7 +228,7 @@ namespace lost_on_island.Pages.Game
             }
             else if (GameState.ShouldRedirectToEndGame)
             {
-                return RedirectToPage("/Game/End");
+                return RedirectToPage("/Game/EndGame");
             }
             if (!IsValidTransition(GameState, locationId))
             {

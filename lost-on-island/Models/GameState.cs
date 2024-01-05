@@ -3,10 +3,10 @@
 public class GameState
 {
     public int CurrentLocationId { get; set; } = 0;
-    public bool IsPlayerDead { get; set; } = true; 
+    public bool IsPlayerDead { get; set; } = false; 
     public bool HasGameEnded { get; set; } = false; 
     public int Energy { get; set; } = 20;
-    public int Health { get; set; } = 1;
+    public int Health { get; set; } = 20;
     public int Turns { get; set; } = -2;
     public bool InFight { get; set; } = false;
     public bool IsRiskyMode { get; set; } = false;
