@@ -277,6 +277,8 @@ namespace lost_on_island.Pages.Game
                     return RedirectToPage("/Game/Death");
                 case 9: 
                     return RedirectToPage("/Game/EndGame");
+                case 0:
+                    return RedirectToPage("/Index");
 
                 default:
                     return RedirectToPage("/Game/Cheater");

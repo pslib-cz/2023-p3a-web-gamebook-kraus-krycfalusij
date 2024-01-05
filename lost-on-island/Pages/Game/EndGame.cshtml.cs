@@ -1,6 +1,7 @@
 using lost_on_island.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Reflection;
 
 namespace lost_on_island.Pages.Game
 {
@@ -18,18 +19,26 @@ namespace lost_on_island.Pages.Game
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
 
-            if (GameState.HasGameEnded == false)
+            if (GameState.CurrentLocationId != 9 || GameState.HasGameEnded == false)
             {
-                return RedirectToPage("/Game/Cheater");
+                Response.Redirect("/Game/Cheater");
             }
 
-            GameState.CurrentLocationId = 8;
+            GameState.CurrentLocationId = 9;
             GameState.Turns += 1;
             
             _sessionStorage.Save("GameState", GameState);
 
-
+            ResetGameState();
             return Page();
+        }
+
+        private void ResetGameState()
+        {
+            GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState = new GameState();
+            GameState.CurrentLocationId = 9;
+            _sessionStorage.Save("GameState", GameState);
         }
     }
 }

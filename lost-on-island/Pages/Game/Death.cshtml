@@ -2,6 +2,34 @@
 @model lost_on_island.Pages.Game.DeathModel
 
 
-<h1>Smrt</h1>
-<p>Bohužel, vaše dobrodružství zde končí...</p>
-<a asp-page="/Index" asp-route-locationId="0">Začít znovu</a>
+<div class="game-container prolog-page deathpage">
+    <div class="location__title__container">
+        <h1 class="location__title--font location__title--header">Smrt</h1>
+        <b class="location__title--font location__title--description">Memento mori</b>
+
+    </div>
+
+    <div class="port_text">
+        <span id="typed-text1" class="port_text__text">
+        </span>
+
+        <div class="port_text__buttons">
+            <a class="port_text__button" asp-page="/Game/Shipwreck" asp-route-locationId="2">Začít znovu</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var typed1 = new Typed('#typed-text1', {
+            strings: ["Z chyb se člověk učí, nebo snad ne?."],
+            typeSpeed: 25,
+            showCursor: false,
+            loop: false
+        });
+    });
+
+</script>

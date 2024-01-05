@@ -1,9 +1,35 @@
 ﻿@page
 @model lost_on_island.Pages.Game.CheaterModel
 @{
-    ViewData["Title"] = "Cheater Alert";
+    ViewData["Title"] = "Vězení";
 }
 
+<div class="game-container prolog-page prisonpage">
+    <div class="location__title__container">
+        <h1 class="location__title--font location__title--header">Vězení</h1>
+    </div>
 
-<h2>Cheater Alert</h2>
-<p>It seems like you've tried to access a location in an invalid way. Please play the game fairly.</p>
+    <div class="port_text">
+        <span id="typed-text1" class="port_text__text">
+        </span>
+
+        <div class="port_text__buttons">
+            <a class="port_text__button" asp-page="/Index" asp-route-locationId="0">Ukončit hru</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var typed1 = new Typed('#typed-text1', {
+            strings: ["Podvádět se nevyplácí. Ať už si udělal cokoliv, tak to nebylo v souladu s pravidly..."],
+            typeSpeed: 25,
+            showCursor: false,
+            loop: false
+        });
+    });
+
+</script>

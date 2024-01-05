@@ -11,7 +11,6 @@ namespace lost_on_island.Pages.Game
         public GameState GameState { get; set; }
         private readonly ISessionStorage<GameState> _sessionStorage;
 
-
         public Location CurrentLocation { get; set; }
         public List<Connection> AvailableConnections { get; set; }
         public List<Cards.Card> LocationCards { get; set; }
@@ -38,7 +37,7 @@ namespace lost_on_island.Pages.Game
 
             Console.WriteLine(GameState);
             // Ovìøení, zda je uživatel na správném locationId
-            if (GameState.CurrentLocationId != 2 && GameState.CurrentLocationId != 3)
+            if (GameState.CurrentLocationId != 2 && GameState.CurrentLocationId != 3 && GameState.CurrentLocationId != 8)
             {
                 return RedirectToPage("/Game/Cheater");
             }

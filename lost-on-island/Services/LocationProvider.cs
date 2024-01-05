@@ -16,7 +16,6 @@ namespace lost_on_island.Services
 
             _locations.Add(new Location { Id = 0, Name = "index", Title = "Hlavní Menu", ImagePath = "", Description = "Výchozí stránka hry.", IsSpecial = true });
 
-            //_locations.Add(new Location { Id = 1, Name = "prolog", Title = "Prolog", ImagePath = "Images/prolog.png", Description = "Začátek dobrodružství.", IsSpecial = true });
             _locations.Add(new Location { Id = 2, Name = "shipwreck", Title = "Loď", ImagePath = "Images/location-shipwreck.png", Description = "Ztroskotaná loď.", IsSpecial = true });
 
             _locations.Add(new Location { Id = 3, Name = "beach", Title = "Pláž", ImagePath = "Images/location-beach.png", Description = "Pláž s výhledem na moře." });
@@ -32,6 +31,8 @@ namespace lost_on_island.Services
             _locations.Add(new Location { Id = 10, Name = "prologport", Title = "Přístav Auckland", ImagePath = "", Description = "Nový Zéland ; podzim 1923", IsSpecial = true });
             _locations.Add(new Location { Id = 11, Name = "prologocean", Title = "Tichý oceán", ImagePath = "", Description = "Neznámé místo ; podzim 1923", IsSpecial = true });
             _locations.Add(new Location { Id = 12, Name = "prologisland", Title = "Tichý oceán", ImagePath = "", Description = "Neznámé místo ; podzim 1923", IsSpecial = true });
+            _locations.Add(new Location { Id = 13, Name = "cheater", Title = "Vězení", ImagePath = "", Description = "", IsSpecial = true });
+
 
             _connections.Add(new Connection { FromLocationId = 10, ToLocationId = 10, Description = "Přístav" });
             _connections.Add(new Connection { FromLocationId = 10, ToLocationId = 11, Description = "Oceán" });
@@ -67,6 +68,7 @@ namespace lost_on_island.Services
             _connections.Add(new Connection { FromLocationId = 6, ToLocationId = 6, Description = "Jeskyně" });
             _connections.Add(new Connection { FromLocationId = 7, ToLocationId = 7, Description = "Hluboký les" });
 
+            _connections.Add(new Connection { FromLocationId = 13, ToLocationId = 0, Description = "Znovu" });
 
 
             _connections.Add(new Connection { FromLocationId = 6, ToLocationId = 5, Description = "Les" });

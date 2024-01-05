@@ -19,17 +19,16 @@ namespace lost_on_island.Pages.Game
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
 
-            if (GameState.CurrentLocationId != 9 && GameState.IsPlayerDead == false)
+            if (GameState.CurrentLocationId != 8 && GameState.IsPlayerDead == false)
             {
                 Response.Redirect("/Game/Cheater");
             }
 
             if (GameState.IsPlayerDead)
                 ResetGameState();
-            GameState.CurrentLocationId = 9;
+            GameState.CurrentLocationId = 8;
 
             _sessionStorage.Save("GameState", GameState);
-
 
             return Page();
         }
@@ -38,7 +37,7 @@ namespace lost_on_island.Pages.Game
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
             GameState = new GameState();
-            GameState.CurrentLocationId = 9;
+            GameState.CurrentLocationId = 8;
             _sessionStorage.Save("GameState", GameState);
         }
     }

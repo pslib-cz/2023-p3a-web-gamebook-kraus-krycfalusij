@@ -747,3 +747,27 @@ button:hover {
 div.inventory__container__no-animation {
     transition-duration: 0s !important;
 }
+
+
+.game-container.endgame {
+    background-image: url(../Images/endpage-mobile.png);
+}
+.game-container.deathpage {
+    background-image: url(../Images/death-mobile.png);
+}
+.game-container.prisonpage {
+    background-image: url(../Images/cheaterpage-mobile.png);
+}
+
+
+@media only screen and (min-width: 769px){
+    div.game-container.endgame {
+        background-image: url(../Images/endpage-desktop.png);
+    }
+    div.game-container.deathpage {
+        background-image: url(../Images/death-desktop.png);
+    }
+    div.game-container.prisonpage {
+        background-image: url(../Images/cheaterpage-desktop.png);
+    }
+}
