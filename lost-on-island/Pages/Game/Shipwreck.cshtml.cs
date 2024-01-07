@@ -47,7 +47,11 @@ namespace lost_on_island.Pages.Game
             }
 
             GameState.CurrentLocationId = 2;
-            GameState.Turns += 1;
+
+            if (GameState.CurrentLocationId != 2 && GameState.CurrentLocationId != 0 && GameState.CurrentLocationId != 1)
+            {
+                GameState.Turns += 1;
+            }
             GameState.InfoText = "Zde opravuješ svou loï.";
             _sessionStorage.Save("GameState", GameState);
 
@@ -70,7 +74,20 @@ namespace lost_on_island.Pages.Game
             return Page();
         }
 
-
+        public IActionResult OnPostHideTutorial()
+        {
+            GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState.ShowTutorial = false;
+            _sessionStorage.Save("GameState", GameState);
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
+        }
+        public IActionResult OnPostShowTutorial()
+        {
+            GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState.ShowTutorial = true;
+            _sessionStorage.Save("GameState", GameState);
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
+        }
         public IActionResult OnPostHandleChangeLocation(string locationIdInputValue)
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");

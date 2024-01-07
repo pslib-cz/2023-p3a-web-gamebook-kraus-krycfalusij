@@ -7,7 +7,7 @@ public class GameState
     public bool HasGameEnded { get; set; } = false; 
     public int Energy { get; set; } = 20;
     public int Health { get; set; } = 20;
-    public int Turns { get; set; } = -2;
+    public int Turns { get; set; } = -1;
     public bool InFight { get; set; } = false;
     public bool IsRiskyMode { get; set; } = false;
     public string InfoText { get; set; } = "";
@@ -16,6 +16,7 @@ public class GameState
     public bool Pickaxe { get; set; } = false;
     public bool Shears { get; set; } = false;
     public bool Backpack { get; set; } = false;
+    public bool ShowTutorial { get; set; } = true;
 
     public int InventoryCapacity { get; set; } = 20;
 

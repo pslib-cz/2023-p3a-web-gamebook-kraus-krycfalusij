@@ -7,6 +7,42 @@
 
 
 <div class="game-container">
+    <form method="post" class="show-tutorial__form" asp-page-handler="ShowTutorial">
+        <button type="submit" class="show-tutorial__button">Návod</button>
+    </form>
+    @if (Model.GameState.ShowTutorial)
+    {
+        <div class="tutorial__container">
+            <div class="tutorial__header">
+                <p class="tutorial__header__text">Tutoriál</p>
+            </div>
+            <div id="tutorialImage" class="tutorial__image" style="background-image: url('/Images/tutorial-1.png');">
+                <form method="post" asp-page-handler="HideTutorial" id="tutorialForm" style="display: none;">
+                </form>
+            </div>
+        </div>
+
+        <script>
+            var tutorialImage = document.getElementById('tutorialImage');
+            var tutorialForm = document.getElementById('tutorialForm');
+            var tutorialImages = [
+                '/Images/tutorial-1.png',
+                '/Images/tutorial-2.png',
+                '/Images/tutorial-3.png'
+            ];
+            var currentImageIndex = 0;
+
+            tutorialImage.addEventListener('click', function () {
+                if (currentImageIndex < tutorialImages.length - 1) {
+                    currentImageIndex++;
+                    tutorialImage.style.backgroundImage = 'url(' + tutorialImages[currentImageIndex] + ')';
+                } else {
+                    tutorialForm.submit();
+                }
+            });
+        </script>
+    }
+
     <div style="background-image: url('@Url.Content($"~/../{Model.CurrentLocation.ImagePath}")')" class="background-overlay"></div>
     <div class="location__title__container">
         <h1 class="location__title--font location__title--header">@Model.CurrentLocation.Title</h1>

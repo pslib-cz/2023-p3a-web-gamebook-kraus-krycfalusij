@@ -71,7 +71,20 @@ namespace lost_on_island.Pages.Game
                     return _locationProvider.IsValidConnection(GameState.CurrentLocationId, targetLocationId);
             }
         }
-
+        public IActionResult OnPostHideTutorial()
+        {
+            GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState.ShowTutorial = false;
+            _sessionStorage.Save("GameState", GameState);
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
+        }
+        public IActionResult OnPostShowTutorial()
+        {
+            GameState = _sessionStorage.LoadOrCreate("GameState");
+            GameState.ShowTutorial = true;
+            _sessionStorage.Save("GameState", GameState);
+            return RedirectToPage(new { locationId = GameState.CurrentLocationId });
+        }
 
         private void UpdateGameState(GameState GameState, int locationId)
         {
