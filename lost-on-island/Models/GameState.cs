@@ -13,7 +13,7 @@ public class GameState
     public string InfoText { get; set; } = "";
     public string InfoText2 { get; set; } = "";
 
-    public bool Sword { get; set; } = true;
+    public bool Sword { get; set; } = false;
     public bool Axe { get; set; } = false;
     public bool Pickaxe { get; set; } = false;
     public bool Shears { get; set; } = false;
