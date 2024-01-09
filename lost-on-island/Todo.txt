@@ -1,16 +1,14 @@
 ﻿TO DO:
-- Informativní text například "- 2 životy" nebo "+ 3 dřeva" vlevo dole obrazovky - ideálně obecná funkce použitelná na všech stránkách s různými text
 - Dodělat návod jak hrát
 - Menu (ukončit hru, nová hra atd - kazda)
+- Opravit aby sword neubíral hp 
+- Opravit barvy u fight systému 
+- spánek a energie?
 
 NAVÍC
-- spánek a energie?
 - UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 
 - 2× větší risk na enemy neznamená 2× větší risk celkově (když z 10 uděláme šanci 20 a celek je 110, 20 / 110 není 20%;)
 - změnit obrázek infoboxu aby seděl
 
 - Celková optimalizace hratelnosti samotné hry - šance
 
-
-Extra navíc? 
-- Sound effecty???
