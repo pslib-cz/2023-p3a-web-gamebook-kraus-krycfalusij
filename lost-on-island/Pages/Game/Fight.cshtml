@@ -55,17 +55,17 @@
     <div class="game-stats">
         <div class="game-stats__energy">
             <span class="icon--energy"></span>
-            Energie: @Model.GameState.Energy/20
+            <span>Energie: @Model.GameState.Energy/20</span>
         </div>
         <div class="game-stats__info-text">
-            @Model.GameState.InfoText
+            <span>@Model.GameState.InfoText</span>
         </div>
         <div class="game-stats__health">
             <span class="icon--health"></span>
-            Zdraví: @Model.GameState.Health/20
+            <span>Zdraví: @Model.GameState.Health/20</span>
         </div>
         <div class="game-stats__turns">
-            Počet tahů: @Model.GameState.Turns
+            <span>Počet tahů: @Model.GameState.Turns</span>
         </div>
         <form method="post" asp-page-handler="HandleBadgeClick" class="badges-list">
             <div class="single-tool__badge__wrapper">

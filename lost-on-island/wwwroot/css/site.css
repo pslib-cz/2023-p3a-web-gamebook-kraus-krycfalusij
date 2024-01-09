@@ -139,7 +139,7 @@ a {
     z-index: 3;
     font-weight: 600;
     height: 11.875em;
-    width: 25em;
+    width: 23em;
 }
 
 .badges-list {
@@ -174,9 +174,9 @@ a {
     padding: 0.5em 1.5em;
     box-sizing: border-box;
     left: 50%;
-    bottom: 140px;
-    height: 100%;
-    width: 100%;
+    bottom: 6.5em;
+    height: 10.5em;
+    width: 22em;
     display: flex;
     flex-direction: column;
 }
@@ -262,10 +262,13 @@ a {
 }
 
 @media only screen and (min-width: 390px) {
+
     .single-tool__badge__infobox {
-        width: 400px;
-        height: 130px;
+        bottom: 7.5em;
+        width: 23em;
+        height: 9em;
     }
+    
     .badges-list {
         gap: 0.75em;
     }
@@ -275,16 +278,13 @@ a {
     }
     .game-stats {
         height: 12em;
-        width: 28em;
+        width: 25em;
     }
 }
 
 @media only screen and (min-width: 768px) {
     .single-tool__badge__infobox {
-        height: 140px;
-    }
-    .badges-list {
-        gap: 1em;
+        height: 9em;
     }
 }
 
@@ -346,8 +346,8 @@ a {
 }
 @media only screen and (min-width: 1600px) {
     .game-stats {
-        height: 250px;
-        width: 500px;
+        height: 13em;
+        width: 26em;
     }
     .game-stats__turns {
         bottom: 13%;
