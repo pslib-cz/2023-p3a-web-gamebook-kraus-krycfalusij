@@ -5,6 +5,7 @@
 }
 
 <div class="game-container" style="background-image: url('@Url.Content("~/Images/location-shipwreck.png")')">
+    <div id="gameOverlay" class="game-overlay @(Model.GameState.IsInventoryOpen ? "game-overlay--active" : "")" onclick="@(Model.GameState.ShowTutorial ? null : "disableMap(); disableInventory();")"></div>
     <form method="post" class="show-tutorial__form" asp-page-handler="ShowTutorial">
         <button type="submit" class="show-tutorial__button">Návod</button>
     </form>
@@ -12,7 +13,7 @@
     {
         <div class="tutorial__container">
             <div class="tutorial__header">
-                <p class="tutorial__header__text">Tutoriál</p>
+                <p class="tutorial__header__text">Návod</p>
             </div>
             <div id="tutorialImage" class="tutorial__image" style="background-image: url('/Images/tutorial-1.png');">
                 <form method="post" asp-page-handler="HideTutorial" id="tutorialForm" style="display: none;">
@@ -21,6 +22,8 @@
         </div>
 
         <script>
+            var overlay = document.querySelector(".game-overlay");
+            overlay.classList.add("game-overlay--active");
             var tutorialImage = document.getElementById('tutorialImage');
             var tutorialForm = document.getElementById('tutorialForm');
             var tutorialImages = [
@@ -35,6 +38,7 @@
                     currentImageIndex++;
                     tutorialImage.style.backgroundImage = 'url(' + tutorialImages[currentImageIndex] + ')';
                 } else {
+                    overlay.classList.remove("game-overlay--active");
                     tutorialForm.submit();
                 }
             });
@@ -49,8 +53,6 @@
         <p class="location__title--font location__title--description">Zde můžeš opravovat svou loď</p>
     </div>
 
-
-    <div onClick="disableMap()" class="map-overlay"></div>
     <div class="toggler map__toggler" onclick="enableMap()">
         <img class="toggler__icon" src="/Images/Icons/map.png" />
     </div>
@@ -88,8 +90,6 @@
         </div>
     </div>
 
-
-    <div id="inventoryOverlay" class="inventory-overlay @(Model.GameState.IsInventoryOpen? "inventory-overlay--active" : "" )" onClick="disableInventory()"></div>
     <div class="toggler inventory__toggler" onclick="enableInventory()">
         <img class="toggler__icon" src="/Images/Icons/inventory.png" />
     </div>
@@ -503,17 +503,16 @@
     const enableMap = () => {
         var map = document.querySelector(".map__container");
         map.classList.add("map__container__enabled");
-        var overlay = document.querySelector(".map-overlay");
-        overlay.classList.add("map-overlay--active");
+        var overlay = document.querySelector(".game-overlay");
+        overlay.classList.add("game-overlay--active");
     }
 
     const disableMap = () => {
         var map = document.querySelector(".map__container");
         map.classList.remove("map__container__enabled");
-        var overlay = document.querySelector(".map-overlay");
-        overlay.classList.remove("map-overlay--active");
+        var overlay = document.querySelector(".game-overlay");
+        overlay.classList.remove("game-overlay--active");
     }
-
 
     document.addEventListener("DOMContentLoaded", function () {
         var inventoryOpen = localStorage.getItem('inventoryOpen');
@@ -528,8 +527,8 @@
             inventory.classList.add("inventory__container__no-animation");
         }
         inventory.classList.add("inventory__container__enabled");
-        var overlay = document.querySelector(".inventory-overlay");
-        overlay.classList.add("inventory-overlay--active");
+        var overlay = document.querySelector(".game-overlay");
+        overlay.classList.add("game-overlay--active");
         localStorage.setItem('inventoryOpen', 'true');
     }
 
@@ -537,10 +536,11 @@
         var inventory = document.querySelector(".inventory__container");
         inventory.classList.remove("inventory__container__enabled");
         inventory.classList.remove("inventory__container__no-animation");
-        var overlay = document.querySelector(".inventory-overlay");
-        overlay.classList.remove("inventory-overlay--active");
+        var overlay = document.querySelector(".game-overlay");
+        overlay.classList.remove("game-overlay--active");
         localStorage.setItem('inventoryOpen', 'false');
     }
+
 
 
     const handleBadgeClick = (div, badgeType) => {

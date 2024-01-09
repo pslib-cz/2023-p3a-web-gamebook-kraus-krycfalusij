@@ -208,7 +208,7 @@
 
 }
 
-.map-overlay, .inventory-overlay {
+.game-overlay {
     visibility: hidden;
     opacity: 0;
     position: fixed;
@@ -224,7 +224,7 @@
 }
 
 @media only screen and (max-width: 1599px) {
-    .map-overlay--active, .inventory-overlay--active {
+    .game-overlay--active {
         visibility: visible;
         opacity: 1;
     } 
