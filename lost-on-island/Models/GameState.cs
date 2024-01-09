@@ -11,6 +11,8 @@ public class GameState
     public bool InFight { get; set; } = false;
     public bool IsRiskyMode { get; set; } = false;
     public string InfoText { get; set; } = "";
+    public string InfoText2 { get; set; } = "";
+
     public bool Sword { get; set; } = false;
     public bool Axe { get; set; } = false;
     public bool Pickaxe { get; set; } = false;
@@ -75,6 +77,10 @@ public class GameState
     {
         InfoText = message;
     }
+    public void UpdateInfoText2(string message)
+    {
+        InfoText2 = message;
+    }
 
 
     public bool AddItem(string name, int count)
@@ -94,7 +100,35 @@ public class GameState
         {
             Inventory.Items.Add(name, count);
         }
-        UpdateInfoText($"+{count}× {name}");
+
+
+        string itemName;
+        switch (name)
+        {
+            case "wood":
+                itemName = count == 1 ? "dřevo" : "dřeva";
+                break;
+            case "food":
+                itemName = count == 1 ? "jídlo" : "jídla";
+                break;
+            case "wool":
+                itemName = count == 1 ? "vlna" : "vlny";
+                break;
+            case "stone":
+                itemName = count == 1 ? "kámen" : "kameny";
+                break;
+            case "iron":
+                itemName = count == 1 ? "železo" : "železa";
+                break;
+            case "rope":
+                itemName = count == 1 ? "lano" : "lana";
+                break;
+            default:
+                itemName = name; 
+                break;
+        }
+
+        UpdateInfoText2($"+{count}× {itemName}");
 
         return true;
     }
@@ -104,7 +138,7 @@ public class GameState
         if (Inventory.Items.ContainsKey(name) && Inventory.Items[name] >= count)
         {
             Inventory.Items[name] -= count;
-            UpdateInfoText($"-{count}× {name}");
+            UpdateInfoText2($"-{count}× {name}");
 
             return true;
         }
@@ -121,11 +155,11 @@ public class GameState
 
         if (Health != originalHealth)
         {
-            UpdateInfoText($"{(Health - originalHealth > 0 ? "+" : "")}{Health - originalHealth} životů");
+            UpdateInfoText2($"{(Health - originalHealth > 0 ? "+" : "")}{Health - originalHealth} životů");
         }
         if (Energy != originalEnergy)
         {
-            UpdateInfoText($"{(Energy - originalEnergy > 0 ? "+" : "")}{Energy - originalEnergy} energie");
+            UpdateInfoText2($"{(Energy - originalEnergy > 0 ? "+" : "")}{Energy - originalEnergy} energie");
         }
 
         CheckGameProgress();

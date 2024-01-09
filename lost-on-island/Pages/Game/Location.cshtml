@@ -294,6 +294,9 @@
         <div class="game-stats__info-text">
             <span>@Model.GameState.InfoText</span>
         </div>
+        <div class="game-stats__info-text info-text--special">
+            <span>@Model.GameState.InfoText2</span>
+        </div>
         <div class="game-stats__health">
             <span class="icon--health"></span>
             <span>Zdraví: @Model.GameState.Health/20</span>
@@ -589,6 +592,11 @@
         if (inventoryOpen === 'true') {
             enableInventory(false);
         }
+        var text2 = document.querySelector(".info-text--special");
+        const timeout = setTimeout(() => {
+            text2 = text2.classList.add("info-text--special--hidden");
+        }, 2500);
+
     });
 
     function enableInventory(withAnimation = true) {

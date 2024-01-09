@@ -824,3 +824,16 @@ div.inventory__container__no-animation {
     padding: 0.5em 1em;
     border: none;
 }
+
+.game-stats__info-text.info-text--special {
+    color: white;
+    left: 15%;
+    top: -7%;
+    font-weight: 500;
+    transition: 0.5s;
+    opacity: 1;
+}
+
+.game-stats__info-text.info-text--special--hidden {
+    opacity: 0;
+}
