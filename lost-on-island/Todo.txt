@@ -1,5 +1,4 @@
 ﻿TO DO:
-- RESPONZIVITA KURVA
 - Informativní text například "- 2 životy" nebo "+ 3 dřeva" vlevo dole obrazovky - ideálně obecná funkce použitelná na všech stránkách s různými text
 - Dodělat návod jak hrát
 - Menu (ukončit hru, nová hra atd - kazda)
