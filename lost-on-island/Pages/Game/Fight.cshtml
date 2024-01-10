@@ -33,7 +33,7 @@
                 {
                     <button type="button"
                             class="answer-button"
-                            onclick="handleAnswerClick(this, '@option', '@Model.GameState.PreviousLocation.Id')"
+                                onclick="handleAnswerClick(this, '@option', '@Model.GameState.PreviousLocation.Id', '@(Model.GameState.Sword ? "True" : "False")')"
                             data-correct="@option.Equals(Model.CurrentQuestion.CorrectAnswer, StringComparison.OrdinalIgnoreCase)">
                         @option
                     </button>
@@ -59,9 +59,6 @@
         </div>
         <div class="game-stats__info-text">
             <span>@Model.GameState.InfoText</span>
-        </div>
-        <div class="game-stats__info-text info-text--special">
-            <span>@Model.GameState.InfoText2</span>
         </div>
         <div class="game-stats__health">
             <span class="icon--health"></span>
@@ -107,23 +104,23 @@
 </div>
 
 <script>
-    function handleAnswerClick(button, answer, previousLocationId) {
+    function handleAnswerClick(button, answer, previousLocationId, hasSword) {
         var isCorrect = button.getAttribute('data-correct') === 'True';
         var infoText = document.querySelector('.game-stats__info-text');
 
-        if (isCorrect) {
-            button.style.backgroundColor = 'green'; 
+        if (isCorrect && hasSword === 'True') {
+            button.style.backgroundColor = '#3d8711';
+            button.style.color = 'white';
+            infoText.innerHTML = 'Nepřítel tě nezranil díky meči';
+        } 
+        
+        else if (isCorrect) {
+            button.style.backgroundColor = '#3d8711';
             button.style.color = 'white';
             infoText.innerHTML = 'Nepřítel tě tolik nezranil.';
         } 
-        if(isCorrect && @Model.GameState.Sword)
-        {
-            button.style.backgroundColor = 'green';
-            button.style.color = 'white';
-            infoText.innerHTML = 'Nepřítel tě nezranil.';
-        }
         else {
-            button.style.backgroundColor = 'red';
+            button.style.backgroundColor = '#951f12';
             button.style.color = 'white';
             infoText.innerHTML = 'Nepřítel tě velmi zranil.';
         }
@@ -142,13 +139,7 @@
             document.getElementById('answerForm').submit();
         }, 1500);
 
-        document.addEventListener("DOMContentLoaded", function () {
-            var text2 = document.querySelector(".info-text--special");
-            const timeout = setTimeout(() => {
-                text2 = text2.classList.add("info-text--special--hidden");
-            }, 2500);
 
-        });
     }
 
 </script>

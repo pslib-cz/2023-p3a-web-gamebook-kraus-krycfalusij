@@ -128,7 +128,8 @@ public class GameState
                 break;
 
             default:
-                itemName = name; 
+                itemName = name;
+                Console.WriteLine(name);
                 break;
         }
 

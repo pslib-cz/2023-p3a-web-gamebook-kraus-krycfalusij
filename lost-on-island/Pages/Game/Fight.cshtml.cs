@@ -57,9 +57,10 @@ namespace lost_on_island.Pages.Game
                 else
                 {
                     damage /= 2;
-                    Console.WriteLine(damage);
                 }
             }
+            Console.WriteLine(damage);
+
             GameState.UpdateHealth(damage);
             GameState.InFight = false;
 
