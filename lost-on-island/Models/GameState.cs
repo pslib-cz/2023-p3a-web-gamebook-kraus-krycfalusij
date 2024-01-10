@@ -123,6 +123,10 @@ public class GameState
             case "rope":
                 itemName = count == 1 ? "lano" : "lana";
                 break;
+            case "bamboo":
+                itemName = count == 1 ? "bambus" : "bambusy";
+                break;
+
             default:
                 itemName = name; 
                 break;
