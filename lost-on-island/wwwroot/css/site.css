@@ -491,23 +491,23 @@ form:has(.button-toggle) {
 }
 
     .material-icon.wood {
-        background-image: url(/Images/Icons/wood.webp);
+        background-image: url(../Images/Icons/wood.webp);
     }
 
     .material-icon.stone {
-        background-image: url(/Images/Icons/stone.webp);
+        background-image: url(../Images/Icons/stone.webp);
     }
     .material-icon.rope {
-        background-image: url(/Images/Icons/rope.webp);
+        background-image: url(../Images/Icons/rope.webp);
     }
     .material-icon.wool {
-        background-image: url(/Images/Icons/wool.webp);
+        background-image: url(../Images/Icons/wool.webp);
     }
     .material-icon.iron {
-        background-image: url(/Images/Icons/iron.webp);
+        background-image: url(../Images/Icons/iron.webp);
     }
     .material-icon.bamboo {
-        background-image: url(/Images/Icons/bamboo.webp);
+        background-image: url(../Images/Icons/bamboo.webp);
     }
 
 @media only screen and (max-width: 768px) {

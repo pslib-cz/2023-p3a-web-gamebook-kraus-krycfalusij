@@ -90,7 +90,7 @@
 }
 
 .map__image__section {
-    background-image: url(/Images/Icons/game-map.webp);
+    background-image: url(../Images/Icons/game-map.webp);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -131,15 +131,15 @@
 }
 
 .tag--green {
-    background-image: url(/Images/Icons/map-label-green.webp);
+    background-image: url(../Images/Icons/map-label-green.webp);
 }
 
 .tag--yellow {
-    background-image: url(/Images/Icons/map-label-yellow.webp);
+    background-image: url(../Images/Icons/map-label-yellow.webp);
 }
 
 .tag--red {
-    background-image: url(/Images/Icons/map-label-red.webp);
+    background-image: url(../Images/Icons/map-label-red.webp);
 }
 
 .tag--shipwreck {
@@ -406,31 +406,31 @@
 
 
     .material-icon.wood {
-        background-image: url('/Images/icons/wood.webp');
+        background-image: url('../Images/icons/wood.webp');
     }
 
     .material-icon.stone {
-        background-image: url('/Images/icons/stone.webp');
+        background-image: url('../Images/icons/stone.webp');
     }
 
     .material-icon.iron {
-        background-image: url('/Images/icons/iron.webp');
+        background-image: url('../Images/icons/iron.webp');
     }
 
     .material-icon.rope {
-        background-image: url('/Images/icons/rope.webp');
+        background-image: url('../Images/icons/rope.webp');
     }
 
     .material-icon.food {
-        background-image: url('/Images/icons/food.webp');
+        background-image: url('../Images/icons/food.webp');
     }
 
     .material-icon.wool {
-        background-image: url('/Images/icons/wool.webp');
+        background-image: url('../Images/icons/wool.webp');
     }
 
     .material-icon.bamboo {
-        background-image: url('/Images/icons/bamboo.webp');
+        background-image: url('../Images/icons/bamboo.webp');
     }
 
 .inventory__shipbuild {
