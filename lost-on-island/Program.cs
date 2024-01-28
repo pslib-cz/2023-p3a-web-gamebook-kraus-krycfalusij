@@ -19,7 +19,7 @@ builder.Services.AddSingleton<ILocationProvider, LocationProvider>();
 builder.Services.AddScoped(typeof(ISessionStorage<>), typeof(SessionStorage<>));
 
 var app = builder.Build();
-app.UsePathBase("/lost-on-island");
+app.UsePathBase("/LostOnIsland");
 
 
 // Configure the HTTP request pipeline.
