@@ -77,7 +77,7 @@ main {
     margin-top: 1em;
     width: 16em;
     height: 7em;
-    background-image: url(../Images/paper-title-background.png);
+    background-image: url(../Images/paper-title-background.webp);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -131,7 +131,7 @@ a {
 }
 
 .game-stats {
-    background-image: url(../Images/gamestatsbackground.png);
+    background-image: url(../Images/gamestatsbackground.webp);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -159,7 +159,7 @@ a {
 }
 
 .single-tool__badge__infobox {
-    background-image: url(../Images/Icons/infobox-background-wide.png);
+    background-image: url(../Images/Icons/infobox-background-wide.webp);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -300,14 +300,14 @@ a {
 
 .icon--energy {
     width: 1em;
-    background-image: url(../Images/icons/energy.png);
+    background-image: url(../Images/icons/energy.webp);
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 .icon--health {
     width: 1em;
-    background-image: url(../Images/icons/heart.png);
+    background-image: url(../Images/icons/heart.webp);
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -491,23 +491,23 @@ form:has(.button-toggle) {
 }
 
     .material-icon.wood {
-        background-image: url(/Images/Icons/wood.png);
+        background-image: url(/Images/Icons/wood.webp);
     }
 
     .material-icon.stone {
-        background-image: url(/Images/Icons/stone.png);
+        background-image: url(/Images/Icons/stone.webp);
     }
     .material-icon.rope {
-        background-image: url(/Images/Icons/rope.png);
+        background-image: url(/Images/Icons/rope.webp);
     }
     .material-icon.wool {
-        background-image: url(/Images/Icons/wool.png);
+        background-image: url(/Images/Icons/wool.webp);
     }
     .material-icon.iron {
-        background-image: url(/Images/Icons/iron.png);
+        background-image: url(/Images/Icons/iron.webp);
     }
     .material-icon.bamboo {
-        background-image: url(/Images/Icons/bamboo.png);
+        background-image: url(/Images/Icons/bamboo.webp);
     }
 
 @media only screen and (max-width: 768px) {
@@ -753,25 +753,25 @@ div.inventory__container__no-animation {
 
 
 .game-container.endgame {
-    background-image: url(../Images/endpage-mobile.png);
+    background-image: url(../Images/endpage-mobile.webp);
 }
 .game-container.deathpage {
-    background-image: url(../Images/death-mobile.png);
+    background-image: url(../Images/death-mobile.webp);
 }
 .game-container.prisonpage {
-    background-image: url(../Images/cheaterpage-mobile.png);
+    background-image: url(../Images/cheaterpage-mobile.webp);
 }
 
 
 @media only screen and (min-width: 769px){
     div.game-container.endgame {
-        background-image: url(../Images/endpage-desktop.png);
+        background-image: url(../Images/endpage-desktop.webp);
     }
     div.game-container.deathpage {
-        background-image: url(../Images/death-desktop.png);
+        background-image: url(../Images/death-desktop.webp);
     }
     div.game-container.prisonpage {
-        background-image: url(../Images/cheaterpage-desktop.png);
+        background-image: url(../Images/cheaterpage-desktop.webp);
     }
 }
 

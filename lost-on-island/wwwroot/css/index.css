@@ -10,7 +10,7 @@
         right: 0;
         bottom: 0;
         left: 0;
-        background-image: url(../Images/desktopview.jpg);
+        background-image: url(../Images/desktopview.webp);
         background-position: center;
         background-size: cover;
         filter: blur(0.5px);
@@ -35,7 +35,7 @@
 
 
 .index__header__container {
-    background-image: url(../Images/paper-title-background.png);
+    background-image: url(../Images/paper-title-background.webp);
     background-size: cover;
     background-position: center;
     width: 17em;
@@ -76,7 +76,7 @@
         background-color: rgba(0, 0, 0, 0.0);
     }
     .index-page::before {
-        background-image: url(../Images/mobileviewextended.jpg);
+        background-image: url(../Images/mobileviewextended.webp);
     }
 
 }

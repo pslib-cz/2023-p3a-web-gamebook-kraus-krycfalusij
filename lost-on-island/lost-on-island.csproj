@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Images\location-forest.png" />
-    <None Include="wwwroot\Images\location-shipwreck.png" />
+    <None Include="wwwroot\Images\location-forest.webp" />
+    <None Include="wwwroot\Images\location-shipwreck.webp" />
   </ItemGroup>
 
 </Project>
