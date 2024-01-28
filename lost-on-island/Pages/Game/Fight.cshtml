@@ -4,18 +4,18 @@
 
 <div class="game-container fight-page">
 
-    <div style="background-image: url('@Url.Content($"~/../{Model.GameState.PreviousLocation?.ImagePath}")')" class="background-overlay"></div>
+    <div style="background-image: url('@Url.Content($"{Model.GameState.PreviousLocation?.ImagePath}")')" class="background-overlay"></div>
 
     <div class="location__title__container">
         <h1 class="location__title--font location__title--header">@Model.GameState.PreviousLocation?.Title</h1>
         <span class="location__title--description">Odpověz správně pro obranu!</span>
     </div>
-
+    
 
     <div class="card flipped">
-        <div class="card--front" style="background-image: url('@(Model.GameState.IsRiskyMode ? "/Images/card-risk-foreground.png" : "/Images/card-safe-foreground.png")');">
+        <div class="card--front" style="background-image: url('@(Model.GameState.IsRiskyMode ? Url.Content("~/Images/card-risk-foreground.png") : Url.Content("~/Images/card-safe-foreground.png"))');">
             <h3 class="card__title">@Model.Enemy.Title</h3>
-            <img class="card__icon" src="@Model.Enemy.Img" alt="Enemy Image" />
+            <img class="card__icon" src="@Url.Content(@Model.Enemy.Img)" alt="Enemy Image" />
             <p class="card__description">@Model.Enemy.Description</p>
         </div>
     </div>
@@ -72,31 +72,31 @@
                 <div class="single-tool__badge__infobox" id="infoSword">
                
                 </div>
-                <div onclick="handleBadgeClick(this, 'Sword')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
+                <div onclick="handleBadgeClick(this, 'Sword')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Sword ? Url.Content("~/Images/Icons/sword-badge.png") : Url.Content("~/Images/Icons/sword-badge-disabled.png"))')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
                 <div class="single-tool__badge__infobox" id="infoAxe">
                     
                 </div>
-                <div onclick="handleBadgeClick(this, 'Axe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Axe ? "/Images/Icons/axe-badge.png" : "/Images/Icons/axe-badge-disabled.png")')"></div>
+                <div onclick="handleBadgeClick(this, 'Axe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Axe ? Url.Content("~/Images/Icons/axe-badge.png") : Url.Content("~/Images/Icons/axe-badge-disabled.png"))')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
                 <div class="single-tool__badge__infobox" id="infoPickaxe">
              
                 </div>
-                <div onclick="handleBadgeClick(this, 'Pickaxe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Pickaxe ? "/Images/Icons/pickaxe-badge.png" : "/Images/Icons/pickaxe-badge-disabled.png")')"></div>
+                <div onclick="handleBadgeClick(this, 'Pickaxe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Pickaxe ? Url.Content("~/Images/Icons/pickaxe-badge.png") : Url.Content("~/Images/Icons/pickaxe-badge-disabled.png"))')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
                 <div class="single-tool__badge__infobox" id="infoShears">
          
                 </div>
-                <div onclick="handleBadgeClick(this, 'Shears')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Shears ? "/Images/Icons/shears-badge.png" : "/Images/Icons/shears-badge-disabled.png")')"></div>
+                <div onclick="handleBadgeClick(this, 'Shears')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Shears ? Url.Content("~/Images/Icons/shears-badge.png") : Url.Content("~/Images/Icons/shears-badge-disabled.png"))')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
                 <div class="single-tool__badge__infobox" id="infoBackpack">
              
                 </div>
-                <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png" )')"></div>
+                <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Backpack ? Url.Content("~/Images/Icons/backpack-badge.png") : Url.Content("~/Images/Icons/backpack-badge-disabled.png") )')"></div>
             </div>
             <input type="hidden" name="badgeType" />
         </form>

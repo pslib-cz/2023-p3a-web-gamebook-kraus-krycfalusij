@@ -17,7 +17,7 @@
             <div class="tutorial__header">
                 <p class="tutorial__header__text">Návod</p>
             </div>
-            <div id="tutorialImage" class="tutorial__image" style="background-image: url('/Images/tutorial-1.png');">
+            <div id="tutorialImage" class="tutorial__image" style="background-image: url('@Url.Content("~/Images/tutorial-1.png")');">
                 <form method="post" asp-page-handler="HideTutorial" id="tutorialForm" style="display: none;">
                 </form>
             </div>
@@ -29,9 +29,9 @@
             var tutorialImage = document.getElementById('tutorialImage');
             var tutorialForm = document.getElementById('tutorialForm');
             var tutorialImages = [
-                '/Images/tutorial-1.png',
-                '/Images/tutorial-2.png',
-                '/Images/tutorial-3.png'
+                '@Url.Content("~/Images/tutorial-1.png")',
+                '@Url.Content("~/Images/tutorial-2.png")',
+                '@Url.Content("~/Images/tutorial-3.png")'
             ];
             var currentImageIndex = 0;
 
@@ -46,8 +46,8 @@
             });
         </script>
     }
-
-    <div style="background-image: url('@Url.Content($"~/../{Model.CurrentLocation.ImagePath}")')" class="background-overlay"></div>
+    
+    <div style="background-image: url('@Url.Content($"{Model.CurrentLocation.ImagePath}")')" class="background-overlay"></div>
     <div class="location__title__container">
         <h1 class="location__title--font location__title--header">@Model.CurrentLocation.Title</h1>
         <p class="location__title--font location__title--description">@Model.CurrentLocation.Description</p>
@@ -63,18 +63,18 @@
         @for (int i = 0; i < 3; i++)
         {
             <form method="post" asp-page-handler="HandleCardClick" class="card-form">
-                <div class="card card-pack__background" style="background-image: url('@(Model.GameState.IsRiskyMode ? "/Images/card-risk-background.png" : "/Images/card-safe-background.png")');">
+                <div class="card card-pack__background" style="background-image: url('@(Model.GameState.IsRiskyMode ? Url.Content("~/Images/card-risk-background.png") : Url.Content("~/Images/card-safe-background.png") )');">
                 </div>
                 <div class="card" onclick="handleCardAnimation(this)">
                     <div class="card--inner">
-                        <div style="background-image: url('@(Model.GameState.IsRiskyMode ? "/Images/card-risk-background.png" : "/Images/card-safe-background.png")');" class="card--back">
+                        <div style="background-image: url('@(Model.GameState.IsRiskyMode ? Url.Content("~/Images/card-risk-background.png") : Url.Content("~/Images/card-safe-background.png"))');" class="card--back">
                         </div>
                         <input type="hidden" name="cardId" value="@Model.SingleLocationCard.Id" />
-
-                        <div class="card--front" onclick="handleCardClick(this)" style="background-image: url('@(Model.GameState.IsRiskyMode ? "/Images/card-risk-foreground.png" : "/Images/card-safe-foreground.png")');">
+                        
+                        <div class="card--front" onclick="handleCardClick(this)" style="background-image: url('@(Model.GameState.IsRiskyMode ? Url.Content("~/Images/card-risk-foreground.png") : Url.Content("~/Images/card-safe-foreground.png"))');">
                             <h3 class="card__title">@Model.SingleLocationCard.Title</h3>
                             <p class ="card__description">@Model.SingleLocationCard.Description</p>
-                            <img class="card__icon" src="@Model.SingleLocationCard.Img" alt="Card Image" />
+                            <img class="card__icon" src="@Url.Content(@Model.SingleLocationCard.Img)" alt="Card Image" />
                             @if (Model.SingleLocationCard.Item != "enemy")
                             {
                                 <p class="card__description">@(Model.SingleLocationCard.ItemCount > 0 ? "+" : "")@Model.SingleLocationCard.ItemCount @Model.SingleLocationCard.ItemDescription</p>
@@ -92,7 +92,7 @@
 
     
     <div class="toggler map__toggler" onclick="enableMap()">
-        <img class="toggler__icon" src="/Images/Icons/map.png"/>
+        <img class="toggler__icon" src="~/Images/Icons/map.png"/>
     </div>
     <div class="map__container"> 
         <div class="map__header__section">
@@ -129,7 +129,7 @@
     </div>
 
     <div class="toggler inventory__toggler" onclick="enableInventory()">
-        <img class="toggler__icon" src="/Images/Icons/inventory.png" />
+        <img class="toggler__icon" src="~/Images/Icons/inventory.png" />
     </div>
     <div class="inventory__container @(Model.GameState.IsInventoryOpen ? "inventory__container__enabled" : "")">
         <div class="inventory__header__section">
@@ -139,7 +139,7 @@
         <div class="inventory__items__section">
             <div class="inventory__item">
                 <p class="inventory__item__count">@Model.GameState.Inventory.Items["food"]×</p>
-                <img class="inventory__item__icon" src="/Images/icons/food.png" />
+                <img class="inventory__item__icon" src="~/Images/icons/food.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Jídlo</span>
                     <span class="inventory__item__info__description">
@@ -156,7 +156,7 @@
             
             <div class="inventory__item">
                 <span class="inventory__item__count">@Model.GameState.Inventory.Items["wood"]×</span>
-                <img class="inventory__item__icon" src="/Images/icons/wood.png" />
+                <img class="inventory__item__icon" src="~/Images/icons/wood.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Dřevo</span>
                     <span class="inventory__item__info__description">
@@ -173,7 +173,7 @@
 
             <div class="inventory__item">
                 <span class="inventory__item__count">@Model.GameState.Inventory.Items["stone"]×</span>
-                <img class="inventory__item__icon" src="/Images/icons/stone.png" />
+                <img class="inventory__item__icon" src="~/Images/icons/stone.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Kámen</span>
                     <span class="inventory__item__info__description">
@@ -191,7 +191,7 @@
             
             <div class="inventory__item">
                 <span class="inventory__item__count">@Model.GameState.Inventory.Items["iron"]×</span>
-                <img class="inventory__item__icon" src="/Images/icons/iron.png" />
+                <img class="inventory__item__icon" src="~/Images/icons/iron.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Železo</span>
                     <span class="inventory__item__info__description">
@@ -209,7 +209,7 @@
             
             <div class="inventory__item">
                 <span class="inventory__item__count">@Model.GameState.Inventory.Items["rope"]×</span>
-                <img class="inventory__item__icon" src="/Images/icons/rope.png" />
+                <img class="inventory__item__icon" src="~/Images/icons/rope.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Lano</span>
                     <span class="inventory__item__info__description">
@@ -228,7 +228,7 @@
 
             <div class="inventory__item">
                 <span class="inventory__item__count">@Model.GameState.Inventory.Items["wool"]×</span>
-                <img class="inventory__item__icon" src="/Images/icons/wool.png" />
+                <img class="inventory__item__icon" src="~/Images/icons/wool.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Vlna</span>
                     <span class="inventory__item__info__description">
@@ -246,7 +246,7 @@
 
             <div class="inventory__item">
                 <span class="inventory__item__count">@Model.GameState.Inventory.Items["bamboo"]×</span>
-                <img class="inventory__item__icon" src="/Images/icons/bamboo.png" />
+                <img class="inventory__item__icon" src="~/Images/icons/bamboo.png" />
                 <div class="inventory__item__info">
                     <span class="inventory__item__info__name">Bambus</span>
                     <span class="inventory__item__info__description">
@@ -264,7 +264,7 @@
 
         </div>
         <div class="inventory__capacity">
-            <img class="inventory__item__icon" src="/Images/icons/inventory.png" />
+            <img class="inventory__item__icon" src="~/Images/icons/inventory.png" />
             <p>
                 Kapacita: @Model.GameState.Inventory.Items.Values.Sum() / @Model.GameState.InventoryCapacity
             </p>
@@ -318,7 +318,7 @@
                                 {
                                     <div class="infobox__single__material__container">
                                         <p class="infobox__single__material__description">@singleMaterial.Title: @singleMaterial.Count</p>
-                                        <img class="infobox__single__material__icon" src="/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
+                                        <img class="infobox__single__material__icon" src="~/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
                                     </div>
                                 }
                             </div>
@@ -342,7 +342,7 @@
                         }
                     }
                 </div>
-                <div onclick="handleBadgeClick(this, 'Sword')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Sword ? "/Images/Icons/sword-badge.png" : "/Images/Icons/sword-badge-disabled.png")')"></div>
+                <div onclick="handleBadgeClick(this, 'Sword')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Sword ? Url.Content("~/Images/Icons/sword-badge.png") : Url.Content("~/Images/Icons/sword-badge-disabled.png"))')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
                 <div class="single-tool__badge__infobox" id="infoAxe">
@@ -357,7 +357,7 @@
                                 {
                                     <div class="infobox__single__material__container">
                                         <p class="infobox__single__material__description">@singleMaterial.Title: @singleMaterial.Count</p>
-                                        <img class="infobox__single__material__icon" src="/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
+                                        <img class="infobox__single__material__icon" src="~/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
                                     </div>
                                 }
                             </div>
@@ -381,7 +381,7 @@
                         }
                     }
                 </div>
-                <div onclick="handleBadgeClick(this, 'Axe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Axe ? "/Images/Icons/axe-badge.png" : "/Images/Icons/axe-badge-disabled.png")')"></div>
+                <div onclick="handleBadgeClick(this, 'Axe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Axe ? Url.Content("~/Images/Icons/axe-badge.png") : Url.Content("~/Images/Icons/axe-badge-disabled.png"))')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
                 <div class="single-tool__badge__infobox" id="infoPickaxe">
@@ -396,7 +396,7 @@
                                 {
                                     <div class="infobox__single__material__container">
                                         <p class="infobox__single__material__description">@singleMaterial.Title: @singleMaterial.Count</p>
-                                        <img class="infobox__single__material__icon" src="/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
+                                        <img class="infobox__single__material__icon" src="~/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
                                     </div>
                                 }
                             </div>
@@ -420,7 +420,7 @@
                         }
                     }
                 </div>
-                <div onclick="handleBadgeClick(this, 'Pickaxe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Pickaxe ? "/Images/Icons/pickaxe-badge.png" : "/Images/Icons/pickaxe-badge-disabled.png")')"></div>
+                <div onclick="handleBadgeClick(this, 'Pickaxe')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Pickaxe ? Url.Content("~/Images/Icons/pickaxe-badge.png") : Url.Content("~/Images/Icons/pickaxe-badge-disabled.png"))')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
                 <div class="single-tool__badge__infobox" id="infoShears">
@@ -435,7 +435,7 @@
                                 {
                                     <div class="infobox__single__material__container">
                                         <p class="infobox__single__material__description">@singleMaterial.Title: @singleMaterial.Count</p>
-                                        <img class="infobox__single__material__icon" src="/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
+                                        <img class="infobox__single__material__icon" src="~/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
                                     </div>
                                 }
                             </div>
@@ -459,7 +459,7 @@
                         }
                     }
                 </div>
-                <div onclick="handleBadgeClick(this, 'Shears')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Shears ? "/Images/Icons/shears-badge.png" : "/Images/Icons/shears-badge-disabled.png")')"></div>
+                <div onclick="handleBadgeClick(this, 'Shears')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Shears ? Url.Content("~/Images/Icons/shears-badge.png") : Url.Content("~/Images/Icons/shears-badge-disabled.png"))')"></div>
             </div>
             <div class="single-tool__badge__wrapper">
                 <div class="single-tool__badge__infobox" id="infoBackpack">
@@ -474,7 +474,7 @@
                                 {
                                     <div class="infobox__single__material__container">
                                         <p class="infobox__single__material__description">@singleMaterial.Title: @singleMaterial.Count</p>
-                                        <img class="infobox__single__material__icon" src="/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
+                                        <img class="infobox__single__material__icon" src="~/Images/Icons/@(singleMaterial.Type).png" alt="@(singleMaterial.Title).png" />
                                     </div>
                                 }
                             </div>
@@ -498,7 +498,7 @@
                         }
                     }
                 </div>
-                <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Backpack ? "/Images/Icons/backpack-badge.png" : "/Images/Icons/backpack-badge-disabled.png" )')"></div>
+                <div onclick="handleBadgeClick(this, 'Backpack')" class="single-tool__badge" style="background-image: url('@(Model.GameState.Backpack ? Url.Content("~/Images/Icons/backpack-badge.png") : Url.Content("~/Images/Icons/backpack-badge-disabled.png"))')"></div>
             </div>
             <input type="hidden" name="badgeType" />
         </form>
