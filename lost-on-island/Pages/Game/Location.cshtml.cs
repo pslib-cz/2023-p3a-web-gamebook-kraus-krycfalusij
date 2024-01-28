@@ -176,7 +176,7 @@ namespace lost_on_island.Pages.Game
                 }
                 else if (selectedCard.Item == "accident") 
                 {
-                    GameState.InfoText = "Bohužel, nehody se stávají.";
+                    GameState.InfoText = "Nehody se stávají.";
                     if (GameState.IsRiskyMode)
                     {
                         GameState.UpdateHealthAndEnergy(selectedCard.ItemCount * 2, 0);
@@ -337,7 +337,7 @@ namespace lost_on_island.Pages.Game
             {
                 _sessionStorage.Save("GameState", GameState); 
             }
-            GameState.InfoText = "Bordel pøece nepotøebuju...";
+            GameState.InfoText = "Bordel nepotøebuju...";
 
             _sessionStorage.Save("GameState", GameState);
 
