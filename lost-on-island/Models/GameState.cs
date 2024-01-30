@@ -168,7 +168,7 @@ public class GameState
         {
             UpdateInfoText2($"{(Energy - originalEnergy > 0 ? "+" : "")}{Energy - originalEnergy} energie");
         }
-
+        Console.WriteLine(Energy);
         CheckGameProgress();
     }
 
