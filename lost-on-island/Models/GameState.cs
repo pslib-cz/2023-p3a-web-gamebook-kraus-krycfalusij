@@ -5,7 +5,7 @@ public class GameState
     public int CurrentLocationId { get; set; } = 0;
     public bool IsPlayerDead { get; set; } = false; 
     public bool HasGameEnded { get; set; } = false; 
-    public double Energy { get; set; } = 20;
+    public double Energy { get; set; } = 20.5;
     public int Health { get; set; } = 20;
     public int Turns { get; set; } = -1;
     public bool InFight { get; set; } = false;
