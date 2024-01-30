@@ -1,9 +1,8 @@
 ﻿TO DO:
 - Dodělat návod jak hrát - badges?
 - Menu (ukončit hru, nová hra atd - kazda)
-- spánek a energie?
-- správné přidání itemů do inventu
-- zobrazit počet pokusů po dohrání
+- spánek ?
+- zobrazit počet tahů po dohrání
 
 NAVÍC
 - UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 

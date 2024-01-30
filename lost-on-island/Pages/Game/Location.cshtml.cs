@@ -235,11 +235,7 @@ namespace lost_on_island.Pages.Game
             GameState = _sessionStorage.LoadOrCreate("GameState");
             GameState.CheckGameProgress();
 
-            if (GameState.ShouldRedirectToDeath)
-            {
-                return RedirectToPage("/Game/Death");
-            }
-            else if (GameState.ShouldRedirectToEndGame)
+            if (GameState.ShouldRedirectToEndGame)
             {
                 return RedirectToPage("/Game/EndGame");
             }
@@ -254,11 +250,19 @@ namespace lost_on_island.Pages.Game
 
             if (GameState.CurrentLocationId != locationId && GameState.CurrentLocationId != 0 && GameState.CurrentLocationId != 1)
             {
-                GameState.UpdateHealthAndEnergy(0, -5);
+                GameState.UpdateHealthAndEnergy(0, -0.5);
                 GameState.Turns += 1;
             }
 
+
             UpdateGameState(GameState, locationId);
+
+
+            if (GameState.ShouldRedirectToDeath)
+            {
+                return RedirectToPage("/Game/Death");
+            }
+
 
             if (_locationProvider.IsSpecialLocation(locationId))
             {
