@@ -86,21 +86,24 @@ public class GameState
     public bool AddItem(string name, int count)
     {
         int currentTotalCount = Inventory.Items.Values.Sum();
-        if (currentTotalCount + count > InventoryCapacity)
+        int availableCapacity = InventoryCapacity - currentTotalCount;
+
+        if (availableCapacity <= 0)
         {
             InfoText = "Máš plný inventář!";
             return false;
         }
 
+        int amountToAdd = Math.Min(count, availableCapacity);
+
         if (Inventory.Items.ContainsKey(name))
         {
-            Inventory.Items[name] += count;
+            Inventory.Items[name] += amountToAdd;
         }
         else
         {
-            Inventory.Items.Add(name, count);
+            Inventory.Items.Add(name, amountToAdd);
         }
-
 
         string itemName;
         switch (name)
@@ -129,7 +132,6 @@ public class GameState
 
             default:
                 itemName = name;
-                Console.WriteLine(name);
                 break;
         }
 

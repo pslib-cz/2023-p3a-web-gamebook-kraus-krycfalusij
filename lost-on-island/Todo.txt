@@ -1,11 +1,12 @@
 ﻿TO DO:
-- Dodělat návod jak hrát
+- Dodělat návod jak hrát - badges?
 - Menu (ukončit hru, nová hra atd - kazda)
 - spánek a energie?
+- správné přidání itemů do inventu
+- zobrazit počet pokusů po dohrání
 
 NAVÍC
 - UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 
-- změnit obrázek infoboxu aby seděl
 
 - Celková optimalizace hratelnosti samotné hry - šance
 
