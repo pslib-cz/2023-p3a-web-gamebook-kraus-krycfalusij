@@ -254,6 +254,7 @@ namespace lost_on_island.Pages.Game
 
             if (GameState.CurrentLocationId != locationId && GameState.CurrentLocationId != 0 && GameState.CurrentLocationId != 1)
             {
+                GameState.UpdateHealthAndEnergy(0, -5);
                 GameState.Turns += 1;
             }
 
@@ -350,7 +351,7 @@ namespace lost_on_island.Pages.Game
 
             if (itemName == "food" && GameState.Inventory.Items[itemName] >= itemCount)
             {
-                GameState.UpdateHealthAndEnergy(2, 0); 
+                GameState.UpdateHealthAndEnergy(2, 2); 
 
                 GameState.RemoveItem(itemName, itemCount);
 

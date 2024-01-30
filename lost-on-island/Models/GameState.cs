@@ -5,7 +5,7 @@ public class GameState
     public int CurrentLocationId { get; set; } = 0;
     public bool IsPlayerDead { get; set; } = false; 
     public bool HasGameEnded { get; set; } = false; 
-    public int Energy { get; set; } = 20;
+    public double Energy { get; set; } = 20;
     public int Health { get; set; } = 20;
     public int Turns { get; set; } = -1;
     public bool InFight { get; set; } = false;
@@ -150,10 +150,10 @@ public class GameState
         return false;
     }
 
-    public void UpdateHealthAndEnergy(int healthChange, int energyChange)
+    public void UpdateHealthAndEnergy(int healthChange, double energyChange)
     {
         int originalHealth = Health;
-        int originalEnergy = Energy;
+        double originalEnergy = Energy;
 
         Health = Math.Min(20, Health + healthChange);
         Energy = Math.Min(20, Energy + energyChange);

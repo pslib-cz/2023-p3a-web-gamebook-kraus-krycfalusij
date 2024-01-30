@@ -289,7 +289,7 @@
     <div class="game-stats">
         <div class="game-stats__energy">
             <span class="icon--energy"></span>
-            <span>Energie: @Model.GameState.Energy/20</span>
+            <span>Energie: @Math.Floor(Model.GameState.Energy)/20</span>
         </div>
         <div class="game-stats__info-text">
             <span>@Model.GameState.InfoText</span>
