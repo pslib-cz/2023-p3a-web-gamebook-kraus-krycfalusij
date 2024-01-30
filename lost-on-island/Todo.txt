@@ -3,6 +3,7 @@
 - Menu (ukončit hru, nová hra atd - kazda)
 - spánek a energie?
 - správné přidání itemů do inventu
+- zobrazit počet pokusů po dohrání
 
 NAVÍC
 - UX (text, vyskakovací okna..., cursor pointer) - ubrání života -zčervenalá obrazokva atd.. 
