@@ -8,6 +8,7 @@ namespace lost_on_island.Pages.Game
     public class EndGameModel : PageModel
     {
         public GameState GameState { get; set; }
+        public int TotalTurns { get; set; }
         private readonly ISessionStorage<GameState> _sessionStorage;
 
         public EndGameModel(ISessionStorage<GameState> sessionStorage)
@@ -36,6 +37,7 @@ namespace lost_on_island.Pages.Game
         private void ResetGameState()
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
+            TotalTurns = GameState.Turns;
             GameState = new GameState();
             GameState.CurrentLocationId = 9;
             _sessionStorage.Save("GameState", GameState);

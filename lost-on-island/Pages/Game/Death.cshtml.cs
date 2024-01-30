@@ -8,6 +8,7 @@ namespace lost_on_island.Pages.Game
     public class DeathModel : PageModel
     {
         public GameState GameState { get; set; }
+        public int TotalTurns { get; set; }
         private readonly ISessionStorage<GameState> _sessionStorage;
 
         public DeathModel(ISessionStorage<GameState> sessionStorage)
@@ -36,6 +37,7 @@ namespace lost_on_island.Pages.Game
         private void ResetGameState()
         {
             GameState = _sessionStorage.LoadOrCreate("GameState");
+            TotalTurns = GameState.Turns;
             GameState = new GameState();
             GameState.CurrentLocationId = 8;
             _sessionStorage.Save("GameState", GameState);
